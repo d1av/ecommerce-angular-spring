@@ -1,5 +1,7 @@
-package com.davi.shop.entities;
+package com.davi.shop.dto;
 
+import com.davi.shop.entities.Product;
+import com.davi.shop.entities.ProductCategory;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -7,39 +9,23 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Entity
-@Table(name = "product")
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private ProductCategory category;
+public class ProductDTO {
+    private ProductCategoryDTO category;
     private String sku;
     private String name;
     private String description;
-    @Column(name = "unit_price")
     private BigDecimal unitPrice;
-    @Column(name = "image_url")
     private String imageUrl;
     private Boolean active;
-    @Column(name = "units_in_stock")
     private Integer unitsInStock;
-    @CreationTimestamp
-    @Column(name = "date_created")
     private Date dateCreated;
-    @UpdateTimestamp
-    @Column(name = "last_updated")
     private Date lastUpdated;
 
-
-    public Product() {
+    public ProductDTO() {
     }
 
-    public Product(Long id, String sku, String name, String description, BigDecimal unitPrice, String imageUrl, boolean active, Integer unitsInStock, Date dateCreated, Date lastUpdated) {
-        this.id = id;
+    public ProductDTO(ProductCategoryDTO category, String sku, String name, String description, BigDecimal unitPrice, String imageUrl, Boolean active, Integer unitsInStock, Date dateCreated, Date lastUpdated) {
+        this.category = category;
         this.sku = sku;
         this.name = name;
         this.description = description;
@@ -51,28 +37,25 @@ public class Product {
         this.lastUpdated = lastUpdated;
     }
 
-    public ProductCategory getCategory() {
+    public ProductDTO(Product entity) {
+        category = new ProductCategoryDTO(entity.getCategory());
+        sku = entity.getSku();
+        name = entity.getName();
+        description = entity.getDescription();
+        unitPrice = entity.getUnitPrice();
+        imageUrl = entity.getImageUrl();
+        active = entity.getActive();
+        unitsInStock = entity.getUnitsInStock();
+        dateCreated = entity.getDateCreated();
+        lastUpdated = entity.getLastUpdated();
+    }
+
+    public ProductCategoryDTO getCategory() {
         return category;
     }
 
-    public void setCategory(ProductCategory category) {
+    public void setCategory(ProductCategoryDTO category) {
         this.category = category;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getSku() {
@@ -115,11 +98,11 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public boolean isActive() {
+    public Boolean getActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 
