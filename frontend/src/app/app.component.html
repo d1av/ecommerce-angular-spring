@@ -14,16 +14,18 @@
       <nav class="navbar-sidebar">
         <ul class="list-unstyled navbar-list">
           <li>
-            <a href="#">Books</a>
+            <a
+              [routerLink]="['/category/1']"
+              routerLinkActive="router-link-active"
+              >Books</a
+            >
           </li>
           <li>
-            <a href="#">Coffee Mugs</a>
-          </li>
-          <li>
-            <a href="#">Mouse Pads</a>
-          </li>
-          <li>
-            <a href="#">Luggage Tags</a>
+            <a
+              [routerLink]="['/category/2']"
+              routerLinkActive="router-link-active"
+              >Coffee Mugs</a
+            >
           </li>
         </ul>
       </nav>
@@ -61,12 +63,12 @@
     <!-- END HEADER DESKTOP-->
 
     <!-- MAIN CONTENT-->
-
     <router-outlet></router-outlet>
   </div>
 </div>
 
 <!-- END PAGE CONTAINER-->
+
 <footer>
   <ul>
     <li><a href="#">About Us</a></li>
