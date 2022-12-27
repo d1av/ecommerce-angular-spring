@@ -1,25 +1,23 @@
 package com.davi.shop.dto;
 
 import com.davi.shop.entities.Product;
-import com.davi.shop.entities.ProductCategory;
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class ProductDTO {
-    private ProductCategoryDTO category;
-    private String sku;
     private String name;
+    private String sku;
     private String description;
+
     private BigDecimal unitPrice;
     private String imageUrl;
     private Boolean active;
     private Integer unitsInStock;
     private Date dateCreated;
     private Date lastUpdated;
+    private ProductCategoryDTO category;
 
     public ProductDTO() {
     }
@@ -81,6 +79,7 @@ public class ProductDTO {
     public void setDescription(String description) {
         this.description = description;
     }
+
 
     public BigDecimal getUnitPrice() {
         return unitPrice;
