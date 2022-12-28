@@ -50,11 +50,25 @@ export class ProductService {
     return this.getProducts(searchUrl)
   }
 
+  searchProductsPaginate(
+    thePage: number,
+    thePageSize: number,
+    theKeyword: string): Observable<ApiResponseProduct> {
+
+    const searchUrl = `${this.searchUrl}?name=${theKeyword}`
+      + `&page=${thePage}&size=${thePageSize}`;
+
+    return this.httpClient.get<ApiResponseProduct>(searchUrl)
+      .pipe(map(response => response))
+  }
+
   getOneProductById(id: number): Observable<Product> {
     const url = `${this.searchUrl}/${id}`;
     return this.httpClient.get<Product>(url)
       .pipe(map(product => product))
   }
+
+
 }
 
 interface ApiResponseProduct {
