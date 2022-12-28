@@ -10,7 +10,6 @@ public class ProductDTO {
     private String name;
     private String sku;
     private String description;
-
     private BigDecimal unitPrice;
     private String imageUrl;
     private Boolean active;

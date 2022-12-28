@@ -1,5 +1,6 @@
 package com.davi.shop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -15,15 +16,21 @@ public class ProductCategory {
     @Column(name = "category_name")
     private String categoryName;
 
-    @OneToMany(mappedBy = "category")
+    @JsonIgnore
+    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER)
     private Set<Product> products;
 
     public ProductCategory() {
     }
 
-    public ProductCategory(Long id, String categoryName) {
+    public ProductCategory(Long id, String categoryName, Set<Product> products) {
         this.id = id;
         this.categoryName = categoryName;
+        this.products = products;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
 

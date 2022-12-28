@@ -38,8 +38,9 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String sku, String name, String description, BigDecimal unitPrice, String imageUrl, boolean active, Integer unitsInStock, Date dateCreated, Date lastUpdated) {
+    public Product(Long id, ProductCategory category, String sku, String name, String description, BigDecimal unitPrice, String imageUrl, Boolean active, Integer unitsInStock, Date dateCreated, Date lastUpdated) {
         this.id = id;
+        this.category = category;
         this.sku = sku;
         this.name = name;
         this.description = description;
@@ -50,6 +51,7 @@ public class Product {
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
     }
+
 
     public ProductCategory getCategory() {
         return category;

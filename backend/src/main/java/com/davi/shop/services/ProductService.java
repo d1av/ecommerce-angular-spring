@@ -16,7 +16,18 @@ public class ProductService {
 
     public Page<ProductDTO> findAllPaged(Pageable pageable) {
         Page<Product> entity = repository.findAll(pageable);
-        Page<ProductDTO> dto = entity.map(x->new ProductDTO(x));
+        Page<ProductDTO> dto = entity.map(x -> new ProductDTO(x));
         return dto;
+    }
+
+    public Page<Product> findByCategoryId(Long id, Pageable pageable) {
+        Page<Product> entity;
+        if (id == null || id < 0) {
+            entity = repository.findAll(pageable);
+        } else {
+            entity = repository.findByCategoryId(id, pageable);
+        }
+    ;
+        return entity;
     }
 }
