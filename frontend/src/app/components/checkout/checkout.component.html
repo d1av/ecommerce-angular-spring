@@ -1,3 +1,27 @@
-<div class="main-content">
-  <p>Checkout works</p>
+<div class="main-content page-m">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <form [formGroup]="checkoutFormGroup">
+        <!--customer form group-->
+        <div formGroupName="customer" class="form-area">
+          <h3>Customer</h3>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label> First Name </label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="firstName" type="text" >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--submit button-->
+        <div class="text-center">
+          <button type="submit" class="btn btn-info">Purchase</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
