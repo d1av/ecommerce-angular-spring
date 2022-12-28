@@ -26,7 +26,10 @@
                 <label>Quantity: </label>
                 <div class="row no-gutters">
                   <div class="col">
-                    <button (click)="incrementQuantity(cartItem)" class="btn btn-primary btn-sm">
+                    <button
+                      (click)="incrementQuantity(cartItem)"
+                      class="btn btn-primary btn-sm"
+                    >
                       <i class="fas fa-plus"></i>
                     </button>
                   </div>
@@ -35,19 +38,26 @@
                     {{ cartItem.quantity }}
                   </div>
 
-                    <div class="col">
-                      <button (click)="decrementQuantity(cartItem)" class="btn btn-primary btn-sm">
-                        <i class="fas fa-minus"></i>
-                      </button>
+                  <div class="col">
+                    <button
+                      (click)="decrementQuantity(cartItem)"
+                      class="btn btn-primary btn-sm"
+                    >
+                      <i class="fas fa-minus"></i>
+                    </button>
                   </div>
                 </div>
                 <div class="col-8"></div>
               </div>
 
               <div>
-                <button (click)="remove(cartItem)" class="btn btn-primary btn-sm">Remove</button>
+                <button
+                  (click)="remove(cartItem)"
+                  class="btn btn-primary btn-sm"
+                >
+                  Remove
+                </button>
               </div>
-
 
               <p class="mt-2">
                 Subtotal:
@@ -61,6 +71,9 @@
               <p>Total Quantity: {{ totalQuantity }}</p>
               <p>Shipping: FREE</p>
               <p>Total Price: {{ totalPrice | currency : "USD" }}</p>
+              <div>
+                <a routerLink="/checkout" class="btn btn-success">Checkout</a>
+              </div>
             </td>
           </tr>
         </table>
