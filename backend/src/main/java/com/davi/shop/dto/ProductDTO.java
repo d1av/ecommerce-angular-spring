@@ -1,12 +1,12 @@
 package com.davi.shop.dto;
 
 import com.davi.shop.entities.Product;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class ProductDTO {
+    private Long id;
     private String name;
     private String sku;
     private String description;
@@ -21,10 +21,10 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
-    public ProductDTO(ProductCategoryDTO category, String sku, String name, String description, BigDecimal unitPrice, String imageUrl, Boolean active, Integer unitsInStock, Date dateCreated, Date lastUpdated) {
-        this.category = category;
-        this.sku = sku;
+    public ProductDTO(Long id, String name, String sku, String description, BigDecimal unitPrice, String imageUrl, Boolean active, Integer unitsInStock, Date dateCreated, Date lastUpdated, ProductCategoryDTO category) {
+        this.id = id;
         this.name = name;
+        this.sku = sku;
         this.description = description;
         this.unitPrice = unitPrice;
         this.imageUrl = imageUrl;
@@ -32,9 +32,11 @@ public class ProductDTO {
         this.unitsInStock = unitsInStock;
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
+        this.category = category;
     }
 
     public ProductDTO(Product entity) {
+        id = entity.getId();
         category = new ProductCategoryDTO(entity.getCategory());
         sku = entity.getSku();
         name = entity.getName();
@@ -45,8 +47,15 @@ public class ProductDTO {
         unitsInStock = entity.getUnitsInStock();
         dateCreated = entity.getDateCreated();
         lastUpdated = entity.getLastUpdated();
+        this.category = new ProductCategoryDTO(entity.getCategory());
     }
 
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public ProductCategoryDTO getCategory() {
         return category;
     }

@@ -37,6 +37,12 @@ export class ProductService {
     console.log(searchUrl)
     return this.getProducts(searchUrl)
   }
+
+  getOneProductById(id: number): Observable<Product> {
+    const url = `${this.searchUrl}/${id}`;
+    return this.httpClient.get<Product>(url)
+      .pipe(map(product => product))
+  }
 }
 
 interface ApiResponseProduct {

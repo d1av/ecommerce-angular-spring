@@ -3,6 +3,7 @@ package com.davi.shop.services;
 import com.davi.shop.dto.ProductDTO;
 import com.davi.shop.entities.Product;
 import com.davi.shop.repositories.ProductRepository;
+import com.davi.shop.services.exceptions.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,11 +27,17 @@ public class ProductService {
             entity = repository.findAll(pageable);
         } else {
             entity = repository.findByCategoryId(id, pageable);
-        }    ;
+        }
+        ;
         return entity;
     }
 
-    public Page<Product> findByName(String name,Pageable pageable){
-        return repository.findByNameContainingIgnoreCase(name,pageable);
+    public Page<Product> findByName(String name, Pageable pageable) {
+        return repository.findByNameContainingIgnoreCase(name, pageable);
+    }
+
+    public ProductDTO findById(Long id) {
+        Product entity = repository.findById(id).orElseThrow(() -> new DataNotFoundException("User id not found."));
+        return new ProductDTO(entity);
     }
 }
