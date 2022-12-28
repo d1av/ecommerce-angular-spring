@@ -1,5 +1,5 @@
 <div class="cart-area d-n">
-  <a href="shopping-detail.html">
+  <a [routerLink]="['/cart-details']" routerLinkActive="router-link-active">
     <div class="total">
       {{ totalPrice | currency : "USD" }}
       <span>{{ totalQuantity }}</span>
