@@ -43,6 +43,12 @@
                 </div>
                 <div class="col-8"></div>
               </div>
+
+              <div>
+                <button (click)="remove(cartItem)" class="btn btn-primary btn-sm">Remove</button>
+              </div>
+
+
               <p class="mt-2">
                 Subtotal:
                 {{ cartItem.quantity * cartItem.unitPrice | currency : "USD" }}
