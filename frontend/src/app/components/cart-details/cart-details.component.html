@@ -6,6 +6,25 @@
         <th width="50%">Product Detail</th>
         <th width="30%"></th>
       </tr>
+      <tr *ngFor="let cartItem of cartItems">
+        <td>
+          <img
+            src="{{ cartItem.imageUrl }}"
+            class="img-responsive"
+            width="150px"
+          />
+        </td>
+        <td>
+          <p>{{ cartItem.name }}</p>
+          <p>{{ cartItem.unitPrice | currency : "USD" }}</p>
+          <p></p>
+        </td>
+        <td>
+          <div class="items">
+            <label>Quantity: </label>{{ cartItem.quantity }}
+          </div>
+        </td>
+      </tr>
     </table>
   </div>
 </div>
