@@ -27,6 +27,11 @@ public class ProductResources {
 
     @GetMapping(value = "/search/category")
     public ResponseEntity<Page<Product>> findAllPaged(@RequestParam("id") Long id, Pageable pageable) {
-        return ResponseEntity.ok().body(service.findByCategoryId(id,pageable));
+        return ResponseEntity.ok().body(service.findByCategoryId(id, pageable));
+    }
+
+    @GetMapping(value = "/search")
+    public ResponseEntity<Page<Product>> seachByName(@RequestParam("name") String name, Pageable pageable0) {
+        return ResponseEntity.ok().body(service.findByName(name, pageable0));
     }
 }

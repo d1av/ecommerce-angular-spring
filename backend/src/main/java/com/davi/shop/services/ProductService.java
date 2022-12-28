@@ -26,8 +26,11 @@ public class ProductService {
             entity = repository.findAll(pageable);
         } else {
             entity = repository.findByCategoryId(id, pageable);
-        }
-    ;
+        }    ;
         return entity;
+    }
+
+    public Page<Product> findByName(String name,Pageable pageable){
+        return repository.findByNameContainingIgnoreCase(name,pageable);
     }
 }
