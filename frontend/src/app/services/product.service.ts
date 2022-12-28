@@ -26,6 +26,18 @@ export class ProductService {
       .pipe(map(response => response.content));
   }
 
+  getProductListPaginate(
+    thePage: number,
+    thePageSize: number,
+    theCategoryId: number): Observable<ApiResponseProduct> {
+
+    const searchUrl = `${this.baseUrl}/search/category?id=${theCategoryId}`
+      + `&page=${thePage}&size=${thePageSize}`;
+
+    return this.httpClient.get<ApiResponseProduct>(searchUrl)
+      .pipe(map(response => response))
+  }
+
   getProductCategories(): Observable<ProductCategory[]> {
     return this.httpClient.get<ResponseProductCategory>(this.categoryUrl)
       .pipe(map(response => response.content));
@@ -47,6 +59,14 @@ export class ProductService {
 
 interface ApiResponseProduct {
   content: Product[]
+  totalPages: number
+  size: number
+  totalElements: number,
+  number: number,
+  first: boolean,
+  last: boolean,
+  empty: boolean
+
 }
 
 interface ResponseProductCategory {

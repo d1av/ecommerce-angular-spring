@@ -10,9 +10,16 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductListComponent implements OnInit {
 
+
   products: Product[] = [];
   currentCategoryId: number = 1;
+  previousCategoryId: number = 1;
   searchMode: boolean = false;
+
+  // new properties
+  thePageNumber: number = 1;
+  thePageSize: number = 10;
+  theTotalElements: number = 0;
 
   constructor(
     private productService: ProductService,
@@ -23,6 +30,7 @@ export class ProductListComponent implements OnInit {
       this.listProducts();
     })
   }
+
 
 
   listProducts() {
@@ -36,7 +44,7 @@ export class ProductListComponent implements OnInit {
 
 
   handleSearchProducts() {
-    const theKeyword: string  = this.route.snapshot.paramMap.get('keyword')!
+    const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!
 
     this.productService.searchProducts(theKeyword).subscribe(
       (data: any) => {
@@ -48,17 +56,36 @@ export class ProductListComponent implements OnInit {
 
   handleListProducts() {
     const routeHasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
+
     if (routeHasCategoryId) {
+      // get the "id" param string. convert string to a number using the "+" symbol
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
-    } else {
-      this.currentCategoryId = 1
+    }
+    else {
+      // not category id available ... default to category id 1
+      this.currentCategoryId = 1;
     }
 
-    this.productService.getProductList(this.currentCategoryId).subscribe(
-      data => {
-        this.products = data;
-      }
-    )
+    if (this.previousCategoryId != this.currentCategoryId) {
+      this.thePageNumber = 1;
+    }
+    this.previousCategoryId = this.currentCategoryId;
+
+    console.log(`currentCategoryId=${this.currentCategoryId},`
+      + `thePageNumber=${this.thePageNumber}`);
+
+
+    this.productService.getProductListPaginate(
+      this.thePageNumber - 1,
+      this.thePageSize,
+      this.currentCategoryId).subscribe(
+        data => {
+          this.products = data.content;
+          this.thePageSize = data.size;
+          this.thePageNumber = data.number + 1;
+          this.theTotalElements = data.totalElements;
+        }
+      )
   }
 
 }

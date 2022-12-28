@@ -749,6 +749,10 @@ table.table.table-bordered th {
 .detail-section {
   margin-top: 60px;
 }
+
+.detail-img{
+  width:30%;
+}
 /**/
 
 /*
@@ -1060,3 +1064,6 @@ footer ul li {
     padding: 8px 0;
   }
 }
+
+/* Importing Bootstrap SCSS file. */
+//@import '~bootstrap/scss/bootstrap';
