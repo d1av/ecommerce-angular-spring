@@ -32,10 +32,10 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-        firstName: new FormControl('',[Validators.required,Validators.minLength(2)]),
+        firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
         lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
         email: new FormControl('',
-        [Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-)+\\.[a-z]{2,4}$')])
+          [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-)+\\.[a-z]{2,4}$')])
       }),
       shippingAddress: this.formBuilder.group({
         street: [''],
@@ -87,13 +87,12 @@ export class CheckoutComponent implements OnInit {
         this.countries = data;
       }
     )
-
-    //populate states
-
-
-
-
   }
+
+  get firstName() { return this.checkoutFormGroup.get('customer.firstName')!; }
+  get lastName() { return this.checkoutFormGroup.get('customer.lastName')!; }
+  get email() { return this.checkoutFormGroup.get('customer.email')!; }
+
 
   onSubmit() {
     console.log(this.checkoutFormGroup.get('customer')?.value)
@@ -101,6 +100,7 @@ export class CheckoutComponent implements OnInit {
     console.log(this.checkoutFormGroup.get('billingAddress')?.value)
     console.log(this.checkoutFormGroup.get('creditCard')?.value)
   }
+
 
   copyShippingAddressToBillingAddress(event: any) {
     if (event.target.checked) {
