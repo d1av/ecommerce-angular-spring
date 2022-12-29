@@ -14,7 +14,7 @@ public class Country {
     @Column(length = 2)
     private String code;
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "country")
     private Set<State> states = new HashSet<State>();
 
     public Country() {
