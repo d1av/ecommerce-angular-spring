@@ -39,6 +39,72 @@
             </div>
           </div>
         </div>
+
+        <!--shipping address-->
+
+        <div formGroupName="customer" class="form-area">
+          <h3>Shipping Address</h3>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label> Country </label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="country">
+                  <option>TO DO</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label> Street </label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="street" type="text" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label> City </label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="city" type="text" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label> State </label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="state">
+                  <option>TO DO</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <label> Zip Code </label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="zipCode" type="text" />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!--submit button-->
         <div class="text-center">
           <button type="submit" class="btn btn-info">Purchase</button>
