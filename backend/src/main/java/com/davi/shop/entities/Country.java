@@ -10,11 +10,13 @@ import java.util.Set;
 @Entity
 @Table(name = "country")
 public class Country {
+    @Column(name = "id", nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 2)
+    @Column(length = 2, nullable = false, name = "code")
     private String code;
+    @Column(name = "name", nullable = false)
     private String name;
 
     @JsonIgnore
