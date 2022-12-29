@@ -23,8 +23,8 @@ public class StateService {
         return dto;
     }
 
-    public List<StateDTO> findAllByCountryId(Long id) {
-        List<State> state = repository.findByCountry(id);
+    public List<StateDTO> findAllByCountryCode(String countryCode) {
+        List<State> state = repository.findByCountryCode(countryCode);
         List<StateDTO> dto = state.stream().map(x -> new StateDTO(x))
                 .collect(Collectors.toList());
         return dto;
