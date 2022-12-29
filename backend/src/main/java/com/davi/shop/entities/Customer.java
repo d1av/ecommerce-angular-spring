@@ -13,7 +13,7 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String email;
-    @OneToMany(mappedBy = "customerId")
+    @OneToMany(mappedBy = "customer")
     private List<Orders> orders;
 
     public Customer() {
