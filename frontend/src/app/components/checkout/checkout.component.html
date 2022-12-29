@@ -21,7 +21,12 @@
                   "
                   class="alert alert-danger mt-1"
                 >
-                  <div *ngIf="firstName?.hasError('required')|| firstName?.hasError('notOnlyWhitespace')">
+                  <div
+                    *ngIf="
+                      firstName?.hasError('required') ||
+                      firstName?.hasError('notOnlyWhitespace')
+                    "
+                  >
                     First Name is required
                   </div>
 
@@ -47,7 +52,12 @@
                   "
                   class="alert alert-danger mt-1"
                 >
-                  <div *ngIf="lastName?.hasError('required')">
+                  <div
+                    *ngIf="
+                      lastName?.hasError('required') ||
+                      lastName?.hasError('notOnlyWhitespace')
+                    "
+                  >
                     Last Name is required
                   </div>
 
