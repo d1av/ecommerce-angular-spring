@@ -265,11 +265,27 @@
             </div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="country">
+                <select
+                  formControlName="country"
+                  (change)="getStates('billingAddress')"
+                >
                   <option *ngFor="let country of countries" [ngValue]="country">
                     {{ country.name }}
                   </option>
                 </select>
+
+                <div
+                  *ngIf="
+                    billingAddressCountry?.invalid &&
+                    (billingAddressCountry?.dirty ||
+                      billingAddressCountry?.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div *ngIf="billingAddressCountry?.hasError('required')">
+                    Country is required
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -281,6 +297,24 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="street" type="text" />
+
+                <div
+                  *ngIf="
+                    billingAddressStreet?.invalid &&
+                    (billingAddressStreet?.dirty ||
+                      billingAddressStreet?.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="
+                      billingAddressStreet?.hasError('required') ||
+                      billingAddressStreet?.hasError('notOnlyWhitespace')
+                    "
+                  >
+                    Street is required
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -292,6 +326,23 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="city" type="text" />
+
+                <div
+                  *ngIf="
+                    billingAddressCity?.invalid &&
+                    (billingAddressCity?.dirty || shippingAddressCity?.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="
+                      billingAddressCity?.hasError('required') ||
+                      billingAddressCity?.hasError('notOnlyWhitespace')
+                    "
+                  >
+                    City is required
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -303,8 +354,25 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state">
-                  <option>TO DO</option>
+                  <option
+                    *ngFor="let state of billingAddressStates"
+                    [ngValue]="state"
+                  >
+                    {{ state.name }}
+                  </option>
                 </select>
+
+                <div
+                  *ngIf="
+                    billingAddressState?.invalid &&
+                    (billingAddressState?.dirty || billingAddressState?.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div *ngIf="billingAddressState?.hasError('required')">
+                    State is required
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -316,6 +384,19 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="zipCode" type="text" />
+
+                <div
+                  *ngIf="
+                    billingAddressZipCode?.invalid &&
+                    (billingAddressZipCode?.dirty ||
+                      billingAddressZipCode?.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div *ngIf="billingAddressZipCode?.hasError('required')">
+                    Zip Code is required
+                  </div>
+                </div>
               </div>
             </div>
           </div>
