@@ -20,7 +20,7 @@ export class ShopFormService {
   }
 
   getStates(theCountryCode: string): Observable<State[]> {
-    const searchStateUrl = `${this.statesUrl}/search?code${theCountryCode}`;
+    const searchStateUrl = `${this.statesUrl}/search?code=${theCountryCode}`;
     return this.httpClient.get<State[]>(searchStateUrl)
       .pipe(map(data => data));
   }

@@ -22,8 +22,8 @@ export class CheckoutComponent implements OnInit {
   countries: Country[] = [];
   states: State[] = [];
 
-  shippingAddressStates: State[]=[];
-  billingAddressStates: State[]=[];
+  shippingAddressStates: State[] = [];
+  billingAddressStates: State[] = [];
 
   constructor(private formBuilder: FormBuilder,
     private shopFormService: ShopFormService) {
@@ -142,10 +142,15 @@ export class CheckoutComponent implements OnInit {
     console.log(`{formGroupName} country name: ${countryName}`);
 
     this.shopFormService.getStates(countryCode).subscribe(
-      data=>{
-        if(formGroupName==='shippingAddress'){
-
+      data => {
+        if (formGroupName === 'shippingAddress') {
+          this.shippingAddressStates = data;
+        } else {
+          this.billingAddressStates = data;
         }
+
+        //select first item by default
+        formGroup?.get('state')?.setValue(data[0]);
       }
     )
 
