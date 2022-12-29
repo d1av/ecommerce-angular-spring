@@ -2,6 +2,7 @@ package com.davi.shop.dto;
 
 import com.davi.shop.entities.Country;
 import com.davi.shop.entities.State;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
 
@@ -12,6 +13,7 @@ public class CountryDTO {
     private Long id;
     private String code;
     private String name;
+    @JsonIgnore
     private Set<State> states = new HashSet<State>();
 
     public CountryDTO() {

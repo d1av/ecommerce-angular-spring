@@ -1,5 +1,6 @@
 package com.davi.shop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -14,6 +15,8 @@ public class Country {
     @Column(length = 2)
     private String code;
     private String name;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "country")
     private Set<State> states = new HashSet<State>();
 
