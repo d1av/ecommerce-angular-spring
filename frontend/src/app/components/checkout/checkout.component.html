@@ -154,6 +154,9 @@
                   >
                     Street is required
                   </div>
+                  <div *ngIf="shippingAddressStreet?.hasError('minlength')">
+                    At least 2 characters are required
+                  </div>
                 </div>
               </div>
             </div>
@@ -181,6 +184,9 @@
                     "
                   >
                     City is required
+                  </div>
+                  <div *ngIf="shippingAddressCity?.hasError('required')">
+                    At least 2 characters are required.
                   </div>
                 </div>
               </div>
@@ -234,8 +240,16 @@
                   "
                   class="alert alert-danger mt-1"
                 >
-                  <div *ngIf="shippingAddressZipCode?.hasError('required')">
+                  <div
+                    *ngIf="
+                      shippingAddressZipCode?.hasError('required') ||
+                      shippingAddressZipCode?.hasError('notOnlyWhitespace')
+                    "
+                  >
                     Zip Code is required
+                  </div>
+                  <div *ngIf="shippingAddressZipCode?.hasError('minlength')">
+                    At least 2 characters are required.
                   </div>
                 </div>
               </div>
@@ -314,6 +328,9 @@
                   >
                     Street is required
                   </div>
+                  <div *ngIf="billingAddressStreet?.hasError('minlength')">
+                    At least 2 characters are required.
+                  </div>
                 </div>
               </div>
             </div>
@@ -341,6 +358,9 @@
                     "
                   >
                     City is required
+                  </div>
+                  <div *ngIf="billingAddressCity?.hasError('minlength')">
+                    At least 2 characters are required.
                   </div>
                 </div>
               </div>
@@ -393,8 +413,16 @@
                   "
                   class="alert alert-danger mt-1"
                 >
-                  <div *ngIf="billingAddressZipCode?.hasError('required')">
+                  <div
+                    *ngIf="
+                      billingAddressZipCode?.hasError('required') ||
+                      billingAddressZipCode?.hasError('notOnlyWhitespace')
+                    "
+                  >
                     Zip Code is required
+                  </div>
+                  <div *ngIf="billingAddressZipCode?.hasError('minlength')">
+                    At least 2 characters are required.
                   </div>
                 </div>
               </div>
