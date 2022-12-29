@@ -19,12 +19,13 @@
                     firstName?.invalid &&
                     (firstName?.dirty || firstName?.touched)
                   "
+                  class="alert alert-danger mt-1"
                 >
-                  <div *ngIf="firstName?.errors?.['required']">
+                  <div *ngIf="firstName?.hasError('required')">
                     First Name is required
                   </div>
 
-                  <div *ngIf="firstName?.errors?.['minlength']">
+                  <div *ngIf="firstName?.hasError('minlength')">
                     First Name must be at least 2 characters long
                   </div>
                 </div>
@@ -39,6 +40,21 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="lastName" type="text" />
+
+                <div
+                  *ngIf="
+                    lastName!.invalid && (lastName!.dirty || lastName!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div *ngIf="lastName!.errors?.['required']">
+                    Last Name is required
+                  </div>
+
+                  <div *ngIf="lastName?.errors?.['minlength']">
+                    Last Name must be at least 2 characters long
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -50,6 +66,21 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="email" type="text" />
+
+                <div
+                  *ngIf="
+                    email!.invalid && (email!.dirty || email!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div *ngIf="email?.errors?.['required']">
+                    Email is required
+                  </div>
+
+                  <div *ngIf="email?.errors?.['pattern']">
+                   Email must be a valid email address format
+                  </div>
+                </div>
               </div>
             </div>
           </div>
