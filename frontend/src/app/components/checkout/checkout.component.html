@@ -43,15 +43,15 @@
 
                 <div
                   *ngIf="
-                    lastName!.invalid && (lastName!.dirty || lastName!.touched)
+                    lastName?.invalid && (lastName?.dirty || lastName?.touched)
                   "
                   class="alert alert-danger mt-1"
                 >
-                  <div *ngIf="lastName!.errors?.['required']">
+                  <div *ngIf="lastName?.hasError('required')">
                     Last Name is required
                   </div>
 
-                  <div *ngIf="lastName?.errors?.['minlength']">
+                  <div *ngIf="lastName?.hasError('minlength')">
                     Last Name must be at least 2 characters long
                   </div>
                 </div>
@@ -68,17 +68,15 @@
                 <input formControlName="email" type="text" />
 
                 <div
-                  *ngIf="
-                    email!.invalid && (email!.dirty || email!.touched)
-                  "
+                  *ngIf="email?.invalid && (email?.dirty || email?.touched)"
                   class="alert alert-danger mt-1"
                 >
-                  <div *ngIf="email?.errors?.['required']">
+                  <div *ngIf="email?.hasError('required')">
                     Email is required
                   </div>
 
-                  <div *ngIf="email?.errors?.['pattern']">
-                   Email must be a valid email address format
+                  <div *ngIf="email?.hasError('pattern')">
+                    Email must be a valid email address format
                   </div>
                 </div>
               </div>
