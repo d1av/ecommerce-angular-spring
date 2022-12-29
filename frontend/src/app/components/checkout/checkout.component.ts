@@ -10,6 +10,7 @@ import { ShopFormService } from 'src/app/services/shop-form.service';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
+
   checkoutFormGroup!: FormGroup;
 
   totalPrice: number = 0;
@@ -20,6 +21,9 @@ export class CheckoutComponent implements OnInit {
 
   countries: Country[] = [];
   states: State[] = [];
+
+  shippingAddressStates: State[]=[];
+  billingAddressStates: State[]=[];
 
   constructor(private formBuilder: FormBuilder,
     private shopFormService: ShopFormService) {
@@ -85,7 +89,7 @@ export class CheckoutComponent implements OnInit {
 
     //populate states
 
-   
+
 
 
   }
@@ -126,5 +130,24 @@ export class CheckoutComponent implements OnInit {
         this.creditCardMonths = data;
       }
     )
+  }
+
+  getStates(formGroupName: string) {
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
+
+    const countryCode = formGroup?.value.country.code
+    const countryName = formGroup?.value.country.name
+
+    console.log(`{formGroupName} country code: ${countryCode}`);
+    console.log(`{formGroupName} country name: ${countryName}`);
+
+    this.shopFormService.getStates(countryCode).subscribe(
+      data=>{
+        if(formGroupName==='shippingAddress'){
+
+        }
+      }
+    )
+
   }
 }
