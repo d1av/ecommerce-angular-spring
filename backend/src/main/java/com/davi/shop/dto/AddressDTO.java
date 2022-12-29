@@ -1,24 +1,18 @@
-package com.davi.shop.entities;
+package com.davi.shop.dto;
 
-import jakarta.persistence.*;
+import com.davi.shop.entities.Address;
 
-@Entity
-@Table(name = "address")
-public class Address {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class AddressDTO {
     private String city;
     private String country;
     private String state;
     private String street;
     private String zipCode;
 
-    public Address() {
+    public AddressDTO() {
     }
 
-    public Address(Long id, String city, String country, String state, String street, String zipCode) {
-        this.id = id;
+    public AddressDTO(String city, String country, String state, String street, String zipCode) {
         this.city = city;
         this.country = country;
         this.state = state;
@@ -26,12 +20,12 @@ public class Address {
         this.zipCode = zipCode;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public AddressDTO(Address entity) {
+        this.city = entity.getCity();
+        this.country = entity.getCountry();
+        this.state = entity.getState();
+        this.street = entity.getStreet();
+        this.zipCode = entity.getZipCode();
     }
 
     public String getCity() {

@@ -13,7 +13,7 @@ public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String order_tracking_number;
+    private String orderTrackingNumber;
     private BigDecimal totalPrice;
     private Integer totalQuantity;
     @ManyToOne
@@ -31,12 +31,13 @@ public class Orders {
     @UpdateTimestamp
     private Date lastUpdated;
 
+
     public Orders() {
     }
 
-    public Orders(Long id, String order_tracking_number, BigDecimal totalPrice, Integer totalQuantity, Address billingAddress, Address shippingAddress, Customer customer, String status, Date dateCreated, Date lastUpdated) {
+    public Orders(Long id, String orderTrackingNumber, BigDecimal totalPrice, Integer totalQuantity, Address billingAddress, Address shippingAddress, Customer customer, String status, Date dateCreated, Date lastUpdated) {
         this.id = id;
-        this.order_tracking_number = order_tracking_number;
+        this.orderTrackingNumber = orderTrackingNumber;
         this.totalPrice = totalPrice;
         this.totalQuantity = totalQuantity;
         this.billingAddress = billingAddress;
@@ -55,12 +56,12 @@ public class Orders {
         this.id = id;
     }
 
-    public String getOrder_tracking_number() {
-        return order_tracking_number;
+    public String getOrderTrackingNumber() {
+        return orderTrackingNumber;
     }
 
-    public void setOrder_tracking_number(String order_tracking_number) {
-        this.order_tracking_number = order_tracking_number;
+    public void setOrderTrackingNumber(String orderTrackingNumber) {
+        this.orderTrackingNumber = orderTrackingNumber;
     }
 
     public BigDecimal getTotalPrice() {
