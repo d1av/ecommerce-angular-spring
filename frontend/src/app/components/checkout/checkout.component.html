@@ -16,18 +16,17 @@
 
                 <div
                   *ngIf="
-                    firstName?.invalid && (firstName?.dirty || firstName?.touched)
-                  ">
-
-                  <div *ngIf="!firstName.errors['required']">
+                    firstName?.invalid &&
+                    (firstName?.dirty || firstName?.touched)
+                  "
+                >
+                  <div *ngIf="firstName?.errors?.['required']">
                     First Name is required
                   </div>
 
-                  <div *ngIf="!firstName?.errors['minlength']">
+                  <div *ngIf="firstName?.errors?.['minlength']">
                     First Name must be at least 2 characters long
                   </div>
-
-
                 </div>
               </div>
             </div>
