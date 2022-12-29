@@ -2,6 +2,8 @@ package com.davi.shop.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "state")
 public class State {
@@ -43,5 +45,17 @@ public class State {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof State state)) return false;
+        return Objects.equals(id, state.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
