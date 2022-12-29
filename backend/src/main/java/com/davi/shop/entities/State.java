@@ -8,14 +8,14 @@ public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long name;
+    private String name;
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
 
     public State() {
     }
-    public State(Long id, Long name, Country country) {
+    public State(Long id, String name, Country country) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -29,11 +29,11 @@ public class State {
         this.id = id;
     }
 
-    public Long getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Long name) {
+    public void setName(String name) {
         this.name = name;
     }
 

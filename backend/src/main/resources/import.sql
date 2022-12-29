@@ -132,3 +132,12 @@ INSERT INTO country(code,name) VALUES ('DE','Germany');
 INSERT INTO country(code,name) VALUES ('IN','India');
 INSERT INTO country(code,name) VALUES ('TR','Turkey');
 INSERT INTO country(code,name) VALUES ('US','United States');
+
+-- -----------------------------------------------------
+-- States
+-- -----------------------------------------------------
+
+INSERT INTO state(name,country_id) VALUES ('Acre',1),('Alagoas',1),('Amapá',1),('Amazonas',1),('Bahia',1),('Ceará',1),('Distrito Federal',1),('Espírito Santo',1),('Goiás',1),('Maranhão',1),('Mato Grosso do Sul',1),('Mato Grosso',1),('Minas Gerais',1),('Paraná',1),('Paraíba',1),('Pará',1),('Pernambuco',1),('Piaui',1),('Rio de Janeiro',1),('Rio Grande do Norte',1),('Rio Grande do Sul',1),('Rondônia',1),('Roraima',1),('Santa Catarina',1),('Sergipe',1),('São Paulo',1),('Tocantins',1),('Alberta',2),('British Columbia',2),('Manitoba',2),('New Brunswick',2),('Newfoundland and Labrador',2);
+INSERT INTO state(name,country_id) VALUES ('Northwest Territories',2),('Nova Scotia',2),('Nunavut',2),('Ontario',2),('Prince Edward Island',2),('Quebec',2),('Saskatchewan',2),('Yukon',2),('Baden-Württemberg',3),('Bavaria',3),('Berlin',3),('Brandenburg',3),('Bremen',3),('Hamburg',3),('Hesse',3),('Lower Saxony',3),('Mecklenburg-Vorpommern',3),('North Rhine-Westphalia',3);
+INSERT INTO state(name,country_id) VALUES ('Rhineland-Palatinate',3),('Saarland',3),('Saxony',3),('Saxony-Anhalt',3),('Schleswig-Holstein',3),('Thuringia',3),('Andhra Pradesh',4),('Arunachal Pradesh',4),('Assam',4),('Bihar',4),('Chhattisgarh',4),('Goa',4),('Gujarat',4),('Haryana',4),('Himachal Pradesh',4),('Jammu & Kashmir',4),('Jharkhand',4),('Karnataka',4);
+INSERT INTO state(name,country_id) VALUES ('Kerala',4),('Madhya Pradesh',4),('Maharashtra',4),('Manipur',4),('Meghalaya',4),('Mizoram',4),('Nagaland',4),('Odisha',4),('Punjab',4),('Rajasthan',4),('Sikkim',4),('Tamil Nadu',4),('Telangana',4),('Tripura',4),('Uttar Pradesh',4),('Uttarakhand',4),('West Bengal',4),('Andaman and Nicobar Islands',4),('Chandigarh',4);

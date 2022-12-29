@@ -1,19 +1,16 @@
 package com.davi.shop.dto;
 
-import com.davi.shop.entities.Country;
 import com.davi.shop.entities.State;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 public class StateDTO {
     private Long id;
-    private Long name;
+    private String name;
     private Long countryId;
 
     public StateDTO() {
     }
 
-    public StateDTO(Long id, Long name, Long countryId) {
+    public StateDTO(Long id, String name, Long countryId) {
         this.id = id;
         this.name = name;
         this.countryId = countryId;
@@ -33,11 +30,11 @@ public class StateDTO {
         this.id = id;
     }
 
-    public Long getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Long name) {
+    public void setName(String name) {
         this.name = name;
     }
 
