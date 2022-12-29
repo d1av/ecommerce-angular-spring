@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
@@ -6,7 +7,10 @@ import { Observable, of } from 'rxjs';
 })
 export class ShopFormService {
 
-  constructor() { }
+  private countriesUrl = 'http://localhost:8080/countries'
+  private statesUrl = 'http://localhost:8080/states'
+
+  constructor(private httpClient: HttpClient) { }
 
 
   getCreditCardMonths(startMonth: number): Observable<number[]> {
