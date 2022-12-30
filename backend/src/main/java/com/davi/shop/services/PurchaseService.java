@@ -23,10 +23,6 @@ public class PurchaseService {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
-    @Autowired
-    private PurchaseRepository purchaseRepository;
-
-
     public PurchaseDTO insert(PurchaseDTO dto) {
         Address shippingAddress = addressRepository.save(dto.getShippingAddress());
         Address billingAddress = addressRepository.save(dto.getBillingAddress());

@@ -6,7 +6,6 @@ import com.davi.shop.entities.Customer;
 import com.davi.shop.entities.OrderItem;
 import com.davi.shop.entities.Order;
 import com.davi.shop.repositories.CustomerRepository;
-import com.davi.shop.repositories.PurchaseRepository;
 import com.davi.shop.services.CheckoutService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +15,9 @@ import java.util.UUID;
 
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
-    private final PurchaseRepository purchaseRepository;
     private final CustomerRepository customerRepository;
 
-    public CheckoutServiceImpl(PurchaseRepository purchaseRepository,
-                               CustomerRepository customerRepository) {
-        this.purchaseRepository = purchaseRepository;
+    public CheckoutServiceImpl(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
