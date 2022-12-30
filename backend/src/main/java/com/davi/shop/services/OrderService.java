@@ -16,7 +16,7 @@ public class OrderService {
     private OrderRepository repository;
 
     public Page<OrderDTO> findByEmail(String email, Pageable pageable) {
-        Page<Order> orders = repository.findByCustomerEmail(email, pageable);
+        Page<Order> orders = repository.findByCustomerEmailOrderByDateCreatedDesc(email, pageable);
         Page<OrderDTO> dto = orders.map(x -> new OrderDTO(x));
         return dto;
     }
