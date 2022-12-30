@@ -181,7 +181,7 @@ export class CheckoutComponent implements OnInit {
     purchase.customer = this.checkoutFormGroup.controls['customer'].value;
 
     // billing address
-    purchase.shippingAddress = this.checkoutFormGroup.controls['billingAddress'].value;
+    purchase.billingAddress = this.checkoutFormGroup.controls['billingAddress'].value;
     const billingState: State = JSON.parse(JSON.stringify(purchase.billingAddress.state));
     const billingCountry: Country = JSON.parse(JSON.stringify(purchase.billingAddress.country));
     purchase.billingAddress.state = billingState.name;
@@ -194,8 +194,7 @@ export class CheckoutComponent implements OnInit {
     // call rest api
     this.checkoutService.placeOrder(purchase).subscribe({
       next: response => {
-        alert(`Your order has been received. \nOrder tracking number: ${response.orderTrackingNumber}`);
-
+        alert(`Your order has been received. Order tracking number: ${response.orderTrackingNumber}`);
         this.resetCart();
 
       },
@@ -210,9 +209,9 @@ export class CheckoutComponent implements OnInit {
     this.cartService.totalPrice.next(0)
     this.cartService.totalQuantity.next(0);
 
+    this.router.navigateByUrl("/products")
     this.checkoutFormGroup.reset();
 
-    this.router.navigateByUrl("/products")
 
 
   }
