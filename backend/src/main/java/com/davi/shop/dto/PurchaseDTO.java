@@ -3,21 +3,21 @@ package com.davi.shop.dto;
 import com.davi.shop.entities.Address;
 import com.davi.shop.entities.Customer;
 import com.davi.shop.entities.OrderItem;
-import com.davi.shop.entities.Orders;
+import com.davi.shop.entities.Order;
 
 import java.util.List;
 
-public class PurchaseInsertDTO {
+public class PurchaseDTO {
     private Customer customer;
     private Address shippingAddress;
     private Address billingAddress;
-    private Orders order;
+    private Order order;
     private List<OrderItem> orderItems;
 
-    public PurchaseInsertDTO() {
+    public PurchaseDTO() {
     }
 
-    public PurchaseInsertDTO(Customer customer, Address shippingAddress, Address billingAddress, Orders order, List<OrderItem> orderItems) {
+    public PurchaseDTO(Customer customer, Address shippingAddress, Address billingAddress, Order order, List<OrderItem> orderItems) {
         this.customer = customer;
         this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
@@ -49,11 +49,11 @@ public class PurchaseInsertDTO {
         this.billingAddress = billingAddress;
     }
 
-    public Orders getOrder() {
+    public Order getOrder() {
         return order;
     }
 
-    public void setOrder(Orders order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
 

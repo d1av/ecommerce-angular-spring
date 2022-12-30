@@ -16,7 +16,7 @@ public class OrderItem {
     private BigDecimal unitPrice;
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Orders orders;
+    private Order order;
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -24,12 +24,12 @@ public class OrderItem {
     public OrderItem() {
     }
 
-    public OrderItem(Long id, String imageUrl, Integer quantity, BigDecimal unitPrice, Orders orders, Product product) {
+    public OrderItem(Long id, String imageUrl, Integer quantity, BigDecimal unitPrice, Order order, Product product) {
         this.id = id;
         this.imageUrl = imageUrl;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
-        this.orders = orders;
+        this.order = order;
         this.product = product;
     }
 
@@ -65,12 +65,12 @@ public class OrderItem {
         this.unitPrice = unitPrice;
     }
 
-    public Orders getOrders() {
-        return orders;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrders(Orders orders) {
-        this.orders = orders;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public Product getProduct() {

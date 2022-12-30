@@ -2,6 +2,8 @@ package com.davi.shop.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Entity
@@ -14,12 +16,12 @@ public class Customer {
     private String lastName;
     private String email;
     @OneToMany(mappedBy = "customer")
-    private List<Orders> orders;
+    private List<Order> orders;
 
     public Customer() {
     }
 
-    public Customer(Long id, String firstName, String lastName, String email, List<Orders> orders) {
+    public Customer(Long id, String firstName, String lastName, String email, List<Order> orders) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,7 +29,20 @@ public class Customer {
         this.orders = orders;
     }
 
-    public List<Orders> getOrders() {
+    public void add(Order order) {
+
+        if (order != null) {
+
+            if (orders == null) {
+                orders = new ArrayList<>();
+            }
+
+            orders.add(order);
+            order.setCustomer(this);
+        }
+    }
+
+    public List<Order> getOrders() {
         return orders;
     }
     public Long getId() {

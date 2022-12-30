@@ -1,6 +1,6 @@
 package com.davi.shop.resources;
 
-import com.davi.shop.dto.PurchaseInsertDTO;
+import com.davi.shop.dto.PurchaseDTO;
 import com.davi.shop.services.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ public class PurchaseResource {
     private PurchaseService service;
 
     @PostMapping
-    public ResponseEntity<PurchaseInsertDTO> saveOne(@RequestBody PurchaseInsertDTO dto) {
+    public ResponseEntity<PurchaseDTO> saveOne(@RequestBody PurchaseDTO dto) {
         return ResponseEntity.ok().body(service.insert(dto));
     }
 }

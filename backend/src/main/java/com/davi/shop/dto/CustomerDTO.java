@@ -1,10 +1,6 @@
 package com.davi.shop.dto;
 
 import com.davi.shop.entities.Customer;
-import com.davi.shop.entities.Orders;
-import jakarta.persistence.OneToMany;
-
-import java.util.List;
 
 public class CustomerDTO {
     private String firstName;

@@ -30,11 +30,11 @@ public class Purchase {
     }
 
     public Purchase(Customer customer, Address shippingAddress, Address billingAddress,
-                    Orders orders, List<OrderItem> orderItems) {
+                    Order order, List<OrderItem> orderItems) {
         this.customerId = customer.getId();
         this.shippingAddressId = shippingAddress.getId();
         this.billingAddressId = billingAddress.getId();
-        this.orders = orders.getId();
+        this.orders = order.getId();
         this.orderItems = orderItems.stream().map(x-> x.getId()).collect(Collectors.toList());
     }
 

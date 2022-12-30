@@ -1,6 +1,6 @@
 package com.davi.shop.dto;
 
-import com.davi.shop.entities.Orders;
+import com.davi.shop.entities.Order;
 
 import java.math.BigDecimal;
 
@@ -16,7 +16,7 @@ public class OrdersDTO {
         this.totalQuantity = totalQuantity;
     }
 
-    public OrdersDTO(Orders entity) {
+    public OrdersDTO(Order entity) {
         totalPrice = entity.getTotalPrice();
         totalQuantity = entity.getTotalQuantity();
     }
