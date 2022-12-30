@@ -3,13 +3,25 @@
     <div class="container-fluid">
       <h3>Your Orders</h3>
 
-      <div *ngIf="orderHistoryList.length>0">
-          <table class="table table-bordered">
-            <th width="20%"> Order Tracking Number </th>
-            <th width="20%"> Total Price </th>
-            <th width="20%"> Total Quantity</th>
-            <th width="20%"> Order Tracking Number </th>
-          </table>
+      <div *ngIf="orderHistoryList.length > 0">
+        <table class="table table-bordered">
+          <th width="20%">Order Tracking Number</th>
+          <th width="20%">Total Price</th>
+          <th width="20%">Total Quantity</th>
+          <th width="20%">Order Tracking Number</th>
+
+          <tr *ngFor="let tempOrderHistory of orderHistoryList">
+            <td>{{ tempOrderHistory.orderTrackingNumber }}</td>
+            <td>{{ tempOrderHistory.totalPrice | currency : "USD" }}</td>
+            <td>{{ tempOrderHistory.totalQuantity }}</td>
+            <td>{{ tempOrderHistory.dateCreated | date : "medium" }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- if order history is empty display a message -->
+      <div *ngIf="orderHistoryList.length==0" class="alert alert-warning col-md-12" role="alert">
+        No orders found.
       </div>
     </div>
   </div>
