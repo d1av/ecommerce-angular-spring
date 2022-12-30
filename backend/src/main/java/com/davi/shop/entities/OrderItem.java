@@ -5,32 +5,40 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "order_item")
+@Table(name="order_item")
 public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
+
+    @Column(name="image_url")
     private String imageUrl;
-    private Integer quantity;
+
+    @Column(name="unit_price")
     private BigDecimal unitPrice;
+
+    @Column(name="quantity")
+    private int quantity;
+
+    @Column(name="product_id")
+    private Long productId;
+
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
-    @OneToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
 
-    public OrderItem() {
-    }
-
-    public OrderItem(Long id, String imageUrl, Integer quantity, BigDecimal unitPrice, Order order, Product product) {
+    public OrderItem(Long id, String imageUrl, BigDecimal unitPrice, int quantity, Long productId, Order order) {
         this.id = id;
         this.imageUrl = imageUrl;
-        this.quantity = quantity;
         this.unitPrice = unitPrice;
+        this.quantity = quantity;
+        this.productId = productId;
         this.order = order;
-        this.product = product;
+    }
+
+    public OrderItem() {
     }
 
     public Long getId() {
@@ -49,14 +57,6 @@ public class OrderItem {
         this.imageUrl = imageUrl;
     }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
     public BigDecimal getUnitPrice() {
         return unitPrice;
     }
@@ -65,19 +65,27 @@ public class OrderItem {
         this.unitPrice = unitPrice;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
     public Order getOrder() {
         return order;
     }
 
     public void setOrder(Order order) {
         this.order = order;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 }

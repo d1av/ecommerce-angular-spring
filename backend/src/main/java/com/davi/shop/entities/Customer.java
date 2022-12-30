@@ -2,39 +2,35 @@ package com.davi.shop.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "email")
     private String email;
-    @OneToMany(mappedBy = "customer")
-    private List<Order> orders;
 
-    public Customer() {
-    }
-
-    public Customer(Long id, String firstName, String lastName, String email, List<Order> orders) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.orders = orders;
-    }
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Set<Order> orders = new HashSet<>();
 
     public void add(Order order) {
 
         if (order != null) {
 
             if (orders == null) {
-                orders = new ArrayList<>();
+                orders = new HashSet<>();
             }
 
             orders.add(order);
@@ -42,9 +38,17 @@ public class Customer {
         }
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public Customer() {
     }
+
+    public Customer(Long id, String firstName, String lastName, String email, Set<Order> orders) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.orders = orders;
+    }
+
     public Long getId() {
         return id;
     }
@@ -75,5 +79,13 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

@@ -6,18 +6,19 @@ import com.davi.shop.entities.OrderItem;
 import com.davi.shop.entities.Order;
 
 import java.util.List;
+import java.util.Set;
 
 public class PurchaseDTO {
     private Customer customer;
     private Address shippingAddress;
     private Address billingAddress;
     private Order order;
-    private List<OrderItem> orderItems;
+    private Set<OrderItem> orderItems;
 
     public PurchaseDTO() {
     }
 
-    public PurchaseDTO(Customer customer, Address shippingAddress, Address billingAddress, Order order, List<OrderItem> orderItems) {
+    public PurchaseDTO(Customer customer, Address shippingAddress, Address billingAddress, Order order, Set<OrderItem> orderItems) {
         this.customer = customer;
         this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
@@ -57,11 +58,11 @@ public class PurchaseDTO {
         this.order = order;
     }
 
-    public List<OrderItem> getOrderItems() {
+    public Set<OrderItem> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(List<OrderItem> orderItems) {
+    public void setOrderItems(Set<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
 }

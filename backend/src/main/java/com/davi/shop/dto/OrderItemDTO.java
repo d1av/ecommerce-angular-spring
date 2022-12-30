@@ -24,7 +24,6 @@ public class OrderItemDTO {
         imageUrl = entity.getImageUrl();
         quantity = entity.getQuantity();
         unitPrice = entity.getUnitPrice();
-        productId = entity.getProduct().getId();
     }
 
     public String getImageUrl() {
