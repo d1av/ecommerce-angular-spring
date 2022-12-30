@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Country } from 'src/app/common/country';
+import { OrderItem } from 'src/app/common/order-item';
 import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
@@ -145,12 +146,20 @@ export class CheckoutComponent implements OnInit {
 
 
   onSubmit() {
-  //  console.log(this.checkoutFormGroup.get('customer')?.value)
+    //  console.log(this.checkoutFormGroup.get('customer')?.value)
 
     if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
       return;
     }
+    const cartItems = this.cartService.cartItems;
+
+    let orderItem: OrderItem[] = [];
+    for (let i = 0; i < cartItems.length; i++) {
+      orderItem[i] = new OrderItem(cartItems[i]);
+    }
+
+    
 
     // set up order
 
