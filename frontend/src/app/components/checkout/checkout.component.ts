@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Country } from 'src/app/common/country';
 import { OrderItem } from 'src/app/common/order-item';
+import { Purchase } from 'src/app/common/purchase';
 import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
@@ -152,19 +153,35 @@ export class CheckoutComponent implements OnInit {
       this.checkoutFormGroup.markAllAsTouched();
       return;
     }
+    // set up order
+    // get cart items
     const cartItems = this.cartService.cartItems;
 
+    // create orderItems from cartItems
     let orderItems: OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem))
 
-
-
-    // set up order
-
-    // get cart items
-
-    // create orderItems from cartItems
-
     //set up purchase
+    let purchase = new Purchase();
+
+    purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value;
+    const shippingState: State = JSON.parse(JSON.stringify(purchase.shippingAddress.state));
+    const shippingCountry: Country = JSON.parse(JSON.stringify(purchase.shippingAddress.country));
+    purchase.shippingAddress.state = shippingState.name;
+    purchase.shippingAddress.country = shippingCountry.name;
+
+    //customer
+
+    purchase.customer = this.checkoutFormGroup.controls['customer'].value;
+
+    // billing address
+    purchase.shippingAddress = this.checkoutFormGroup.controls['billingAddress'].value;
+    const billingState: State = JSON.parse(JSON.stringify(purchase.billingAddress.state));
+    const billingCountry: Country = JSON.parse(JSON.stringify(purchase.billingAddress.country));
+    purchase.billingAddress.state = billingState.name;
+    purchase.billingAddress.country = billingCountry.name;
+
+
+
 
     // populate purchase
 
