@@ -17,6 +17,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShopValidators } from './validators/shop-validators';
 import { LoginComponent } from './components/login/login.component';
+import { LoginStatusComponent } from './components/login-status/login-status.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LoginComponent } from './components/login/login.component';
     CartDetailsComponent,
     CheckoutComponent,
     LoginComponent,
+    LoginStatusComponent,
   ],
   imports: [
     BrowserModule,
