@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.oktaSignin.remove();
 
     this.oktaSignin.renderEl({
-      el: '#okta-sign-in-widget'
+      el: '#okta-sing-in-widget'
     },
       (response: any) => {
         if (response.status == 'SUCCESS') {
