@@ -154,12 +154,9 @@ export class CheckoutComponent implements OnInit {
     }
     const cartItems = this.cartService.cartItems;
 
-    let orderItem: OrderItem[] = [];
-    for (let i = 0; i < cartItems.length; i++) {
-      orderItem[i] = new OrderItem(cartItems[i]);
-    }
+    let orderItems: OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem))
 
-    
+
 
     // set up order
 
