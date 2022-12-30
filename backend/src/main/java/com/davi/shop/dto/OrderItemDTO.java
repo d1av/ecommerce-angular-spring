@@ -1,11 +1,6 @@
 package com.davi.shop.dto;
 
 import com.davi.shop.entities.OrderItem;
-import com.davi.shop.entities.Orders;
-import com.davi.shop.entities.Product;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 import java.math.BigDecimal;
 

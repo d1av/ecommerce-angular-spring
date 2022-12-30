@@ -35,7 +35,7 @@ public class Purchase {
         this.shippingAddressId = shippingAddress.getId();
         this.billingAddressId = billingAddress.getId();
         this.orders = orders.getId();
-        this.orderItems = orderItems.stream().map(x -> x.getId()).collect(Collectors.toList());
+        this.orderItems = orderItems.stream().map(x-> x.getId()).collect(Collectors.toList());
     }
 
     public Long getId() {

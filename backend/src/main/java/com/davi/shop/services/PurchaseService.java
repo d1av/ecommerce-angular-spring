@@ -31,12 +31,16 @@ public class PurchaseService {
 
 
     public PurchaseInsertDTO insert(PurchaseInsertDTO dto) {
-        customerRepository.save(dto.getCustomer());
-        addressRepository.save(dto.getShippingAddress());
-        addressRepository.save(dto.getBillingAddress());
-        ordersRepository.save(dto.getOrder());
+        Address shippingAddress = addressRepository.save(dto.getShippingAddress());
+        Address billingAddress = addressRepository.save(dto.getBillingAddress());
+        Customer customer = customerRepository.save(dto.getCustomer());
+        Orders orders = new Orders(dto, shippingAddress, billingAddress, customer, "");
+        dto.setOrder(ordersRepository.save(orders));
         dto.getOrderItems().stream()
-                .map(x -> orderItemRepository.save(x))
+                .map(x -> {
+                    x.setOrders(orders);
+                    return orderItemRepository.save(x);
+                })
                 .collect(Collectors.toList());
         return dto;
     }

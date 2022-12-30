@@ -1,5 +1,6 @@
 package com.davi.shop.entities;
 
+import com.davi.shop.dto.PurchaseInsertDTO;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -46,6 +47,15 @@ public class Orders {
         this.status = status;
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
+    }
+
+    public Orders(PurchaseInsertDTO entity, Address shippingAddress, Address billingAddress,Customer customer, String status) {
+        this.totalPrice = entity.getOrder().getTotalPrice();
+        this.totalQuantity = entity.getOrder().getTotalQuantity();
+        this.billingAddress = shippingAddress;
+        this.shippingAddress = billingAddress;
+        this.customer = customer;
+        this.status = status;
     }
 
     public Long getId() {
