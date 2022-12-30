@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
+import { CheckoutService } from 'src/app/services/checkout.service';
 import { ShopFormService } from 'src/app/services/shop-form.service';
 import { ShopValidators } from 'src/app/validators/shop-validators';
 
@@ -28,6 +30,8 @@ export class CheckoutComponent implements OnInit {
   billingAddressStates: State[] = [];
 
   constructor(
+    private checkoutService: CheckoutService,
+    private router: Router,
     private cartService: CartService,
     private formBuilder: FormBuilder,
     private shopFormService: ShopFormService) { }
@@ -141,11 +145,24 @@ export class CheckoutComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.checkoutFormGroup.get('customer')?.value)
+  //  console.log(this.checkoutFormGroup.get('customer')?.value)
 
     if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
+      return;
     }
+
+    // set up order
+
+    // get cart items
+
+    // create orderItems from cartItems
+
+    //set up purchase
+
+    // populate purchase
+
+    // call rest api
 
   }
 
