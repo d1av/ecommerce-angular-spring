@@ -1,7 +1,6 @@
 package com.davi.shop.services;
 
 import com.davi.shop.dto.OrderDTO;
-import com.davi.shop.dto.PurchaseResponseDTO;
 import com.davi.shop.entities.Order;
 import com.davi.shop.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
