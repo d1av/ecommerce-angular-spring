@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Country } from 'src/app/common/country';
+import { Order } from 'src/app/common/order';
 import { OrderItem } from 'src/app/common/order-item';
 import { Purchase } from 'src/app/common/purchase';
 import { State } from 'src/app/common/state';
@@ -147,6 +148,7 @@ export class CheckoutComponent implements OnInit {
 
 
   onSubmit() {
+
     //  console.log(this.checkoutFormGroup.get('customer')?.value)
 
     if (this.checkoutFormGroup.invalid) {
@@ -155,6 +157,11 @@ export class CheckoutComponent implements OnInit {
     }
     // set up order
     // get cart items
+    let order = new Order();
+    order.totalPrice = this.totalPrice;
+    order.totalQuantity = this.totalQuantity;
+
+
     const cartItems = this.cartService.cartItems;
 
     // create orderItems from cartItems
@@ -180,12 +187,33 @@ export class CheckoutComponent implements OnInit {
     purchase.billingAddress.state = billingState.name;
     purchase.billingAddress.country = billingCountry.name;
 
-
-
-
     // populate purchase
+    purchase.order = order;
+    purchase.orderItems = orderItems;
 
     // call rest api
+    this.checkoutService.placeOrder(purchase).subscribe({
+      next: response => {
+        alert(`Your order has been received. \nOrder tracking number: ${response.orderTrackingNumber}`);
+
+        this.resetCart();
+
+      },
+      error: err => {
+        alert(`There was an error: ${err.message}`)
+      }
+    })
+
+  }
+  resetCart() {
+    this.cartService.cartItems = [];
+    this.cartService.totalPrice.next(0)
+    this.cartService.totalQuantity.next(0);
+
+    this.checkoutFormGroup.reset();
+
+    this.router.navigateByUrl("/products")
+
 
   }
 
