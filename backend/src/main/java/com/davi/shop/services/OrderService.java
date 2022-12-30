@@ -1,5 +1,6 @@
 package com.davi.shop.services;
 
+import com.davi.shop.dto.OrderDTO;
 import com.davi.shop.dto.PurchaseResponseDTO;
 import com.davi.shop.entities.Order;
 import com.davi.shop.repositories.OrderRepository;
@@ -14,9 +15,9 @@ public class OrderService {
     @Autowired
     private OrderRepository repository;
 
-    public Page<PurchaseResponseDTO> findByEmail(String email, Pageable pageable) {
+    public Page<OrderDTO> findByEmail(String email, Pageable pageable) {
         Page<Order> orders = repository.findByCustomerEmail(email, pageable);
-        Page<PurchaseResponseDTO> dto = orders.map(x->new PurchaseResponseDTO(x.getOrderTrackingNumber()));
+        Page<OrderDTO> dto = orders.map(x -> new OrderDTO(x));
         return dto;
     }
 }
