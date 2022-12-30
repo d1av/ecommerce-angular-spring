@@ -11,5 +11,5 @@
     Logout
   </button>
 
-  <button routerLink="/members" class="security-btn">Member</button>
+  <button *ngIf="isAuthenticated" routerLink="/members" class="security-btn">Member</button>
 </div>
