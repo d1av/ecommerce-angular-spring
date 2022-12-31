@@ -1,8 +1,10 @@
+import { environment } from "src/environments/environment";
+
 export default {
-  oidc:{
+  oidc: {
     clientId: '0oa7slv4ogJuueesy5d7',
     issuer: 'https://dev-86276196.okta.com/oauth2/default',
-    redirectUri: 'http://localhost:4200/login/callback',
-    scopes:['openid','profile','email']
+    redirectUri: environment.shopApiUrl + '/login/callback',
+    scopes: ['openid', 'profile', 'email']
   }
 }
