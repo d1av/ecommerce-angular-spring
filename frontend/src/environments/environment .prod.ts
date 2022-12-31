@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  shopApiUrl: 'http://localhost:8080'
+  shopApiUrl: 'https://angular-eshop-backend.herokuapp.com/'
 }
