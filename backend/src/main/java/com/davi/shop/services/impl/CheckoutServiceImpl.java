@@ -22,7 +22,7 @@ public class CheckoutServiceImpl implements CheckoutService {
     private final CustomerRepository customerRepository;
 
     public CheckoutServiceImpl(CustomerRepository customerRepository,
-                               @Value("$stripe.key.secret") String secretKey) {
+                               @Value("${stripe.key.secret}") String secretKey) {
         this.customerRepository = customerRepository;
         Stripe.apiKey = secretKey;
     }

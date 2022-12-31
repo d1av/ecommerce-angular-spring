@@ -25,6 +25,7 @@
     "@okta/okta-auth-js": "^6.4.0",
     "@okta/okta-signin-widget": "^6.2.0",
     "@popperjs/core": "^2.11.6",
+    "@stripe/stripe-js": "^1.46.0",
     "bootstrap": "^5.2.3",
     "rxjs": "~7.5.0",
     "stripe": "^11.5.0",

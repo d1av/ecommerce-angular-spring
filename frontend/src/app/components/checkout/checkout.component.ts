@@ -13,6 +13,7 @@ import { ShopFormService } from 'src/app/services/shop-form.service';
 import { ShopValidators } from 'src/app/validators/shop-validators';
 import { environment } from 'src/environments/environment';
 
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -242,9 +243,30 @@ export class CheckoutComponent implements OnInit {
               payment_method: {
                 card: this.cardElement
               }
-            })
+            },
+            {
+              handleActions: false
+            }).then((result: any) => {
+              if (result.error) {
+                alert(`There was an error: ${result.error.message}`);
+              } else {
+                this.checkoutService.placeOrder(purchase).subscribe({
+                  next: (response: any) => {
+                    alert(`Your order has been received. \nOrder tracking number: ${response.orderTrackingNumber}`)
+
+                    //reset cart
+                    this.resetCart();
+                  },
+                  error: (err: any) => {
+                    alert(`There was an error: ${err.message}`)
+                  }
+                })
+              }
+            });
         }
       )
+    } else {
+      this.checkoutFormGroup.markAllAsTouched();
     }
 
 
