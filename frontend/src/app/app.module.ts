@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { HttpClientModule, HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
-=======
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
->>>>>>> a2a4190dcd835df27e2ddda8682ef2e99baf8d36
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
