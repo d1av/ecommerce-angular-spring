@@ -4,12 +4,14 @@ import { Router } from '@angular/router';
 import { Country } from 'src/app/common/country';
 import { Order } from 'src/app/common/order';
 import { OrderItem } from 'src/app/common/order-item';
+import { PaymentInfo } from 'src/app/common/payment-info';
 import { Purchase } from 'src/app/common/purchase';
 import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { ShopFormService } from 'src/app/services/shop-form.service';
 import { ShopValidators } from 'src/app/validators/shop-validators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-checkout',
@@ -34,6 +36,12 @@ export class CheckoutComponent implements OnInit {
 
   storage: Storage = sessionStorage;
 
+  //stripe initializer
+  stripe = Stripe(environment.stripePublishableKey);
+  paymentInfo: PaymentInfo = new PaymentInfo();
+  cardElement: any;
+  displayError: any = "";
+
   constructor(
     private checkoutService: CheckoutService,
     private router: Router,
@@ -43,6 +51,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     const theEmail = JSON.parse(this.storage.getItem('UserEmail')!)
+    this.setupStripePaymentForm();
 
     this.reviewCartDetails();
 
@@ -76,15 +85,19 @@ export class CheckoutComponent implements OnInit {
         Validators.minLength(2), ShopValidators.notOnlyWhitespace]),
       }),
       creditCard: this.formBuilder.group({
-        cardType: new FormControl('', [Validators.required]),
-        nameOnCard: new FormControl('', [Validators.required,
-        Validators.minLength(2), ShopValidators.notOnlyWhitespace]),
-        cardNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{16}')]),
-        securityCode: new FormControl('', [Validators.required, Validators.pattern('[0-9]{3}')]),
-        expirationMonth: [''],
-        expirationYear: ['']
+        /*
+          cardType: new FormControl('', [Validators.required]),
+          nameOnCard: new FormControl('', [Validators.required,
+          Validators.minLength(2), ShopValidators.notOnlyWhitespace]),
+          cardNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{16}')]),
+          securityCode: new FormControl('', [Validators.required, Validators.pattern('[0-9]{3}')]),
+          expirationMonth: [''],
+          expirationYear: ['']
+          */
       })
     })
+
+    /*
 
     //populate credit card month and year
     const startMonth: number = new Date().getMonth() + 1;
@@ -104,6 +117,8 @@ export class CheckoutComponent implements OnInit {
       }
     );
 
+    */
+
     //populate countries
 
     this.shopFormService.getCountries().subscribe(
@@ -112,6 +127,10 @@ export class CheckoutComponent implements OnInit {
         this.countries = data;
       }
     )
+  }
+  
+  setupStripePaymentForm() {
+
   }
   reviewCartDetails() {
     //subscribe to cartService.totalQuantity
