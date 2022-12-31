@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "qa":"npm start -- --configuration=qa",
+    "qa": "npm start -- --configuration=qa",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -27,6 +27,7 @@
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
     "rxjs": "~7.5.0",
+    "stripe": "^11.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },
