@@ -128,9 +128,22 @@ export class CheckoutComponent implements OnInit {
       }
     )
   }
-  
-  setupStripePaymentForm() {
 
+  setupStripePaymentForm() {
+    var elements = this.stripe.elements();
+
+    this.cardElement = elements.create('card', { hidePostalCode: true });
+    this.cardElement.mount('#card-element');
+
+    this.cardElement.on('change', (event: any) => {
+      this.displayError = document.getElementById('card-errors');
+
+      if (event.complete) {
+        this.displayError.textContent = "";
+      } else if (event.error) {
+        this.displayError.textContent = event.error.message;
+      }
+    })
   }
   reviewCartDetails() {
     //subscribe to cartService.totalQuantity
