@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Country } from '../common/country';
 import { State } from '../common/state';
 
@@ -9,8 +10,8 @@ import { State } from '../common/state';
 })
 export class ShopFormService {
 
-  private countriesUrl = 'http://localhost:8080/countries'
-  private statesUrl = 'http://localhost:8080/states'
+  private countriesUrl = environment.shopApiUrl + '/countries'
+  private statesUrl = environment.shopApiUrl + '/states'
 
   constructor(private httpClient: HttpClient) { }
 

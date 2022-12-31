@@ -1,5 +1,5 @@
 import { Injector, NgModule } from '@angular/core';
-import { Router, RouterModule, Routes } from '@angular/router';
+import { provideRouter, Router, RouterModule, Routes } from '@angular/router';
 import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
@@ -46,7 +46,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [],
+  exports: [RouterModule],
+  providers:[provideRouter(routes)]
 })
 export class AppRoutingModule { }
