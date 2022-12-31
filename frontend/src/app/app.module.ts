@@ -70,10 +70,7 @@ const oktaAuth = new OktaAuth(oktaConfig);
     ProductService,
     CartService,
     OktaCallbackComponent,
-<<<<<<< HEAD
     provideHttpClient(),
-=======
->>>>>>> a2a4190dcd835df27e2ddda8682ef2e99baf8d36
     { provide: OKTA_CONFIG, useValue: { oktaAuth } },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],
