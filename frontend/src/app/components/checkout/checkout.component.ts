@@ -233,6 +233,7 @@ export class CheckoutComponent implements OnInit {
     // stripe because cents
     this.paymentInfo.amount = Math.round(this.totalPrice * 100);
     this.paymentInfo.currency = "USD";
+    this.paymentInfo.receiptEmail = purchase.customer.email;
 
     // if form valid , create payment intent
     if (!this.checkoutFormGroup.invalid && this.displayError.textContent === "") {
@@ -268,12 +269,12 @@ export class CheckoutComponent implements OnInit {
                     alert(`Your order has been received. \nOrder tracking number: ${response.orderTrackingNumber}`)
 
                     //reset cart
-                    this.resetCart();
                     this.isDisabled = false;
+                    this.resetCart();
                   },
                   error: (err: any) => {
-                    alert(`There was an error: ${err.message}`)
                     this.isDisabled = false;
+                    alert(`There was an error: ${err.message}`)
                   }
                 })
               }
