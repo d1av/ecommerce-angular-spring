@@ -230,7 +230,7 @@ export class CheckoutComponent implements OnInit {
     purchase.orderItems = orderItems;
 
     // stripe because cents
-    this.paymentInfo.amount = this.totalPrice * 100;
+    this.paymentInfo.amount = Math.round(this.totalPrice * 100);
     this.paymentInfo.currency = "USD";
 
     // if form valid , create payment intent
