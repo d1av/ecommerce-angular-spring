@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { HttpClientModule, HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+=======
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+>>>>>>> a2a4190dcd835df27e2ddda8682ef2e99baf8d36
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -25,12 +29,13 @@ import {
 
 import { OktaAuth } from '@okta/okta-auth-js';
 
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 import { MembersPageComponent } from './components/members-page/members-page.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import myAppConfig from './config/my-app-config';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
-import { AppRoutingModule } from './app-routing.module';
+
 
 const oktaConfig = myAppConfig.oidc;
 const oktaAuth = new OktaAuth(oktaConfig);
@@ -65,7 +70,10 @@ const oktaAuth = new OktaAuth(oktaConfig);
     ProductService,
     CartService,
     OktaCallbackComponent,
+<<<<<<< HEAD
     provideHttpClient(),
+=======
+>>>>>>> a2a4190dcd835df27e2ddda8682ef2e99baf8d36
     { provide: OKTA_CONFIG, useValue: { oktaAuth } },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],
