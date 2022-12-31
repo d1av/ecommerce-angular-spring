@@ -73,6 +73,7 @@ public class CheckoutServiceImpl implements CheckoutService {
         params.put("amount", paymentInfoDTO.getAmount());
         params.put("currency", paymentInfoDTO.getCurrency());
         params.put("payment_method_types", paymentMethodTypes);
+        params.put("description","Shop Purchase");
         return PaymentIntent.create(params);
     }
 
