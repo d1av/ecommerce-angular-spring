@@ -44,6 +44,7 @@ export class CheckoutComponent implements OnInit {
   displayError: any = "";
 
 
+  isDisabled: boolean = false;
 
   constructor(
     private checkoutService: CheckoutService,
@@ -235,7 +236,7 @@ export class CheckoutComponent implements OnInit {
 
     // if form valid , create payment intent
     if (!this.checkoutFormGroup.invalid && this.displayError.textContent === "") {
-
+      this.isDisabled = true;
       this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
         (paymentIntentResponse) => {
           this.stripe.confirmCardPayment(paymentIntentResponse.client_secret,
@@ -260,6 +261,7 @@ export class CheckoutComponent implements OnInit {
             }).then((result: any) => {
               if (result.error) {
                 alert(`There was an error: ${result.error.message}`);
+                this.isDisabled = false;
               } else {
                 this.checkoutService.placeOrder(purchase).subscribe({
                   next: (response: any) => {
@@ -267,9 +269,11 @@ export class CheckoutComponent implements OnInit {
 
                     //reset cart
                     this.resetCart();
+                    this.isDisabled = false;
                   },
                   error: (err: any) => {
                     alert(`There was an error: ${err.message}`)
+                    this.isDisabled = false;
                   }
                 })
               }

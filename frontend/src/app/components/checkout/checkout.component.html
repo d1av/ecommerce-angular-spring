@@ -457,7 +457,9 @@
 
         <!--submit button-->
         <div class="text-center">
-          <button type="submit" class="btn btn-info">Purchase</button>
+          <button type="submit" [disabled]="isDisabled" class="btn btn-info">
+            Purchase
+          </button>
         </div>
       </form>
     </div>
