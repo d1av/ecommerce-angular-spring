@@ -4,9 +4,14 @@ This project is of an online shopping website with many features, such as:
 product cart, form validation, payment via stripe and many more.
 
 
+
 # This site is live!
 
 ### [Link here.](https://ecommerce-as.vercel.app/)
+
+# Demo video
+
+https://user-images.githubusercontent.com/107776531/210157428-27683ea2-275d-45e7-9d49-af22bb618a83.mp4
 
 
 # Used Technologies
