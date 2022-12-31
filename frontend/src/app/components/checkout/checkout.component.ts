@@ -42,6 +42,8 @@ export class CheckoutComponent implements OnInit {
   cardElement: any;
   displayError: any = "";
 
+
+
   constructor(
     private checkoutService: CheckoutService,
     private router: Router,
@@ -226,17 +228,38 @@ export class CheckoutComponent implements OnInit {
     purchase.order = order;
     purchase.orderItems = orderItems;
 
-    // call rest api
-    this.checkoutService.placeOrder(purchase).subscribe({
-      next: response => {
-        alert(`Your order has been received. Order tracking number: ${response.orderTrackingNumber}`);
-        this.resetCart();
+    // stripe because cents
+    this.paymentInfo.amount = this.totalPrice * 100;
+    this.paymentInfo.currency = "USD";
 
-      },
-      error: err => {
-        alert(`There was an error: ${err.message}`)
-      }
-    })
+    // if form valid , create payment intent
+    if (!this.checkoutFormGroup.invalid && this.displayError.textContent === "") {
+
+      this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
+        (paymentIntentResponse) => {
+          this.stripe.confirmCardPayment(paymentIntentResponse.client_secret,
+            {
+              payment_method: {
+                card: this.cardElement
+              }
+            })
+        }
+      )
+    }
+
+
+
+    // // call rest api
+    // this.checkoutService.placeOrder(purchase).subscribe({
+    //   next: response => {
+    //     alert(`Your order has been received. Order tracking number: ${response.orderTrackingNumber}`);
+    //     this.resetCart();
+
+    //   },
+    //   error: err => {
+    //     alert(`There was an error: ${err.message}`)
+    //   }
+    // })
 
   }
   resetCart() {
