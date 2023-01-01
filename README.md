@@ -17,9 +17,11 @@ https://user-images.githubusercontent.com/107776531/210157428-27683ea2-275d-45e7
 # Used Technologies
 
 1. **Angular:** 15.0.0.
+1. **Spring Boot:** 3.0.1
 1. **Angular CLI:** 15.0.0
 1. **Nodejs:** 18.12.1
 1. **SASS:** 1.56.0
+1. **Stripe**
 
 ## Setting up the local server
 
