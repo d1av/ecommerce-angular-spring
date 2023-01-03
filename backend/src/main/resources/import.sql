@@ -146,3 +146,14 @@ INSERT INTO state(name,country_id) VALUES ('Mississippi',6),('Missouri',6),('Mon
 INSERT INTO state(name,country_id) VALUES ('Ağrı',5),('Aksaray',5),('Amasya',5),('Ankara',5),('Antalya',5),('Ardahan',5),('Artvin',5),('Aydın',5),('Balıkesir',5),('Bartın',5),('Batman',5),('Bayburt',5),('Bilecik',5),('Bingöl',5),('Bitlis',5),('Bolu',5),('Burdur',5),('Bursa',5),('Çanakkale',5),('Çankırı',5),('Çorum',5),('Denizli',5),('Diyarbakır',5),('Düzce',5),('Edirne',5),('Elazığ',5),('Erzincan',5),('Erzurum',5),('Eskişehir',5),('Gaziantep',5),('Giresun',5),('Gümüşhane',5),('Hakkâri',5),('Hatay',5);
 INSERT INTO state(name,country_id) VALUES ('Iğdır',5),('Isparta',5),('İstanbul',5),('İzmir',5),('Kahramanmaraş',5),('Karabük',5),('Karaman',5),('Kars',5),('Kastamonu',5),('Kayseri',5),('Kırıkkale',5),('Kırklareli',5),('Kırşehir',5),('Kilis',5),('Kocaeli',5),('Konya',5),('Kütahya',5),('Malatya',5),('Manisa',5),('Mardin',5),('Mersin',5),('Muğla',5),('Muş',5),('Nevşehir',5),('Niğde',5),('Ordu',5),('Osmaniye',5),('Rize',5),('Sakarya',5),('Samsun',5),('Siirt',5);
 INSERT INTO state(name,country_id) VALUES ('Sinop',5),('Sivas',5),('Şanlıurfa',5),('Şırnak',5),('Tekirdağ',5),('Tokat',5),('Trabzon',5),('Tunceli',5),('Uşak',5),('Van',5),('Yalova',5),('Yozgat',5),('Zonguldak',5);
+
+-- -----------------------------------------------------
+-- Users and Roles
+-- -----------------------------------------------------
+
+INSERT INTO roles(name) VALUES ('ROLE_USER'),('ROLE_ADMIN');
+
+INSERT INTO users(email,name,password,username) VALUES ('admin@admin','Admin','$2a$10$FUlO0odzUuxuv1KbGjOgE.Kr9Xuz3baIMsVlhTENkD9QPkB.ecRiK','admin');
+INSERT INTO users(email,name,password,username) VALUES ('davi@davi','Davi','$2a$10$9B7YovC4owgOeiHTTny.PucbEx3pWX4KAEgX447vnOpjcfguLqsB6','davi');
+
+INSERT INTO users_roles(user_id,role_id) VALUES (1,1),(1,2),(2,1);
