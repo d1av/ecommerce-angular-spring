@@ -1,6 +1,8 @@
 package com.davi.shop.exceptions;
 
-import com.davi.shop.dto.ErrorDetails;
+import com.davi.shop.dto.exceptions.ErrorDetails;
+import com.davi.shop.dto.exceptions.StandardError;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -13,12 +15,25 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(DataNotFoundException.class)
+    public ResponseEntity<StandardError> entityNotFound(DataNotFoundException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError();
+        err.setTimestamp(Instant.now());
+        err.setStatus(status.value());
+        err.setError("Incorrect search parameter.");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
 
     // handle specific exceptions
     @ExceptionHandler(ResourceNotFoundException.class)
@@ -38,13 +53,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     // global exceptions
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception,
-                                                              WebRequest webRequest) {
-        ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
-                webRequest.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception,
+//                                                              WebRequest webRequest) {
+//        ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
+//                webRequest.getDescription(false));
+//        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,

@@ -1,4 +1,4 @@
-package com.davi.shop.resources.exceptions;
+package com.davi.shop.dto.exceptions;
 
 import java.time.Instant;
 

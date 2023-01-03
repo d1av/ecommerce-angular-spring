@@ -1,4 +1,4 @@
-package com.davi.shop.dto;
+package com.davi.shop.dto.exceptions;
 
 import java.util.Date;
 
