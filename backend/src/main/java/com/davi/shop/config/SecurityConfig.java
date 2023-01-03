@@ -51,8 +51,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         (authorize) ->
                                 //authorize.anyRequest().authenticated()
-                                authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                                authorize.requestMatchers(HttpMethod.GET, "/countries/**").permitAll()
+                                        .requestMatchers(HttpMethod.GET, "/states/**").permitAll()
                                         .requestMatchers("/h2/**").permitAll()
+                                        .requestMatchers("/checkout/**").permitAll()
                                         .requestMatchers("/api/auth/**").permitAll()
                                         .anyRequest().authenticated()
                 )
