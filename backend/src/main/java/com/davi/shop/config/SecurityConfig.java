@@ -52,11 +52,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         (authorize) ->
                                 //authorize.anyRequest().authenticated()
-                                authorize.requestMatchers(HttpMethod.GET, "/**").permitAll()
-                                        .requestMatchers("/h2/**").permitAll()
+                                authorize.requestMatchers("/h2/**").permitAll()
+                                        .requestMatchers("/api/orders/**").authenticated()
+                                        .requestMatchers(HttpMethod.GET,"/states/**").permitAll()
+                                        .requestMatchers(HttpMethod.GET,"/products/**").permitAll()
+                                        .requestMatchers(HttpMethod.GET,"/countries/**").permitAll()
+                                        .requestMatchers(HttpMethod.GET,"/product-categories/**").permitAll()
                                         .requestMatchers("/checkout/**").permitAll()
                                         .requestMatchers("/api/auth/**").permitAll()
-                                        .anyRequest().permitAll()
+                                        .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
