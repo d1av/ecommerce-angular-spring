@@ -27,6 +27,7 @@
     "@popperjs/core": "^2.11.6",
     "@stripe/stripe-js": "^1.46.0",
     "bootstrap": "^5.2.3",
+    "ngx-spinner": "^15.0.1",
     "rxjs": "~7.5.0",
     "stripe": "^11.5.0",
     "tslib": "^2.3.0",

@@ -27,8 +27,8 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-spinner/animations/ball-spin.css",
               "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "./node_modules/@okta/okta-signin-widget/dist/css/okta-sign-in.min.css",
               "src/styles.scss"
             ],
             "scripts": []

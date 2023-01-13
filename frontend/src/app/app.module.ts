@@ -16,6 +16,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { SearchComponent } from './components/search/search.component';
 import { CartService } from './services/cart.service';
 import { ProductService } from './services/product.service';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import {
   OktaAuthModule,
@@ -31,6 +32,8 @@ import { MembersPageComponent } from './components/members-page/members-page.com
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import myAppConfig from './config/my-app-config';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { LoadingInterceptor } from './interceptor/loading.interceptor';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
 const oktaConfig = myAppConfig.oidc;
@@ -60,7 +63,9 @@ const oktaAuth = new OktaAuth(oktaConfig);
     OktaAuthModule,
     RouterModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-spin' }),
+    BrowserAnimationsModule,
   ],
   providers: [
     ProductService,
@@ -68,7 +73,8 @@ const oktaAuth = new OktaAuth(oktaConfig);
     OktaCallbackComponent,
     provideHttpClient(),
     { provide: OKTA_CONFIG, useValue: { oktaAuth } },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

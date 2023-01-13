@@ -1,7 +1,6 @@
-import { Injector, NgModule } from '@angular/core';
-import { provideRouter, Router, RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { provideRouter, RouterModule, Routes } from '@angular/router';
 import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
-import { OktaAuth } from '@okta/okta-auth-js';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { LoginComponent } from './components/login/login.component';
@@ -10,27 +9,16 @@ import { OrderHistoryComponent } from './components/order-history/order-history.
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 
-function sendToLoginPage(oktaAuth:OktaAuth,injector:Injector){
-  // use injector to access any service available within you application
-  const router = injector.get(Router);
-
-  // Redirect the user to your custom login page
-  router.navigate(['/login']);
-}
-
-
 const routes: Routes = [
   {
     path: 'order-history',
-    canActivate: [OktaAuthGuard],
-    component: OrderHistoryComponent,
-    data: {onAuthRequired: sendToLoginPage}
+  //  canActivate: [OktaAuthGuard],
+    component: OrderHistoryComponent
   },
   {
     path: 'members',
-    canActivate: [OktaAuthGuard],
-    component: MembersPageComponent,
-    data: {onAuthRequired: sendToLoginPage}
+  //  canActivate: [OktaAuthGuard],
+    component: MembersPageComponent
   },
   { path: 'login/callback', component: OktaCallbackComponent },
   { path: 'login', component: LoginComponent },
