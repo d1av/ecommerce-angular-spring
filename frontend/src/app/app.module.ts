@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from "ngx-spinner";
 import { AppComponent } from './app.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
@@ -16,29 +17,16 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { SearchComponent } from './components/search/search.component';
 import { CartService } from './services/cart.service';
 import { ProductService } from './services/product.service';
-import { NgxSpinnerModule } from "ngx-spinner";
 
-import {
-  OktaAuthModule,
-  OktaCallbackComponent,
-  OKTA_CONFIG
-} from '@okta/okta-angular';
 
-import { OktaAuth } from '@okta/okta-auth-js';
 
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { MembersPageComponent } from './components/members-page/members-page.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
-import myAppConfig from './config/my-app-config';
-import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { LoadingInterceptor } from './interceptor/loading.interceptor';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-
-
-const oktaConfig = myAppConfig.oidc;
-const oktaAuth = new OktaAuth(oktaConfig);
-
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +48,6 @@ const oktaAuth = new OktaAuth(oktaConfig);
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    OktaAuthModule,
     RouterModule,
     HttpClientModule,
     AppRoutingModule,
@@ -70,9 +57,7 @@ const oktaAuth = new OktaAuth(oktaConfig);
   providers: [
     ProductService,
     CartService,
-    OktaCallbackComponent,
     provideHttpClient(),
-    { provide: OKTA_CONFIG, useValue: { oktaAuth } },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
