@@ -1,8 +1,9 @@
 import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, lastValueFrom, Observable } from 'rxjs';
+import { from, lastValueFrom, map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Login from '../common/login';
+import tokenResponse from '../common/tokenResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ import Login from '../common/login';
 export class AuthInterceptorService implements HttpInterceptor {
 
   baseUrl = environment.shopApiUrl;
+  accessToken: string | undefined;
+  responseLoginDataFromApi: any;
 
   constructor(
     private http: HttpClient,
@@ -27,16 +30,22 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     if (securedEndpoints.some(url => request.urlWithParams.includes(url))) {
 
-      // request = request.clone({
-      //   setHeaders: {
-      //     Authorization: 'Bearer ' + accessToken
-      //   }
-      // });
+      request = request.clone({
+        setHeaders: {
+          Authorization: 'Bearer ' + this.accessToken
+        }
+      });
     }
     return await lastValueFrom(next.handle(request));
   }
 
+
   login(formValue: Login): Observable<any> {
-    return this.http.post<Login>(this.baseUrl+'/api/auth/login', formValue)
+    return this.http.post<tokenResponse>(this.baseUrl + '/api/auth/login', formValue).pipe(map(
+      data => {
+        this.accessToken = data.accessToken;
+        return this.responseLoginDataFromApi = data;
+      })
+    )
   }
 }

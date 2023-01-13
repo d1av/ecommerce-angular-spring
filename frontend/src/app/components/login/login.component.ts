@@ -41,8 +41,12 @@ export class LoginComponent implements OnInit {
       this.loginFormGroup.markAllAsTouched();
       return;
     }
+    const formForApi = {
+      usernameOrEmail: this.loginFormGroup.value['email'],
+      password: this.loginFormGroup.value['password']
+    }
     const authService = this.injector.get(AuthInterceptorService);
-    authService.login(this.loginFormGroup.value).subscribe(
+    authService.login(formForApi).subscribe(
       data => console.log(data)
 
     )
