@@ -1,5 +1,6 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthInterceptorService } from 'src/app/services/auth-interceptor.service';
 
 @Component({
   selector: 'app-login',
@@ -13,34 +14,38 @@ export class LoginComponent implements OnInit {
   isDisabled: boolean = true;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private injector: Injector
   ) {
 
   }
 
   ngOnInit(): void {
     this.loginFormGroup = this.formBuilder.group({
-      email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(4)]),
-      password: new FormControl('', [Validators.minLength(4), Validators.maxLength(16), Validators.required])
-
+      email: new FormControl('', [Validators.required,
+      Validators.email, Validators.minLength(4)]),
+      password: new FormControl('', [Validators.minLength(4),
+      Validators.maxLength(16), Validators.required])
     })
-    this.loginFormGroup.valueChanges.subscribe(changes => {
+    this.loginFormGroup.valueChanges.subscribe(() => {
       if (this.loginFormGroup.invalid) {
         this.isDisabled = true;
       } else {
         this.isDisabled = false;
       }
-      console.log(changes);
-
     });
   }
 
   handleSubmit() {
-    console.log(this.loginFormGroup.value);
     if (this.loginFormGroup.invalid) {
       this.loginFormGroup.markAllAsTouched();
       return;
     }
+    const authService = this.injector.get(AuthInterceptorService);
+    authService.login(this.loginFormGroup.value).subscribe(
+      data => console.log(data)
+
+    )
 
   }
 

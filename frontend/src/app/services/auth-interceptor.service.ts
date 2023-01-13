@@ -1,14 +1,19 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, lastValueFrom, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import Login from '../common/login';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthInterceptorService implements HttpInterceptor {
 
-  constructor() { }
+  baseUrl = environment.shopApiUrl;
+
+  constructor(
+    private http: HttpClient,
+  ) { }
 
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -29,5 +34,9 @@ export class AuthInterceptorService implements HttpInterceptor {
       // });
     }
     return await lastValueFrom(next.handle(request));
+  }
+
+  login(formValue: Login): Observable<any> {
+    return this.http.post<Login>(this.baseUrl+'/api/auth/login', formValue)
   }
 }
