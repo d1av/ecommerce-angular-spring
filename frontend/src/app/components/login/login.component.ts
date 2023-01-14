@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
     const authService = this.injector.get(AuthInterceptorService);
     authService.login(formForApi).subscribe(
       data => console.log(data)
-
     )
 
   }

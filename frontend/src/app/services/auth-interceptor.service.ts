@@ -24,7 +24,7 @@ export class AuthInterceptorService implements HttpInterceptor {
   }
 
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
-    const theEndpoint = environment.shopApiUrl+'/orders'
+    const theEndpoint = environment.shopApiUrl + '/orders'
 
     const securedEndpoints = [theEndpoint];
 
@@ -32,7 +32,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
       request = request.clone({
         setHeaders: {
-          //Authorization: 'Bearer ' + this.accessToken
+          Authorization: 'Bearer ' + this.accessToken
         }
       });
     }
@@ -44,6 +44,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     return this.http.post<tokenResponse>(this.baseUrl + '/api/auth/login', formValue).pipe(map(
       data => {
         this.accessToken = data.accessToken;
+        localStorage.setItem("token", data.accessToken)
         return this.responseLoginDataFromApi = data;
       })
     )
