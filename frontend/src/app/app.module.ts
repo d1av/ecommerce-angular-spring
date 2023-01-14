@@ -27,6 +27,7 @@ import { MembersPageComponent } from './components/members-page/members-page.com
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { LoadingInterceptor } from './interceptor/loading.interceptor';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { AdminAreaComponent } from './components/admin-area/admin-area.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     LoginComponent,
     LoginStatusComponent,
     MembersPageComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    AdminAreaComponent
   ],
   imports: [
     BrowserModule,

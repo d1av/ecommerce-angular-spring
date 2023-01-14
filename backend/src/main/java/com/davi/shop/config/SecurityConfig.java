@@ -50,7 +50,6 @@ public class SecurityConfig {
         http.csrf().disable()
                 .authorizeHttpRequests(
                         (authorize) ->
-                                //authorize.anyRequest().authenticated()
                                 authorize.requestMatchers("/h2/**").permitAll()
                                         .requestMatchers("/api/orders/**").authenticated()
                                         .requestMatchers(HttpMethod.GET, "/states/**").permitAll()
@@ -60,12 +59,13 @@ public class SecurityConfig {
                                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                         .requestMatchers("/checkout/**").permitAll()
                                         .requestMatchers("/api/auth/**").permitAll()
-                                        .anyRequest().authenticated()
+                                        .anyRequest().permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors();
+
 
         http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

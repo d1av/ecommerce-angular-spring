@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { provideRouter, RouterModule, Routes } from '@angular/router';
+import { AdminAreaComponent } from './components/admin-area/admin-area.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { LoginComponent } from './components/login/login.component';
@@ -11,15 +12,15 @@ import { ProductListComponent } from './components/product-list/product-list.com
 const routes: Routes = [
   {
     path: 'order-history',
-  //  canActivate: [OktaAuthGuard],
+    //  canActivate: [OktaAuthGuard],
     component: OrderHistoryComponent
   },
   {
     path: 'members',
-  //  canActivate: [OktaAuthGuard],
+    //  canActivate: [OktaAuthGuard],
     component: MembersPageComponent
   },
-//  { path: 'login/callback', component: OktaCallbackComponent },
+  { path: 'admin', component: AdminAreaComponent },
   { path: 'login', component: LoginComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'cart-details', component: CartDetailsComponent },
@@ -35,6 +36,6 @@ const routes: Routes = [
 @NgModule({
   imports: [],
   exports: [RouterModule],
-  providers:[provideRouter(routes)]
+  providers: [provideRouter(routes)]
 })
 export class AppRoutingModule { }
