@@ -13,6 +13,7 @@ export class AuthInterceptorService implements HttpInterceptor {
   baseUrl = environment.shopApiUrl;
   accessToken: string | undefined;
   responseLoginDataFromApi: any;
+  storage: Storage = sessionStorage;
 
   constructor(
     private http: HttpClient,
@@ -27,6 +28,9 @@ export class AuthInterceptorService implements HttpInterceptor {
     const theEndpoint = environment.shopApiUrl + '/orders'
 
     const securedEndpoints = [theEndpoint];
+    if (this.accessToken == null) {
+      this.accessToken = localStorage.getItem("token")!;
+    }
 
     if (securedEndpoints.some(url => request.urlWithParams.includes(url))) {
 
@@ -44,7 +48,8 @@ export class AuthInterceptorService implements HttpInterceptor {
     return this.http.post<tokenResponse>(this.baseUrl + '/api/auth/login', formValue).pipe(map(
       data => {
         this.accessToken = data.accessToken;
-        localStorage.setItem("token", data.accessToken)
+        this.storage.setItem("token", data.accessToken)
+        this.storage.setItem("email", formValue.usernameOrEmail)
         return this.responseLoginDataFromApi = data;
       })
     )
