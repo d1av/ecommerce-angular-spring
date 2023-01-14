@@ -48,23 +48,24 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
-                .cors(cors->cors.disable())
                 .authorizeHttpRequests(
                         (authorize) ->
                                 //authorize.anyRequest().authenticated()
                                 authorize.requestMatchers("/h2/**").permitAll()
                                         .requestMatchers("/api/orders/**").authenticated()
-                                        .requestMatchers(HttpMethod.GET,"/states/**").permitAll()
-                                        .requestMatchers(HttpMethod.GET,"/products/**").permitAll()
-                                        .requestMatchers(HttpMethod.GET,"/countries/**").permitAll()
-                                        .requestMatchers(HttpMethod.GET,"/product-categories/**").permitAll()
+                                        .requestMatchers(HttpMethod.GET, "/states/**").permitAll()
+                                        .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
+                                        .requestMatchers(HttpMethod.GET, "/countries/**").permitAll()
+                                        .requestMatchers(HttpMethod.GET, "/product-categories/**").permitAll()
+                                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                         .requestMatchers("/checkout/**").permitAll()
                                         .requestMatchers("/api/auth/**").permitAll()
                                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .cors();
 
         http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

@@ -32,7 +32,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
       request = request.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + this.accessToken
+        //  Authorization: 'Bearer ' + this.accessToken
         }
       });
     }
