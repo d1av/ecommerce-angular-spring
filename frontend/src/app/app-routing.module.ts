@@ -12,12 +12,10 @@ import { ProductListComponent } from './components/product-list/product-list.com
 const routes: Routes = [
   {
     path: 'order-history',
-    //  canActivate: [OktaAuthGuard],
     component: OrderHistoryComponent
   },
   {
     path: 'members',
-    //  canActivate: [OktaAuthGuard],
     component: MembersPageComponent
   },
   { path: 'admin', component: AdminAreaComponent },
