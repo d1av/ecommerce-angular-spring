@@ -3,16 +3,29 @@ package com.davi.shop.dto;
 import com.davi.shop.entities.Address;
 import com.davi.shop.entities.Customer;
 import com.davi.shop.entities.OrderItem;
+
+import jakarta.validation.constraints.NotBlank;
+
 import com.davi.shop.entities.Order;
 
 import java.util.List;
 import java.util.Set;
 
 public class PurchaseDTO {
+    
+    @NotBlank(message = "'customer' should not be empty.")
     private Customer customer;
+    
+    @NotBlank(message = "'shippingAddress' should not be empty.")
     private Address shippingAddress;
+    
+    @NotBlank(message = "'billingAddress' should not be empty.")
     private Address billingAddress;
+    
+    @NotBlank(message = "'order' should not be empty.")
     private Order order;
+    
+    @NotBlank(message = "'orderItems' should not be empty.")
     private Set<OrderItem> orderItems;
 
     public PurchaseDTO() {

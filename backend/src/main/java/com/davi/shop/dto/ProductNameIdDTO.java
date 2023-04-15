@@ -2,8 +2,14 @@ package com.davi.shop.dto;
 
 import com.davi.shop.entities.Product;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class ProductNameIdDTO {
+    
+    @NotBlank(message = "'id' should not be empty.")
     private Long id;
+    
+    @NotBlank(message = "'name' should not be empty.")
     private String name;
 
     public ProductNameIdDTO(Long id, String name) {

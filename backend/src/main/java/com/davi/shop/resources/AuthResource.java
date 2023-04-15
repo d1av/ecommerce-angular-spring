@@ -4,6 +4,9 @@ import com.davi.shop.dto.auth.JWTAuthResponse;
 import com.davi.shop.dto.auth.LoginDTO;
 import com.davi.shop.dto.auth.RegisterDTO;
 import com.davi.shop.services.AuthService;
+
+import jakarta.validation.Valid;
+
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +26,7 @@ public class AuthResource {
     }
 
     @PostMapping(value = {"/login", "/signin"})
-    public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<JWTAuthResponse> login(@Valid @RequestBody LoginDTO loginDTO) {
         String token = authService.login(loginDTO);
 
         JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
@@ -33,7 +36,7 @@ public class AuthResource {
     }
 
     @PostMapping(value = {"/register", "/signup"})
-    public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
+    public ResponseEntity<String> register(@Valid @RequestBody RegisterDTO registerDTO) {
         String response = authService.register(registerDTO);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

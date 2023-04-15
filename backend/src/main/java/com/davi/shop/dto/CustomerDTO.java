@@ -2,9 +2,17 @@ package com.davi.shop.dto;
 
 import com.davi.shop.entities.Customer;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class CustomerDTO {
+    
+    @NotBlank(message = "'firstName' should not be empty.")
     private String firstName;
+    
+    @NotBlank(message = "'lastName' should not be empty.")
     private String lastName;
+    
+    @NotBlank(message = "'email' should not be empty.")
     private String email;
 
     public CustomerDTO() {

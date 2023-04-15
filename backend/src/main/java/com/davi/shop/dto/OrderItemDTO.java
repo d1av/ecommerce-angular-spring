@@ -2,12 +2,22 @@ package com.davi.shop.dto;
 
 import com.davi.shop.entities.OrderItem;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.math.BigDecimal;
 
 public class OrderItemDTO {
+    
+    @NotBlank(message = "'imageUrl' should not be empty.")
     private String imageUrl;
+    
+    @NotBlank(message = "'quantity' should not be empty.")
     private Integer quantity;
+    
+    @NotBlank(message = "'unitPrice' should not be empty.")
     private BigDecimal unitPrice;
+    
+    @NotBlank(message = "'productId' should not be empty.")
     private Long productId;
 
     public OrderItemDTO() {

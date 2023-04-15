@@ -2,6 +2,11 @@ package com.davi.shop.resources;
 
 import com.davi.shop.dto.CountryDTO;
 import com.davi.shop.services.CountryService;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +30,7 @@ public class CountryResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<CountryDTO> getOneById(@PathVariable Long id) {
+    public ResponseEntity<CountryDTO> getOneById(@NotBlank @Min(1) @Max(100) @PathVariable Long id) {
         return ResponseEntity.ok().body(service.findOneById(id));
     }
 }

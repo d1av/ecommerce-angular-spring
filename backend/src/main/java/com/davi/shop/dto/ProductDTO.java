@@ -2,20 +2,44 @@ package com.davi.shop.dto;
 
 import com.davi.shop.entities.Product;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class ProductDTO {
+    
+    @NotBlank(message = "'id' should not be empty.")
     private Long id;
+    
+    @NotBlank(message = "'name' should not be empty.")
     private String name;
+    
+    @NotBlank(message = "'sku' should not be empty.")
     private String sku;
+    
+    @NotBlank(message = "'description' should not be empty.")
     private String description;
+    
+    @NotBlank(message = "'unitPrice' should not be empty.")
     private BigDecimal unitPrice;
+    
+    @NotBlank(message = "'imageUrl' should not be empty.")
     private String imageUrl;
+    
+    @NotBlank(message = "'active' should not be empty.")
     private Boolean active;
+    
+    @NotBlank(message = "'unitsInStock' should not be empty.")
     private Integer unitsInStock;
+    
+    @NotBlank(message = "'dateCreated' should not be empty.")
     private Date dateCreated;
+    
+    @NotBlank(message = "'lastUpdated' should not be empty.")
     private Date lastUpdated;
+    
+    @NotBlank(message = "'category' should not be empty.")
     private ProductCategoryDTO category;
 
     public ProductDTO() {

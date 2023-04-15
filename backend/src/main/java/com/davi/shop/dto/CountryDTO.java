@@ -5,13 +5,20 @@ import com.davi.shop.entities.State;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class CountryDTO {
+    
+    @NotBlank(message = "'id' should not be empty.")
     private Long id;
+    
+    @NotBlank(message = "'code' should not be empty.")
     private String code;
+    
+    @NotBlank(message = "'name' should not be empty.")
     private String name;
     @JsonIgnore
     private Set<State> states = new HashSet<State>();

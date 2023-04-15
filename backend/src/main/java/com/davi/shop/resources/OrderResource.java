@@ -2,6 +2,11 @@ package com.davi.shop.resources;
 
 import com.davi.shop.dto.OrderDTO;
 import com.davi.shop.services.OrderService;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +25,7 @@ public class OrderResource {
 
     @GetMapping(value = "/search")
     public ResponseEntity<Page<OrderDTO>> findSalesByEmail(
-            @RequestParam(value = "email") String email, Pageable pageable) {
+	    @NotBlank @Min(1) @Max(100) @RequestParam(value = "email") String email, Pageable pageable) {
         return ResponseEntity.ok().body(service.findByEmail(email, pageable));
     }
 }

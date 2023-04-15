@@ -2,9 +2,17 @@ package com.davi.shop.dto;
 
 import com.davi.shop.entities.State;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class StateDTO {
+    
+    @NotBlank(message = "'id' should not be empty.")
     private Long id;
+    
+    @NotBlank(message = "'name' should not be empty.")
     private String name;
+    
+    @NotBlank(message = "'countryId' should not be empty.")
     private Long countryId;
 
     public StateDTO() {

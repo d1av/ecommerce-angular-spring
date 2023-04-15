@@ -23,7 +23,7 @@ public class ProductService {
 
     public Page<Product> findByCategoryId(Long id, Pageable pageable) {
         Page<Product> entity;
-        if (id == null || id < 0) {
+        if (checkIfNullOrNegative(id)) {
             entity = repository.findAll(pageable);
         } else {
             entity = repository.findByCategoryId(id, pageable);
@@ -31,6 +31,11 @@ public class ProductService {
         ;
         return entity;
     }
+
+    private boolean checkIfNullOrNegative(Long entity) {
+        return entity == null || entity < 0;
+    }
+
 
     public Page<Product> findByName(String name, Pageable pageable) {
         return repository.findByNameContainingIgnoreCase(name, pageable);

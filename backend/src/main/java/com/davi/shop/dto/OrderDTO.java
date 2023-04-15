@@ -2,13 +2,23 @@ package com.davi.shop.dto;
 
 import com.davi.shop.entities.Order;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderDTO {
+    
+    @NotBlank(message = "'totalPrice' should not be empty.")
     private BigDecimal totalPrice;
+    
+    @NotBlank(message = "'totalQuantity' should not be empty.")
     private Integer totalQuantity;
+    
+    @NotBlank(message = "'orderTrackingNumber' should not be empty.")
     private String orderTrackingNumber;
+    
+    @NotBlank(message = "'dateCreated' should not be empty.")
     private Date dateCreated;
 
     public OrderDTO() {

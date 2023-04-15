@@ -1,40 +1,49 @@
 package com.davi.shop.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class PaymentInfoDTO {
+
+    @NotBlank(message = "'amount' should not be empty.")
     private int amount;
+
+    @NotBlank(message = "'currency' should not be empty.")
     private String currency;
+
+    @NotBlank(message = "'receiptEmail' should not be empty.")
     private String receiptEmail;
 
     public PaymentInfoDTO() {
     }
 
-    public PaymentInfoDTO(int amount, String currency, String receiptEmail) {
-        this.amount = amount;
-        this.currency = currency;
-        this.receiptEmail = receiptEmail;
+    public PaymentInfoDTO(int amount, String currency,
+	    String receiptEmail) {
+	this.amount = amount;
+	this.currency = currency;
+	this.receiptEmail = receiptEmail;
     }
 
     public String getReceiptEmail() {
-        return receiptEmail;
+	return receiptEmail;
     }
 
     public void setReceiptEmail(String receiptEmail) {
-        this.receiptEmail = receiptEmail;
+	this.receiptEmail = receiptEmail;
     }
 
     public int getAmount() {
-        return amount;
+	return amount;
     }
 
     public void setAmount(int amount) {
-        this.amount = amount;
+	this.amount = amount;
     }
 
     public String getCurrency() {
-        return currency;
+	return currency;
     }
 
     public void setCurrency(String currency) {
-        this.currency = currency;
+	this.currency = currency;
     }
 }

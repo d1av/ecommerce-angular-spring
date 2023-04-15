@@ -2,6 +2,11 @@ package com.davi.shop.resources;
 
 import com.davi.shop.dto.StateDTO;
 import com.davi.shop.services.StateService;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,15 +27,16 @@ public class StateResource {
 
     @GetMapping
     public ResponseEntity<Page<StateDTO>> findAllPaged(
-            Pageable pageable) {
-        return ResponseEntity.ok()
-                .body(service.findAllPaged(pageable));
+	    Pageable pageable) {
+	return ResponseEntity.ok()
+		.body(service.findAllPaged(pageable));
     }
 
     @GetMapping(value = "/search")
     public ResponseEntity<List<StateDTO>> findByCountryCode(
-            @RequestParam("code") String countryCode) {
-        List<StateDTO> list = service.findAllByCountryCode(countryCode);
-        return ResponseEntity.ok().body(list);
+	    @NotBlank @Min(1) @Max(100) @RequestParam("code") String countryCode) {
+	List<StateDTO> list = service
+		.findAllByCountryCode(countryCode);
+	return ResponseEntity.ok().body(list);
     }
 }
