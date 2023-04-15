@@ -1,10 +1,11 @@
 package com.davi.shop.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class PaymentInfoDTO {
 
-    @NotBlank(message = "'amount' should not be empty.")
+    @NotNull(message = "'amount' should not be empty.")
     private int amount;
 
     @NotBlank(message = "'currency' should not be empty.")

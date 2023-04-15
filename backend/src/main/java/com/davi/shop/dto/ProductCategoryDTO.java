@@ -3,10 +3,11 @@ package com.davi.shop.dto;
 import com.davi.shop.entities.ProductCategory;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class ProductCategoryDTO {
     
-    @NotBlank(message = "'id' should not be empty.")
+    @NotNull(message = "'id' should not be empty.")
     private Long id;
     
     @NotBlank(message = "'categoryName' should not be empty.")

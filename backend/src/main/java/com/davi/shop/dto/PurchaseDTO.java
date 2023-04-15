@@ -5,6 +5,7 @@ import com.davi.shop.entities.Customer;
 import com.davi.shop.entities.OrderItem;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import com.davi.shop.entities.Order;
 
@@ -13,19 +14,19 @@ import java.util.Set;
 
 public class PurchaseDTO {
     
-    @NotBlank(message = "'customer' should not be empty.")
+    @NotNull(message = "'customer' should not be empty.")
     private Customer customer;
     
-    @NotBlank(message = "'shippingAddress' should not be empty.")
+    @NotNull(message = "'shippingAddress' should not be empty.")
     private Address shippingAddress;
     
-    @NotBlank(message = "'billingAddress' should not be empty.")
+    @NotNull(message = "'billingAddress' should not be empty.")
     private Address billingAddress;
     
-    @NotBlank(message = "'order' should not be empty.")
+    @NotNull(message = "'order' should not be empty.")
     private Order order;
     
-    @NotBlank(message = "'orderItems' should not be empty.")
+    @NotNull(message = "'orderItems' should not be empty.")
     private Set<OrderItem> orderItems;
 
     public PurchaseDTO() {
