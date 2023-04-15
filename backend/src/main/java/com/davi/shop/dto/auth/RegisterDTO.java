@@ -1,13 +1,11 @@
 package com.davi.shop.dto.auth;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class RegisterDTO {
 
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 100, message = "The Name must have beetwen 1 and 100 letters.")
     @NotBlank(message = "'name' cannot be empty.")
     private String name;
 

@@ -2,7 +2,9 @@ package com.davi.shop.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-public class ShopAPIException extends RuntimeException {
+import com.davi.shop.exceptions.main.NoStackTraceException;
+
+public class ShopAPIException extends NoStackTraceException {
     /**
      * 
      */
@@ -11,22 +13,24 @@ public class ShopAPIException extends RuntimeException {
     private String message;
 
     public ShopAPIException(HttpStatus status, String message) {
-        this.status = status;
-        this.message = message;
+	super(message);
+	this.status = status;
+	this.message = message;
     }
 
-    public ShopAPIException(String message, HttpStatus status, String message1) {
-        super(message);
-        this.status = status;
-        this.message = message1;
+    public ShopAPIException(String message, HttpStatus status,
+	    String message1) {
+	super(message + message1);
+	this.status = status;
+	this.message = message1;
     }
 
     public HttpStatus getStatus() {
-        return status;
+	return status;
     }
 
     @Override
     public String getMessage() {
-        return message;
+	return message;
     }
 }

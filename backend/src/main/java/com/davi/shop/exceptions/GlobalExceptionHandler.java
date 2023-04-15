@@ -11,10 +11,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -25,6 +28,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
+@EnableWebSecurity
 public class GlobalExceptionHandler
 	extends ResponseEntityExceptionHandler {
 
@@ -59,6 +63,17 @@ public class GlobalExceptionHandler
 	ErrorDetails errorDetails = new ErrorDetails(new Date(),
 		exception.getMessage(),
 		webRequest.getDescription(false));
+	return new ResponseEntity<>(errorDetails,
+		HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({ AuthenticationException.class })
+    @ResponseBody
+    public ResponseEntity<ErrorDetails> handleAuthenticationException(
+	    Exception ex, WebRequest webRequest) {
+
+	ErrorDetails errorDetails = new ErrorDetails(new Date(),
+		ex.getMessage(), webRequest.getDescription(false));
 	return new ResponseEntity<>(errorDetails,
 		HttpStatus.BAD_REQUEST);
     }
@@ -118,7 +133,7 @@ public class GlobalExceptionHandler
 	return new ResponseEntity<>(errorDetails,
 		HttpStatus.UNPROCESSABLE_ENTITY);
     }
-    
+
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handleValidationExceptions(
 	    ConstraintViolationException ex, WebRequest request) {
@@ -129,8 +144,7 @@ public class GlobalExceptionHandler
 	    errors.put(fieldName, errorMessage);
 
 	});
-	ErrorDetails errorDetails = ErrorDetails.with(
-		ex.getMessage(),
+	ErrorDetails errorDetails = ErrorDetails.with(ex.getMessage(),
 		request.getDescription(false), errors);
 	return new ResponseEntity<>(errorDetails,
 		HttpStatus.UNPROCESSABLE_ENTITY);
@@ -154,5 +168,4 @@ public class GlobalExceptionHandler
 		HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-   
 }
