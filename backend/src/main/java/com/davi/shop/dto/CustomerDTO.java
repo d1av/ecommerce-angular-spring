@@ -3,15 +3,19 @@ package com.davi.shop.dto;
 import com.davi.shop.entities.Customer;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class CustomerDTO {
     
+    @Size(min = 1, max = 100)
     @NotBlank(message = "'firstName' should not be empty.")
     private String firstName;
     
+    @Size(min = 1, max = 100)
     @NotBlank(message = "'lastName' should not be empty.")
     private String lastName;
     
+    @Size(min = 1, max = 100)
     @NotBlank(message = "'email' should not be empty.")
     private String email;
 

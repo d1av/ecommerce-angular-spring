@@ -6,6 +6,7 @@ import com.davi.shop.services.OrderService;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +26,7 @@ public class OrderResource {
 
     @GetMapping(value = "/search")
     public ResponseEntity<Page<OrderDTO>> findSalesByEmail(
-	    @NotBlank @Min(1) @Max(100) @RequestParam(value = "email") String email, Pageable pageable) {
+	    @NotBlank @Size(min = 1, max = 100) @RequestParam(value = "email") String email, Pageable pageable) {
         return ResponseEntity.ok().body(service.findByEmail(email, pageable));
     }
 }

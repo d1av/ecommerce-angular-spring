@@ -1,27 +1,28 @@
 package com.davi.shop.exceptions;
 
-import com.davi.shop.dto.exceptions.ErrorDetails;
-import com.davi.shop.dto.exceptions.StandardError;
-import jakarta.servlet.http.HttpServletRequest;
+import java.nio.file.AccessDeniedException;
+import java.time.Instant;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.time.Instant;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import com.davi.shop.dto.exceptions.ErrorDetails;
+import com.davi.shop.dto.exceptions.StandardError;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler
@@ -117,18 +118,41 @@ public class GlobalExceptionHandler
 	return new ResponseEntity<>(errorDetails,
 		HttpStatus.UNPROCESSABLE_ENTITY);
     }
-
     
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public Map<String, String> handleValidationExceptions(
-//      MethodArgumentNotValidException ex) {
-//        Map<String, String> errors = new HashMap<>();
-//        ex.getBindingResult().getAllErrors().forEach((error) -> {
-//            String fieldName = ((FieldError) error).getField();
-//            String errorMessage = error.getDefaultMessage();
-//            errors.put(fieldName, errorMessage);
-//        });
-//        return errors;
-//    }
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Object> handleValidationExceptions(
+	    ConstraintViolationException ex, WebRequest request) {
+	Map<String, String> errors = new HashMap<>();
+	ex.getConstraintViolations().forEach((error) -> {
+	    String fieldName = error.getPropertyPath().toString();
+	    String errorMessage = error.getMessage();
+	    errors.put(fieldName, errorMessage);
+
+	});
+	ErrorDetails errorDetails = ErrorDetails.with(
+		ex.getMessage(),
+		request.getDescription(false), errors);
+	return new ResponseEntity<>(errorDetails,
+		HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+	    MethodArgumentNotValidException ex, HttpHeaders headers,
+	    HttpStatusCode status, WebRequest request) {
+	Map<String, String> errors = new HashMap<>();
+	ex.getBindingResult().getAllErrors().forEach((error) -> {
+	    String fieldName = ((FieldError) error).getField();
+	    String errorMessage = error.getDefaultMessage();
+	    errors.put(fieldName, errorMessage);
+	});
+	ErrorDetails errorDetails = ErrorDetails.with(
+		ex.getMessage().substring(0, 100),
+		request.getDescription(false), errors);
+
+	return new ResponseEntity<>(errorDetails,
+		HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+   
 }

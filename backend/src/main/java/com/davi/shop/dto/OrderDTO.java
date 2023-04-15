@@ -3,6 +3,7 @@ package com.davi.shop.dto;
 import com.davi.shop.entities.Order;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -15,6 +16,7 @@ public class OrderDTO {
     @NotBlank(message = "'totalQuantity' should not be empty.")
     private Integer totalQuantity;
     
+    @Size(min = 1, max = 100)
     @NotBlank(message = "'orderTrackingNumber' should not be empty.")
     private String orderTrackingNumber;
     

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,9 +16,11 @@ public class CountryDTO {
     @NotBlank(message = "'id' should not be empty.")
     private Long id;
     
+    @Size(min = 1, max = 100)
     @NotBlank(message = "'code' should not be empty.")
     private String code;
     
+    @Size(min = 1, max = 100)
     @NotBlank(message = "'name' should not be empty.")
     private String name;
     @JsonIgnore

@@ -3,21 +3,27 @@ package com.davi.shop.dto;
 import com.davi.shop.entities.Address;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class AddressDTO {
     
+    @Size(min = 1, max = 100)
     @NotBlank(message = "'city' should not be empty.")
     private String city;
     
+    @Size(min = 1, max = 100)
     @NotBlank(message = "'country' should not be empty.")
     private String country;
     
+    @Size(min = 1, max = 100)
     @NotBlank(message = "'state' should not be empty.")
     private String state;
     
+    @Size(min = 1, max = 100)
     @NotBlank(message = "'street' should not be empty.")
     private String street;
     
+    @Size(min = 1, max = 100)
     @NotBlank(message = "'zipCode' should not be empty.")
     private String zipCode;
 
