@@ -1,4 +1,4 @@
-import { environment } from "src/environments/environment";
+import { environment } from "src/environments/environment.prod";
 
 export default {
   oidc: {
@@ -6,4 +6,4 @@ export default {
     redirectUri: environment.shopApiUrl + '/login/callback',
     scopes: ['openid', 'profile', 'email']
   }
-}
+};

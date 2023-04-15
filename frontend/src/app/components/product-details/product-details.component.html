@@ -1,13 +1,15 @@
 <div class="detail-section">
   <div class="container-fluid">
-    <img [src]="product.imageUrl" class="detail-img" />
+    <img [src]="product != null ? product.imageUrl : null" class="detail-img" />
 
-    <h3>{{ product.name }}</h3>
-    <div class="price">{{ product.unitPrice }}</div>
-    <button (click)="addToCart(product)" class="btn btn-primary btn-sm">Add to cart</button>
+    <h3>{{ product != null ? product.name : "Produto" }}</h3>
+    <div class="price">{{ product != null ? product.unitPrice : 00 }}</div>
+    <button (click)="addToCart(product)" class="btn btn-primary btn-sm">
+      Add to cart
+    </button>
 
     <hr />
     <h4>Description</h4>
-    <p>{{ product.description }}</p>
+    <p>{{ product != null ? product.description : "Description" }}</p>
   </div>
 </div>

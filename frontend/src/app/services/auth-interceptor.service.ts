@@ -15,7 +15,7 @@ export class AuthInterceptorService implements HttpInterceptor {
   responseLoginDataFromApi: any;
   storage: Storage = sessionStorage;
 
-  constructor(
+  constructor (
     private http: HttpClient,
   ) { }
 
@@ -25,7 +25,7 @@ export class AuthInterceptorService implements HttpInterceptor {
   }
 
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
-    const theEndpoint = environment.shopApiUrl + '/orders'
+    const theEndpoint = environment.shopApiUrl + '/orders';
 
     const securedEndpoints = [theEndpoint];
     if (this.accessToken == null) {
@@ -48,10 +48,11 @@ export class AuthInterceptorService implements HttpInterceptor {
     return this.http.post<tokenResponse>(this.baseUrl + '/api/auth/login', formValue).pipe(map(
       data => {
         this.accessToken = data.accessToken;
-        this.storage.setItem("token", data.accessToken)
-        this.storage.setItem("email", formValue.usernameOrEmail)
-        return this.responseLoginDataFromApi = data;
+        this.storage.setItem("token", data.accessToken);
+        this.storage.setItem("email", formValue.usernameOrEmail);
+        this.responseLoginDataFromApi = data;
+        return this.responseLoginDataFromApi;
       })
-    )
+    );
   }
 }

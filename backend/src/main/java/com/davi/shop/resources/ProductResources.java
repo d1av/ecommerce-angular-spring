@@ -7,6 +7,7 @@ import com.davi.shop.services.ProductService;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ProductResources {
 
     @GetMapping(value = "/search/category")
     public ResponseEntity<Page<Product>> findAllPaged(
-	    @RequestParam("id") @NotBlank @Size(min = 1, max = 100) Long id,
+	    @RequestParam("id") Long id,
 	    Pageable pageable) {
 	return ResponseEntity.ok()
 		.body(service.findByCategoryId(id, pageable));
@@ -41,7 +42,7 @@ public class ProductResources {
 
     @GetMapping(value = "/search")
     public ResponseEntity<Page<Product>> seachByName(
-	    @RequestParam("name") @NotBlank @Size(min = 1, max = 100) String name,
+	    @RequestParam("name") String name,
 	    Pageable pageable0) {
 	return ResponseEntity.ok()
 		.body(service.findByName(name, pageable0));
@@ -49,7 +50,7 @@ public class ProductResources {
 
     @GetMapping(value = "/search/{id}")
     public ResponseEntity<ProductDTO> searchById(
-	    @PathVariable @NotBlank @Size(min = 1, max = 100) Long id,
+	    @PathVariable @NotNull Long id,
 	    Pageable pageable) {
 	return ResponseEntity.ok().body(service.findById(id));
     }

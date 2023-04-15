@@ -9,13 +9,13 @@ import { OrderHistory } from '../common/order-history';
 })
 export class OrderHistoryService {
 
-  private orderUrl = environment.shopApiUrl + '/orders'
+  private orderUrl = environment.shopApiUrl + '/orders';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor (private httpClient: HttpClient) { }
 
   getOrderHistory(theEmail: string): Observable<GetResponseOrderHistory> {
 
-    const orderHistoryUrl = `${this.orderUrl}/search?email=${theEmail}`;
+    const orderHistoryUrl = `${ this.orderUrl }/search?email=${ theEmail }`;
 
     return this.httpClient.get<GetResponseOrderHistory>(orderHistoryUrl);
 

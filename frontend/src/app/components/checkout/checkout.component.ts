@@ -11,7 +11,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { ShopFormService } from 'src/app/services/shop-form.service';
 import { ShopValidators } from 'src/app/validators/shop-validators';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 
 @Component({
@@ -46,7 +46,7 @@ export class CheckoutComponent implements OnInit {
 
   isDisabled: boolean = false;
 
-  constructor(
+  constructor (
     private checkoutService: CheckoutService,
     private router: Router,
     private cartService: CartService,
@@ -54,7 +54,7 @@ export class CheckoutComponent implements OnInit {
     private shopFormService: ShopFormService) { }
 
   ngOnInit(): void {
-    const theEmail = JSON.parse(this.storage.getItem('UserEmail')!)
+    const theEmail = JSON.parse(this.storage.getItem('UserEmail')!);
     this.setupStripePaymentForm();
 
     this.reviewCartDetails();
@@ -99,7 +99,7 @@ export class CheckoutComponent implements OnInit {
           expirationYear: ['']
           */
       })
-    })
+    });
 
     /*
 
@@ -130,7 +130,7 @@ export class CheckoutComponent implements OnInit {
         console.log("Retrieved countries " + JSON.stringify(data));
         this.countries = data;
       }
-    )
+    );
   }
 
   setupStripePaymentForm() {
@@ -147,18 +147,18 @@ export class CheckoutComponent implements OnInit {
       } else if (event.error) {
         this.displayError.textContent = event.error.message;
       }
-    })
+    });
   }
   reviewCartDetails() {
     //subscribe to cartService.totalQuantity
     this.cartService.totalQuantity.subscribe(
       totalQuantity => this.totalQuantity = totalQuantity
-    )
+    );
 
     //subscribe to cartService.totalPrice
     this.cartService.totalPrice.subscribe(
       totalPrice => this.totalPrice = totalPrice
-    )
+    );
 
 
   }
@@ -204,7 +204,7 @@ export class CheckoutComponent implements OnInit {
     const cartItems = this.cartService.cartItems;
 
     // create orderItems from cartItems
-    let orderItems: OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem))
+    let orderItems: OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem));
 
     //set up purchase
     let purchase = new Purchase();
@@ -246,7 +246,7 @@ export class CheckoutComponent implements OnInit {
                 card: this.cardElement,
                 billing_details: {
                   email: purchase.customer.email,
-                  name: `${purchase.customer.firstName} ${purchase.customer.lastName}`,
+                  name: `${ purchase.customer.firstName } ${ purchase.customer.lastName }`,
                   address: {
                     line1: purchase.billingAddress.state,
                     city: purchase.billingAddress.city,
@@ -261,12 +261,12 @@ export class CheckoutComponent implements OnInit {
               handleActions: false
             }).then((result: any) => {
               if (result.error) {
-                alert(`There was an error: ${result.error.message}`);
+                alert(`There was an error: ${ result.error.message }`);
                 this.isDisabled = false;
               } else {
                 this.checkoutService.placeOrder(purchase).subscribe({
                   next: (response: any) => {
-                    alert(`Your order has been received. \nOrder tracking number: ${response.orderTrackingNumber}`)
+                    alert(`Your order has been received. \nOrder tracking number: ${ response.orderTrackingNumber }`);
 
                     //reset cart
                     this.isDisabled = false;
@@ -274,13 +274,13 @@ export class CheckoutComponent implements OnInit {
                   },
                   error: (err: any) => {
                     this.isDisabled = false;
-                    alert(`There was an error: ${err.message}`)
+                    alert(`There was an error: ${ err.message }`);
                   }
-                })
+                });
               }
             });
         }
-      )
+      );
     } else {
       this.checkoutFormGroup.markAllAsTouched();
     }
@@ -302,11 +302,11 @@ export class CheckoutComponent implements OnInit {
   }
   resetCart() {
     this.cartService.cartItems = [];
-    this.cartService.totalPrice.next(0)
+    this.cartService.totalPrice.next(0);
     this.cartService.totalQuantity.next(0);
-    this.cartService.persistCartItems()
+    this.cartService.persistCartItems();
 
-    this.router.navigateByUrl("/products")
+    this.router.navigateByUrl("/products");
     this.checkoutFormGroup.reset();
 
 
@@ -317,12 +317,12 @@ export class CheckoutComponent implements OnInit {
   copyShippingAddressToBillingAddress(event: any) {
     if (event.target.checked) {
       this.checkoutFormGroup.controls['billingAddress']
-        .setValue(this.checkoutFormGroup.controls['shippingAddress'].value)
+        .setValue(this.checkoutFormGroup.controls['shippingAddress'].value);
 
       //bugfix fix for states
       this.billingAddressStates = this.shippingAddressStates;
     } else {
-      this.checkoutFormGroup.controls['billingAddress'].reset()
+      this.checkoutFormGroup.controls['billingAddress'].reset();
 
       //bug fix for states
       this.billingAddressStates = [];
@@ -340,25 +340,25 @@ export class CheckoutComponent implements OnInit {
     if (currentYear === selectedYear) {
       startMonth = new Date().getMonth() + 1;
     } else {
-      startMonth = 1
+      startMonth = 1;
     }
 
     this.shopFormService.getCreditCardMonths(startMonth).subscribe(
       data => {
-        console.log("Retrieved credit card months: " + data)
+        console.log("Retrieved credit card months: " + data);
         this.creditCardMonths = data;
       }
-    )
+    );
   }
 
   getStates(formGroupName: string) {
     const formGroup = this.checkoutFormGroup.get(formGroupName);
 
-    const countryCode = formGroup?.value.country.code
-    const countryName = formGroup?.value.country.name
+    const countryCode = formGroup?.value.country.code;
+    const countryName = formGroup?.value.country.name;
 
-    console.log(`${formGroupName} country code: ${countryCode}`);
-    console.log(`${formGroupName} country name: ${countryName}`);
+    console.log(`${ formGroupName } country code: ${ countryCode }`);
+    console.log(`${ formGroupName } country name: ${ countryName }`);
 
     this.shopFormService.getStates(countryCode).subscribe(
       data => {
@@ -371,7 +371,7 @@ export class CheckoutComponent implements OnInit {
         //select first item by default
         formGroup?.get('state')?.setValue(data[0]);
       }
-    )
+    );
 
   }
 }

@@ -10,18 +10,18 @@ import { State } from '../common/state';
 })
 export class ShopFormService {
 
-  private countriesUrl = environment.shopApiUrl + '/countries'
-  private statesUrl = environment.shopApiUrl + '/states'
+  private countriesUrl = environment.shopApiUrl + '/countries';
+  private statesUrl = environment.shopApiUrl + '/states';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor (private httpClient: HttpClient) { }
 
   getCountries(): Observable<Country[]> {
     return this.httpClient.get<GetCountriesApi>(this.countriesUrl)
-      .pipe(map(data => data.content))
+      .pipe(map(data => data.content));
   }
 
   getStates(theCountryCode: string): Observable<State[]> {
-    const searchStateUrl = `${this.statesUrl}/search?code=${theCountryCode}`;
+    const searchStateUrl = `${ this.statesUrl }/search?code=${ theCountryCode }`;
     return this.httpClient.get<State[]>(searchStateUrl)
       .pipe(map(data => data));
   }
@@ -33,7 +33,7 @@ export class ShopFormService {
     for (let theMonth = startMonth; theMonth <= 12; theMonth++) {
       data.push(theMonth);
     }
-    return of(data)
+    return of(data);
   }
 
 
@@ -52,5 +52,5 @@ export class ShopFormService {
 }
 
 interface GetCountriesApi {
-  content: Country[]
+  content: Country[];
 }
