@@ -65,6 +65,7 @@ public class SecurityConfig {
                                                 "/swagger-ui/**").permitAll()
                                         .requestMatchers("/checkout/**").permitAll()
                                         .requestMatchers("/api/auth/**").permitAll()
+                                        .requestMatchers("/**").permitAll()
                                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
