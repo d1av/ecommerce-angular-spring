@@ -1,0 +1,45 @@
+version: '3.9'
+services:
+  db:
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: eshop
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 30
+  backend:
+    image: davi38/ecommerce-back
+    #build: ./backend
+    restart: always
+    environment:
+      MYSQL_URL: jdbc:mysql://db:3306/eshop
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8080:8080"
+    depends_on:
+       db:
+          condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+  frontend:
+    image: davi38/ecommerce-front
+    #build: ./frontend
+    restart: always
+    ports:
+      - "4200:80"
+    depends_on:
+       backend:
+         condition: service_healthy
