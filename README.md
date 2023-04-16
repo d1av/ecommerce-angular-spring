@@ -1,25 +1,11 @@
-# Ecommerce site
-
-
-
-# Demo video
-
-https://user-images.githubusercontent.com/107776531/210157428-27683ea2-275d-45e7-9d49-af22bb618a83.mp4
-
-# This site is live!
-
-### [Link here.](https://angular-eshop-backend.herokuapp.com/)
-
-# API Endpoints
-
-### [Link here.](https://angular-eshop-backend.herokuapp.com/swagger-ui/index.html)
-
-
-
 # Ecommerce Project
 
 Welcome to the Ecommerce project repository! This project is of an online shopping website with many features, such as:
 product cart, form validation, payment via stripe and many more.
+
+# Demo video
+
+https://user-images.githubusercontent.com/107776531/210157428-27683ea2-275d-45e7-9d49-af22bb618a83.mp4
 
 ## Technologies Used
 
@@ -45,6 +31,14 @@ docker-compose up
 This command may take some time to complete as it needs to download all the necessary dependencies and build the project. Once it's finished, you can access the application by navigating to `http://localhost:4200` in your web browser.
 
 Note that the user for testing purposes is `admin@admin.com` and the password is `admin`, but please keep in mind that the application may not work correctly because there is no Stripe key included in the codebase.
+
+# This site is live!
+
+### [Link here.](https://angular-eshop-backend.herokuapp.com/)
+
+# API Endpoints
+
+### [Link here.](https://angular-eshop-backend.herokuapp.com/swagger-ui/index.html)
 
 ## Contributing
 
