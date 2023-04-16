@@ -1,24 +1,27 @@
 # Ecommerce site
 
-This project is of an online shopping website with many features, such as:
-product cart, form validation, payment via stripe and many more.
 
-
-
-# This site is live!
-
-### [Link here.](https://ecommerce-as.vercel.app/)
-
-# API Endpoints
-
-### [Link here.](https://angular-eshop-backend.herokuapp.com/swagger-ui/index.html)
 
 # Demo video
 
 https://user-images.githubusercontent.com/107776531/210157428-27683ea2-275d-45e7-9d49-af22bb618a83.mp4
 
+# This site is live!
 
-# Used Technologies
+### [Link here.](https://angular-eshop-backend.herokuapp.com/)
+
+# API Endpoints
+
+### [Link here.](https://angular-eshop-backend.herokuapp.com/swagger-ui/index.html)
+
+
+
+# Ecommerce Project
+
+Welcome to the Ecommerce project repository! This project is of an online shopping website with many features, such as:
+product cart, form validation, payment via stripe and many more.
+
+## Technologies Used
 
 1. **Angular:** 15.0.0.
 1. **Spring Boot:** 3.0.1
@@ -27,38 +30,22 @@ https://user-images.githubusercontent.com/107776531/210157428-27683ea2-275d-45e7
 1. **SASS:** 1.56.0
 1. **Stripe**
 
-## Setting up the local server
+## Installation
 
-1. Using [GIT](https://git-scm.com/), Clone the repository with the command:
-```bash
-git clone https://github.com/d1av/ecommerce-angular-spring.git
-```
-2. Change the variables from src/environments.ts, to your API url.
+To install and run this project, you will need to have Docker and Docker Compose installed on your machine. Once you have confirmed that they are installed, follow the steps below:
 
-
-
-
-# How to install the project
-
-1. Install Apache Maven
-2. Install Node.js
-3. Assing the variables in application.properties to your local computer, and the frontend environment variables.
-
-4. go the backend folder and run the spring project, with this command in an command line interface:
-
-```bash
-mvn spring-boot:run
+1. Clone this repository to your local machine.
+2. Open a terminal window and navigate to the root directory of the cloned repository.
+3. Run the following command to start the containers:
 
 ```
-
-4. then go to the frontend folder and open the cli
-
-```bash
-npm install
-
-#and
-
-npm start
+docker-compose up
 ```
 
-5. Open [http://localhost:4200](http://localhost:4200) with your browser to see the result.
+This command may take some time to complete as it needs to download all the necessary dependencies and build the project. Once it's finished, you can access the application by navigating to `http://localhost:4200` in your web browser.
+
+Note that the user for testing purposes is `admin@admin.com` and the password is `admin`, but please keep in mind that the application may not work correctly because there is no Stripe key included in the codebase.
+
+## Contributing
+
+If you would like to contribute to this project, please fork the repository and submit a pull request with your changes. We welcome any contributions and feedback!
