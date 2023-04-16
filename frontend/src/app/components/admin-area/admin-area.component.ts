@@ -8,17 +8,25 @@ import { OrderHistoryService } from 'src/app/services/order-history.service';
 })
 export class AdminAreaComponent implements OnInit {
 
-  constructor(private orderHistoryService: OrderHistoryService) { }
-  ngOnInit(): void {
+  userOrders: any;
+  storage: Storage = sessionStorage;
 
+  constructor (private orderHistoryService: OrderHistoryService) { }
+  ngOnInit(): void {
+    this.getOrdersEndpoint();
   }
 
-
   getOrdersEndpoint() {
-    this.orderHistoryService.getOrderHistory("davi@davi.com").subscribe(
+    const theEmail = this.storage.getItem('email')!;
+    this.orderHistoryService.getOrderHistory(theEmail).subscribe(
       data => {
         console.log(data);
+        this.userOrders = data.content;
       }
-    )
+    );
+  }
+
+  getJson(): string {
+    return JSON.stringify(this.userOrders);
   }
 }

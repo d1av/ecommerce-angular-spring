@@ -26,7 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MembersPageComponent } from './components/members-page/members-page.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { LoadingInterceptor } from './interceptor/loading.interceptor';
-import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { AuthInterceptorService } from './services/authentication/auth-interceptor.service';
 import { AdminAreaComponent } from './components/admin-area/admin-area.component';
 
 @NgModule({

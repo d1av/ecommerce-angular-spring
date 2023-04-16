@@ -2,8 +2,8 @@ import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from
 import { Injectable } from '@angular/core';
 import { from, lastValueFrom, map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import Login from '../common/login';
-import tokenResponse from '../common/tokenResponse';
+import Login from '../../common/login';
+import tokenResponse from '../../common/tokenResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     const securedEndpoints = [theEndpoint];
     if (this.accessToken == null) {
-      this.accessToken = localStorage.getItem("token")!;
+      this.accessToken = this.storage.getItem("token")!;
     }
 
     if (securedEndpoints.some(url => request.urlWithParams.includes(url))) {

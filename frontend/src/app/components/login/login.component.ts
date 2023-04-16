@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthInterceptorService } from 'src/app/services/auth-interceptor.service';
+import { Router } from '@angular/router';
+import { AuthInterceptorService } from 'src/app/services/authentication/auth-interceptor.service';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,12 @@ export class LoginComponent implements OnInit {
   isSignIn: any;
   loginFormGroup!: FormGroup;
   isDisabled: boolean = true;
+  storage: Storage = sessionStorage;
 
-  constructor(
+  constructor (
     private formBuilder: FormBuilder,
-    private injector: Injector
+    private injector: Injector,
+    private router: Router
   ) {
 
   }
@@ -26,7 +29,7 @@ export class LoginComponent implements OnInit {
       Validators.email, Validators.minLength(4)]),
       password: new FormControl('', [Validators.minLength(4),
       Validators.maxLength(16), Validators.required])
-    })
+    });
     this.loginFormGroup.valueChanges.subscribe(() => {
       if (this.loginFormGroup.invalid) {
         this.isDisabled = true;
@@ -44,15 +47,20 @@ export class LoginComponent implements OnInit {
     const formForApi = {
       usernameOrEmail: this.loginFormGroup.value['email'],
       password: this.loginFormGroup.value['password']
-    }
+    };
     const authService = this.injector.get(AuthInterceptorService);
     authService.login(formForApi).subscribe(
-      data => console.log(data)
-    )
+      data => {
+        if (data && this.storage.getItem('token')) {
+          console.log(data);
+          this.router.navigateByUrl('/admin');
+        }
+      }
+    );
 
   }
 
-  get email() { return this.loginFormGroup.get('email') }
-  get password() { return this.loginFormGroup.get('password') }
+  get email() { return this.loginFormGroup.get('email'); }
+  get password() { return this.loginFormGroup.get('password'); }
 
 }
