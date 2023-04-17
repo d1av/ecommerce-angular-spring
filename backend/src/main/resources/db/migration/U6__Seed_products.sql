@@ -1,7 +1,3 @@
-DROP TABLE users_roles;
+DELETE FROM countries;
+DELETE FROM states;
 
-DROP TABLE addresses;
-
-DROP TABLE users;
-
-DROP TABLE roles;

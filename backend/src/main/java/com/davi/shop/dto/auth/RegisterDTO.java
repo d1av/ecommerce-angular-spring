@@ -1,5 +1,6 @@
 package com.davi.shop.dto.auth;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -17,11 +18,12 @@ public class RegisterDTO {
     @NotBlank(message = "'username' cannot be empty.")
     private String username;
 
+    @Email(message = "email is not an valid email.")
     @Size(min = 1, max = 100)
     @NotBlank(message = "'email' cannot be empty.")
     private String email;
 
-    @Size(min = 1, max = 35)
+    @Size(min = 4, max = 35, message = "The password need beetwen 4 and 35 characters.")
     @NotBlank(message = "'password' cannot be empty.")
     private String password;
 
