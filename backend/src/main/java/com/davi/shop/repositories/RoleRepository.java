@@ -1,7 +1,8 @@
 package com.davi.shop.repositories;
 
-import com.davi.shop.entities.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.davi.shop.entities.role.Role;
 
 import java.util.Optional;
 

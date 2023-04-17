@@ -42,8 +42,8 @@ public class Order {
     private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
@@ -67,7 +67,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, String orderTrackingNumber, int totalQuantity, BigDecimal totalPrice, String status, Date dateCreated, Date lastUpdated, Set<OrderItem> orderItems, Customer customer, Address shippingAddress, Address billingAddress) {
+    public Order(Long id, String orderTrackingNumber, int totalQuantity, BigDecimal totalPrice, String status, Date dateCreated, Date lastUpdated, Set<OrderItem> orderItems, User user, Address shippingAddress, Address billingAddress) {
         this.id = id;
         this.orderTrackingNumber = orderTrackingNumber;
         this.totalQuantity = totalQuantity;
@@ -76,7 +76,7 @@ public class Order {
         this.dateCreated = dateCreated;
         this.lastUpdated = lastUpdated;
         this.orderItems = orderItems;
-        this.customer = customer;
+        this.user = user;
         this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
     }
@@ -145,12 +145,12 @@ public class Order {
         this.orderItems = orderItems;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public User getCustomer() {
+        return user;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomer(User user) {
+        this.user = user;
     }
 
     public Address getShippingAddress() {

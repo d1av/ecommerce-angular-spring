@@ -1,21 +1,15 @@
-CREATE TABLE customers (
-	id INT NOT NULL PRIMARY KEY UNIQUE,
-	first_name VARCHAR(255) NOT NULL,
-	last_name VARCHAR(255) NOT NULL,
-	email VARCHAR(255) NOT NULL
-);
-
 CREATE TABLE orders (
-	id INT NOT NULL PRIMARY KEY UNIQUE,
+	id INT NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
 	order_tracking_number VARCHAR(255) NOT NULL,
 	total_quantity INT NOT NULL,
 	total_price BIGINT NOT NULL,
 	status VARCHAR(255) NOT NULL,
 	date_created DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
 	last_updated DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-	customer_id INT NOT NULL,
+	user_id INT NOT NULL,
 	shipping_address_id INT NOT NULL,
-	billing_address_id INT NOT NULL,
+	billing_address_id INT NOT NULL,	
+	CONSTRAINT fk_ordus_orders_user_id FOREIGN KEY (user_id) REFERENCES users (id),
 	CONSTRAINT fk_orders_shipping_address_id FOREIGN KEY (shipping_address_id) REFERENCES addresses (id),
 	CONSTRAINT fk_orders_billing_address_id FOREIGN KEY (billing_address_id) REFERENCES addresses (id)
 );

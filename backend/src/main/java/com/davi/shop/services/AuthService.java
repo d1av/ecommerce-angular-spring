@@ -2,9 +2,10 @@ package com.davi.shop.services;
 
 import com.davi.shop.dto.auth.LoginDTO;
 import com.davi.shop.dto.auth.RegisterDTO;
+import com.davi.shop.entities.User;
 
 public interface AuthService {
     String login(LoginDTO loginDto);
 
-    String register(RegisterDTO registerDto);
+    User register(RegisterDTO registerDto);
 }

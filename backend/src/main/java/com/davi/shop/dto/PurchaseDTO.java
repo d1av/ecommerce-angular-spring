@@ -1,21 +1,18 @@
 package com.davi.shop.dto;
 
-import com.davi.shop.entities.Address;
-import com.davi.shop.entities.Customer;
-import com.davi.shop.entities.OrderItem;
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
-import com.davi.shop.entities.Order;
-
-import java.util.List;
 import java.util.Set;
+
+import com.davi.shop.entities.Address;
+import com.davi.shop.entities.Order;
+import com.davi.shop.entities.OrderItem;
+import com.davi.shop.entities.User;
+
+import jakarta.validation.constraints.NotNull;
 
 public class PurchaseDTO {
     
-    @NotNull(message = "'customer' should not be empty.")
-    private Customer customer;
+    @NotNull(message = "'user' should not be empty.")
+    private User user;
     
     @NotNull(message = "'shippingAddress' should not be empty.")
     private Address shippingAddress;
@@ -32,20 +29,22 @@ public class PurchaseDTO {
     public PurchaseDTO() {
     }
 
-    public PurchaseDTO(Customer customer, Address shippingAddress, Address billingAddress, Order order, Set<OrderItem> orderItems) {
-        this.customer = customer;
+    public PurchaseDTO(User user, Address shippingAddress, Address billingAddress, Order order, Set<OrderItem> orderItems) {
+        this.user = user;
         this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
         this.order = order;
         this.orderItems = orderItems;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    
+
+    public User getUser() {
+        return user;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Address getShippingAddress() {

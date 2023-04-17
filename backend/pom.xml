@@ -15,6 +15,8 @@
     <description>E-Commerce web application</description>
     <properties>
         <java.version>17</java.version>
+        <flyway.user>root</flyway.user>
+		<flyway.password>root</flyway.password>
     </properties>
     <dependencies>
         <dependency>
@@ -122,6 +124,10 @@
 
     <build>
         <plugins>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+			</plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

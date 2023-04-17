@@ -3,6 +3,8 @@ package com.davi.shop.resources;
 import com.davi.shop.dto.auth.JWTAuthResponse;
 import com.davi.shop.dto.auth.LoginDTO;
 import com.davi.shop.dto.auth.RegisterDTO;
+import com.davi.shop.dto.auth.RegisterResponseDTO;
+import com.davi.shop.entities.User;
 import com.davi.shop.services.AuthService;
 
 import jakarta.validation.Valid;
@@ -24,22 +26,26 @@ public class AuthResource {
     private AuthService authService;
 
     public AuthResource(AuthService authService) {
-        this.authService = authService;
+	this.authService = authService;
     }
 
-    @PostMapping(value = {"/login", "/signin"})
-    public ResponseEntity<JWTAuthResponse> login(@Valid @RequestBody LoginDTO loginDTO) {
-        String token = authService.login(loginDTO);
+    @PostMapping(value = { "/login", "/signin" })
+    public ResponseEntity<JWTAuthResponse> login(
+	    @Valid @RequestBody LoginDTO loginDTO) {
+	String token = authService.login(loginDTO);
 
-        JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
-        jwtAuthResponse.setAccessToken(token);
+	JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
+	jwtAuthResponse.setAccessToken(token);
 
-        return ResponseEntity.ok(jwtAuthResponse);
+	return ResponseEntity.ok(jwtAuthResponse);
     }
 
-    @PostMapping(value = {"/register", "/signup"})
-    public ResponseEntity<String> register(@Valid @RequestBody RegisterDTO registerDTO) {
-        String response = authService.register(registerDTO);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    @PostMapping(value = { "/register", "/signup" })
+    public ResponseEntity<RegisterResponseDTO> register(
+	    @Valid @RequestBody RegisterDTO registerDTO) {
+	return new ResponseEntity<>(
+		RegisterResponseDTO
+			.from(authService.register(registerDTO)),
+		HttpStatus.CREATED);
     }
 }

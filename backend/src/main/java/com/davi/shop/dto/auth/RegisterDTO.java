@@ -6,8 +6,12 @@ import jakarta.validation.constraints.Size;
 public class RegisterDTO {
 
     @Size(min = 1, max = 100, message = "The Name must have beetwen 1 and 100 letters.")
-    @NotBlank(message = "'name' cannot be empty.")
-    private String name;
+    @NotBlank(message = "'firstName' cannot be empty.")
+    private String firstName;
+
+    @Size(min = 1, max = 100, message = "The Name must have beetwen 1 and 100 letters.")
+    @NotBlank(message = "'lastName' cannot be empty.")
+    private String lastName;
 
     @Size(min = 1, max = 100)
     @NotBlank(message = "'username' cannot be empty.")
@@ -21,43 +25,44 @@ public class RegisterDTO {
     @NotBlank(message = "'password' cannot be empty.")
     private String password;
 
-    public RegisterDTO(String name, String username, String email,
-	    String password) {
-	this.name = name;
+    private RegisterDTO(
+	    @Size(min = 1, max = 100, message = "The Name must have beetwen 1 and 100 letters.") @NotBlank(message = "'firstName' cannot be empty.") String firstName,
+	    @Size(min = 1, max = 100, message = "The Name must have beetwen 1 and 100 letters.") @NotBlank(message = "'lastName' cannot be empty.") String lastName,
+	    @Size(min = 1, max = 100) @NotBlank(message = "'username' cannot be empty.") String username,
+	    @Size(min = 1, max = 100) @NotBlank(message = "'email' cannot be empty.") String email,
+	    @Size(min = 1, max = 35) @NotBlank(message = "'password' cannot be empty.") String password) {
+	super();
+	this.firstName = firstName;
+	this.lastName = lastName;
 	this.username = username;
 	this.email = email;
 	this.password = password;
     }
 
-    public String getName() {
-	return name;
+    public static RegisterDTO with(String firstName, String lastName,
+	    String username, String email, String password) {
+	return new RegisterDTO(firstName, lastName, username, email,
+		password);
     }
 
-    public void setName(String name) {
-	this.name = name;
+    public String getFirstName() {
+	return firstName;
+    }
+
+    public String getLastName() {
+	return lastName;
     }
 
     public String getUsername() {
 	return username;
     }
 
-    public void setUsername(String username) {
-	this.username = username;
-    }
-
     public String getEmail() {
 	return email;
-    }
-
-    public void setEmail(String email) {
-	this.email = email;
     }
 
     public String getPassword() {
 	return password;
     }
 
-    public void setPassword(String password) {
-	this.password = password;
-    }
 }

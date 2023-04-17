@@ -1,30 +1,37 @@
 package com.davi.shop.services.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.davi.shop.dto.PaymentInfoDTO;
 import com.davi.shop.dto.PurchaseDTO;
 import com.davi.shop.dto.PurchaseResponseDTO;
-import com.davi.shop.entities.Customer;
-import com.davi.shop.entities.OrderItem;
 import com.davi.shop.entities.Order;
-import com.davi.shop.repositories.CustomerRepository;
+import com.davi.shop.entities.OrderItem;
+import com.davi.shop.entities.User;
+import com.davi.shop.repositories.UserRepository;
 import com.davi.shop.services.CheckoutService;
 import com.davi.shop.utils.IDUtils;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.*;
 
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
-    private final CustomerRepository customerRepository;
 
-    public CheckoutServiceImpl(CustomerRepository customerRepository,
+    private final UserRepository userRepository;
+
+    public CheckoutServiceImpl(UserRepository userRepository,
 	    @Value("${stripe.key.secret}") String secretKey) {
-	this.customerRepository = customerRepository;
+	this.userRepository = userRepository;
 	Stripe.apiKey = secretKey;
     }
 
@@ -39,28 +46,30 @@ public class CheckoutServiceImpl implements CheckoutService {
 
 	// populate order with order items
 	Set<OrderItem> orderItems = purchase.getOrderItems();
-	orderItems.forEach(item -> order.add(item));
+	orderItems.forEach(order::add);
 
 	// populate order with billingAddress and shippingAddress
 	order.setBillingAddress(purchase.getBillingAddress());
 	order.setShippingAddress(purchase.getShippingAddress());
 
 	// populate customer with order
-	Customer customer = purchase.getCustomer();
+	User user = purchase.getUser();
 
-	String theEmail = customer.getEmail();
+	String theEmail = user.getEmail();
 
-	Customer customerFromDB = customerRepository
+	Optional<User> customerFromDB = userRepository
 		.findByEmail(theEmail);
 
-	if (customerFromDB != null) {
-	    customer = customerFromDB;
+	if (customerFromDB.isPresent()) {
+	    user = customerFromDB.get();
+	}else {
+	    user.setId(null);
 	}
 
-	customer.add(order);
+	user.add(order);
 
 	// save to the database
-	customerRepository.save(customer);
+	userRepository.save(user);
 
 	// return a response
 	return new PurchaseResponseDTO(orderTrackingNumber);
