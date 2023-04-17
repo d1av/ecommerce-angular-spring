@@ -1,0 +1,73 @@
+spring:
+ profiles:
+  active:${APP_PROFILE:dev}
+ jpa:
+  open-in-view: false
+  show-sql: true
+  properties:
+   hibernate:
+    '[format_sql]': false
+    ddl-auto: none
+   properties:
+     # "[hibernate.dialect]": org.hibernate.dialect.MySQL8InnoDBDialect
+      "[hibernate.generate.statistics]": false
+      "[hibernate.connection.provider_disables_autocommit]": true
+ 
+ mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+ cache:
+    type: redis
+ data:
+  redis:
+   host: ${redis.url:localhost}
+   port: ${redis.port:6379}
+ flyway:
+    url: ${mysql.url:jdbc:mysql://localhost:3306/eshop_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+    user: "${mysql.username:root}"
+    password: "${mysql.password:root}"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    enabled: true
+      
+ datasource:
+    url: ${mysql.url:jdbc:mysql://localhost:3306/eshop_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+    username: "${mysql.username:root}"
+    password: "${mysql.password:root}"
+    driver-class-name: com.mysql.cj.jdbc.Driver  #com.mysql.cj.jdbc.Driver
+    hikari:
+      auto-commit: false
+      connection-timeout: 250 # é feito em miliseconds. O ideal é manter baixo para estorar timeout
+      max-lifetime: 600000 #tempo adviso que uso conexão pode ficar aberto (19mins) - security
+      maximum-pool-size: 10 #numero até o max 20 conexões com o banco de dados. O ideal é manter baixo
+      minimum-idle: 5
+      pool-name: master
+#spring.data.rest.base-path=/api
+
+allowed:
+ origin: ${ALLOW_URL:http://localhost:4200}
+
+security: 
+ oauth2: 
+  client:
+   client-id: ${CLIENT_ID:myclientid}
+   client-secret: ${CLIENT_SECRET:myclientsecret}
+
+jwt: 
+  secret: ${JWT_SECRET:aGVsbG9ib3lzaWJvdWdodHNkZmdzZnNoZHNoZmRoc2hzaHNoc2hlbGxvYm95c2lib3VnaHRzZGZnc2ZzaGRzaGZkaHNoc2hzaHNoZWxsb2JveXNpYm91Z2h0c2RmZ3Nmc2hkc2hmZGhzaHNoc2hzaGVsbG9ib3lzaWJvdWdodHNkZmdzZnNoZHNoZmRoc2hzaHNoc2hlbGxvYm95c2lib3VnaHRzZGZnc2ZzaGRzaGZkaHNoc2hzaHNoZWxsb2JveXNpYm91Z2h0c2RmZ3Nmc2hkc2hmZGhzaHNoc2hz}
+  duration: ${JWT_DURATION:8640000}
+
+####
+## Patment Processing with stripe
+# Dummy key
+stripe: 
+  key: 
+   secret: ${STRIPE_SKEY:sk_test_51LeP5ZSTEbgQpy2wcWh9NByZsgonJqfKVkGxZitaX14DY2QEnkseKIydc9ehbv6p7Gy8yK8Ec2UbAUi6onJSPpCK00QXjAzyhk}
+
+server: 
+ port: ${PORT:8080}
+ compression:
+    enabled: false
+ undertow:
+    threads:
+      worker: 64
+      io: 4

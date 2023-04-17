@@ -9,32 +9,43 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
 
     @Column(name = "id", nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @ManyToOne
     @JoinColumn(name = "category_id")
     private ProductCategory category;
+    
     @Column(name = "sku", nullable = false)
     private String sku;
+    
     @Column(name = "name", nullable = false)
     private String name;
+    
     @Column(name = "description")
     private String description;
+    
     @Column(name = "unit_price")
     private BigDecimal unitPrice;
+    
     @Column(name = "image_url")
     private String imageUrl;
+    
+    @Column(name = "active")
     private Boolean active;
+    
     @Column(name = "units_in_stock")
     private Integer unitsInStock;
+    
     @CreationTimestamp
     @Column(name = "date_created")
     private Date dateCreated;
+    
     @UpdateTimestamp
     @Column(name = "last_updated")
     private Date lastUpdated;

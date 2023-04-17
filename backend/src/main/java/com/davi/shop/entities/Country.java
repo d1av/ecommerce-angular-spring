@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "country")
+@Table(name = "countries")
 public class Country {
     @Column(name = "id", nullable = false)
     @Id
