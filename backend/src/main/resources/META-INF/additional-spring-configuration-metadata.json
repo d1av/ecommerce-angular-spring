@@ -1,0 +1,52 @@
+{"properties": [
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret'"
+  },
+  {
+    "name": "jwt.duration",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.duration'"
+  },
+  {
+    "name": "security.oauth2.client.client-id",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.client.client-id'"
+  },
+  {
+    "name": "security.oauth2.client.client-secret",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.client.client-secret'"
+  },
+  {
+    "name": "allowed.origin",
+    "type": "java.lang.String",
+    "description": "A description for 'allowed.origin'"
+  },
+  {
+    "name": "flyway.url",
+    "type": "java.lang.String",
+    "description": "A description for 'flyway.url'"
+  },
+  {
+    "name": "flyway.user",
+    "type": "java.lang.String",
+    "description": "A description for 'flyway.user'"
+  },
+  {
+    "name": "flyway.password",
+    "type": "java.lang.String",
+    "description": "A description for 'flyway.password'"
+  },
+  {
+    "name": "flyway.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'flyway.driver-class-name'"
+  },
+  {
+    "name": "flyway.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'flyway.enabled'"
+  }
+]}

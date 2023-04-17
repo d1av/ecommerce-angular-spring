@@ -13,12 +13,7 @@ CREATE TABLE products (
 	image_url VARCHAR(255) NOT NULL,
 	active BOOLEAN NOT NULL DEFAULT TRUE,
 	units_in_stock INT NOT NULL,
-	date_created DATETIME(6) NOT NULL,
-	last_updated DATETIME(6) NOT NULL,
-	CONSTRAINT fk_states_country_id FOREIGN KEY (category_id) REFERENCES product_categories (id),
-);
-
-CREATE TABLE roles (
-	id INT NOT NULL PRIMARY KEY UNIQUE,
-	name VARCHAR(255) NOT NULL UNIQUE
+	date_created DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+	last_updated DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+	CONSTRAINT fk_prd_states_country_id FOREIGN KEY (category_id) REFERENCES product_categories (id)
 );

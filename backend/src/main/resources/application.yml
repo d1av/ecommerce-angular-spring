@@ -1,6 +1,6 @@
 spring:
- profiles:
-  active:${APP_PROFILE:dev}
+# profiles:
+#  active:${APP_PROFILE:default}
  jpa:
   open-in-view: false
   show-sql: true
@@ -12,7 +12,13 @@ spring:
      # "[hibernate.dialect]": org.hibernate.dialect.MySQL8InnoDBDialect
       "[hibernate.generate.statistics]": false
       "[hibernate.connection.provider_disables_autocommit]": true
- 
+ flyway:
+   url: ${mysql.url:jdbc:mysql://localhost:3306/eshop_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+   user: "${mysql.username:root}"
+   password: "${mysql.password:root}"
+   driver-class-name: com.mysql.cj.jdbc.Driver
+   enabled: true
+   
  mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
@@ -21,14 +27,7 @@ spring:
  data:
   redis:
    host: ${redis.url:localhost}
-   port: ${redis.port:6379}
- flyway:
-    url: ${mysql.url:jdbc:mysql://localhost:3306/eshop_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
-    user: "${mysql.username:root}"
-    password: "${mysql.password:root}"
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    enabled: true
-      
+   port: ${redis.port:6379}    
  datasource:
     url: ${mysql.url:jdbc:mysql://localhost:3306/eshop_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
     username: "${mysql.username:root}"
@@ -42,6 +41,7 @@ spring:
       minimum-idle: 5
       pool-name: master
 #spring.data.rest.base-path=/api
+ 
 
 allowed:
  origin: ${ALLOW_URL:http://localhost:4200}
