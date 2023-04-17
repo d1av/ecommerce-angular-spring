@@ -14,7 +14,7 @@ import com.stripe.exception.StripeException;
 import jakarta.validation.Valid;
 
 @Validated
-@RequestMapping(value = "/checkout")
+@RequestMapping(value = "/api/v1/checkout")
 public interface CheckoutAPI {
 
     @PostMapping("/purchase")

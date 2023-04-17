@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Validated
 @RestController
-@RequestMapping(value = "/products")
+@RequestMapping(value = "/api/v1/products")
 public class ProductResources {
 
     @Autowired

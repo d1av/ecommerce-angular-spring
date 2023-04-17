@@ -53,5 +53,10 @@
     "name": "stripe.key.secret",
     "type": "java.lang.String",
     "description": "A description for 'stripe.key.secret'"
+  },
+  {
+    "name": "spring.jpa.hibernate.[format_sql]",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.hibernate.[format_sql]'"
   }
 ]}

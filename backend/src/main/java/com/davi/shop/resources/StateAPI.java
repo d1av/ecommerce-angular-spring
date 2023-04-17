@@ -16,7 +16,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Validated
-@RequestMapping(value = "/states")
+@RequestMapping(value = "/api/v1/states")
 public interface StateAPI {
 
     @GetMapping

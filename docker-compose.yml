@@ -6,13 +6,13 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: eshop
+      MYSQL_DATABASE: eshop_db
     ports:
       - "3306:3306"
     volumes:
       - ./db:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       timeout: 5s
       retries: 30
   backend:
@@ -20,17 +20,25 @@ services:
     #build: ./backend
     restart: always
     environment:
-      MYSQL_URL: jdbc:mysql://db:3306/eshop
+      MYSQL_URL: jdbc:mysql://db:3306/eshop_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: root
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     ports:
       - "8080:8080"
     depends_on:
-       db:
-          condition: service_healthy
+      db:
+        condition: service_healthy
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8080/actuator/health"
+        ]
       interval: 10s
       timeout: 5s
       retries: 30
@@ -39,7 +47,7 @@ services:
     #build: ./frontend
     restart: always
     ports:
-      - "4200:80"
+      - "4200:4200"
     depends_on:
-       backend:
-         condition: service_healthy
+      backend:
+        condition: service_healthy

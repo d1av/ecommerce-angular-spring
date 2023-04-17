@@ -16,6 +16,7 @@ import com.davi.shop.dto.controller.PurchaseDTO;
 import com.davi.shop.dto.controller.PurchaseResponseDTO;
 import com.davi.shop.entities.order.Order;
 import com.davi.shop.entities.order.OrderItem;
+import com.davi.shop.entities.order.OrderStatus;
 import com.davi.shop.entities.user.User;
 import com.davi.shop.repositories.UserRepository;
 import com.davi.shop.services.CheckoutService;
@@ -51,6 +52,9 @@ public class CheckoutServiceImpl implements CheckoutService {
 	// populate order with billingAddress and shippingAddress
 	order.setBillingAddress(purchase.getBillingAddress());
 	order.setShippingAddress(purchase.getShippingAddress());
+	
+	// order status for product
+	order.setStatus(OrderStatus.PENDING);
 
 	// populate customer with order
 	User user = purchase.getUser();
@@ -62,8 +66,6 @@ public class CheckoutServiceImpl implements CheckoutService {
 
 	if (customerFromDB.isPresent()) {
 	    user = customerFromDB.get();
-	}else {
-	    user.setId(null);
 	}
 
 	user.add(order);

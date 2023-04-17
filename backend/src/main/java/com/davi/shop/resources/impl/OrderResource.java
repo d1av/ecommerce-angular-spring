@@ -14,7 +14,7 @@ import com.davi.shop.dto.controller.OrderDTO;
 import com.davi.shop.services.OrderService;
 
 @RestController
-@RequestMapping(value = "/orders")
+@RequestMapping(value = "/api/v1/orders")
 public class OrderResource {
 
     @Autowired

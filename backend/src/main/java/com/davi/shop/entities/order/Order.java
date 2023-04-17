@@ -14,6 +14,8 @@ import com.davi.shop.entities.user.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,8 +42,9 @@ public class Order {
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private OrderStatus status;
 
     @Column(name = "date_created")
     @CreationTimestamp
@@ -82,8 +85,8 @@ public class Order {
     }
 
     public Order(Long id, String orderTrackingNumber,
-	    int totalQuantity, BigDecimal totalPrice, String status,
-	    Date dateCreated, Date lastUpdated,
+	    int totalQuantity, BigDecimal totalPrice,
+	    OrderStatus status, Date dateCreated, Date lastUpdated,
 	    Set<OrderItem> orderItems, User user,
 	    Address shippingAddress, Address billingAddress) {
 	this.id = id;
@@ -131,11 +134,11 @@ public class Order {
 	this.totalPrice = totalPrice;
     }
 
-    public String getStatus() {
+    public OrderStatus getStatus() {
 	return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
 	this.status = status;
     }
 

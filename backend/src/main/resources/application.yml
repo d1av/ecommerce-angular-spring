@@ -5,13 +5,13 @@ spring:
   open-in-view: false
   show-sql: true
   properties:
-   hibernate:
-    '[format_sql]': false
-    ddl-auto: none
-   properties:
-     # "[hibernate.dialect]": org.hibernate.dialect.MySQL8InnoDBDialect
+    # "[hibernate.dialect]": org.hibernate.dialect.MySQL8InnoDBDialect
       "[hibernate.generate.statistics]": false
       "[hibernate.connection.provider_disables_autocommit]": true
+  generate-ddl: true
+  hibernate:
+    ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:none}
+    
  flyway:
    url: ${mysql.url:jdbc:mysql://localhost:3306/eshop_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
    user: "${mysql.username:root}"
@@ -25,9 +25,11 @@ spring:
  cache:
     type: redis
  data:
+  
   redis:
    host: ${redis.url:localhost}
-   port: ${redis.port:6379}    
+   port: ${redis.port:6379}
+ 
  datasource:
     url: ${mysql.url:jdbc:mysql://localhost:3306/eshop_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
     username: "${mysql.username:root}"
@@ -40,7 +42,6 @@ spring:
       maximum-pool-size: 10 #numero até o max 20 conexões com o banco de dados. O ideal é manter baixo
       minimum-idle: 5
       pool-name: master
-#spring.data.rest.base-path=/api
  
 
 allowed:
