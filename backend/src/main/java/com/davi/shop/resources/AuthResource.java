@@ -4,6 +4,7 @@ import com.davi.shop.dto.auth.JWTAuthResponse;
 import com.davi.shop.dto.auth.LoginDTO;
 import com.davi.shop.dto.auth.RegisterDTO;
 import com.davi.shop.dto.auth.RegisterResponseDTO;
+import com.davi.shop.dto.service.LoginRolesResponseDTO;
 import com.davi.shop.entities.User;
 import com.davi.shop.services.AuthService;
 
@@ -32,12 +33,11 @@ public class AuthResource {
     @PostMapping(value = { "/login", "/signin" })
     public ResponseEntity<JWTAuthResponse> login(
 	    @Valid @RequestBody LoginDTO loginDTO) {
-	String token = authService.login(loginDTO);
+	LoginRolesResponseDTO response = authService.login(loginDTO);
 
-	JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
-	jwtAuthResponse.setAccessToken(token);
-
-	return ResponseEntity.ok(jwtAuthResponse);
+	return ResponseEntity.ok(
+		JWTAuthResponse.with(loginDTO.getUsernameOrEmail(),
+			response.getToken(), response.getRoles()));
     }
 
     @PostMapping(value = { "/register", "/signup" })

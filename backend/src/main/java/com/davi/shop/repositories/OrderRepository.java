@@ -8,5 +8,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    Page<Order> findByCustomerEmailOrderByDateCreatedDesc(@Param("email") String email, Pageable pageable);
+    Page<Order> findByUserEmailOrderByDateCreatedDesc(@Param("email") String email, Pageable pageable);
 }

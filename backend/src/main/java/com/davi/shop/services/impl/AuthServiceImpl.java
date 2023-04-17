@@ -1,18 +1,21 @@
 package com.davi.shop.services.impl;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.davi.shop.dto.auth.LoginDTO;
 import com.davi.shop.dto.auth.RegisterDTO;
+import com.davi.shop.dto.service.LoginRolesResponseDTO;
 import com.davi.shop.entities.User;
 import com.davi.shop.entities.role.Role;
 import com.davi.shop.exceptions.DataNotFoundException;
@@ -45,7 +48,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String login(LoginDTO loginDto) {
+    public LoginRolesResponseDTO login(LoginDTO loginDto) {
 	Authentication authentication = authenticationManager
 		.authenticate(new UsernamePasswordAuthenticationToken(
 			loginDto.getUsernameOrEmail(),
@@ -54,7 +57,13 @@ public class AuthServiceImpl implements AuthService {
 	SecurityContextHolder.getContext()
 		.setAuthentication(authentication);
 
-	return jwtTokenProvider.generateToken(authentication);
+	List<String> roles = SecurityContextHolder.getContext()
+		.getAuthentication().getAuthorities().stream()
+		.map(GrantedAuthority::getAuthority).toList();
+
+	return LoginRolesResponseDTO.with(
+		jwtTokenProvider.generateToken(authentication),
+		roles);
     }
 
     @Override
@@ -74,11 +83,9 @@ public class AuthServiceImpl implements AuthService {
 		    "Email is already exists!.");
 	}
 
-	User user = User.newCustomerUser(
-		registerDto.getFirstName(), 
-		registerDto.getLastName(), 
-		registerDto.getUsername(), 
-		registerDto.getEmail(), 
+	User user = User.newCustomerUser(registerDto.getFirstName(),
+		registerDto.getLastName(), registerDto.getUsername(),
+		registerDto.getEmail(),
 		passwordEncoder.encode(registerDto.getPassword()));
 	User savedUser = userRepository.saveAndFlush(user);
 

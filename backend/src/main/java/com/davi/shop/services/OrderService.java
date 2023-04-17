@@ -17,21 +17,16 @@ public class OrderService {
 
     private final OrderRepository repository;
 
-    private final UserRepository userRepository;
-
-    public OrderService(final OrderRepository repository,
-	    final UserRepository userRepository) {
+    public OrderService(final OrderRepository repository) {
 	this.repository = Objects.requireNonNull(repository);
-	this.userRepository = Objects.requireNonNull(userRepository);
     }
 
     public Page<OrderDTO> findByEmail(String email,
 	    Pageable pageable) {
 
 	Page<Order> orders = repository
-		.findByCustomerEmailOrderByDateCreatedDesc(email,
+		.findByUserEmailOrderByDateCreatedDesc(email,
 			pageable);
-	Page<OrderDTO> dto = orders.map(x -> new OrderDTO(x));
-	return dto;
+	return orders.map(OrderDTO::new);
     }
 }

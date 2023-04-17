@@ -23,7 +23,7 @@ public class CustomerDTO {
     public CustomerDTO() {
     }
 
-    public CustomerDTO(String firstName, String lastName,
+    private CustomerDTO(String firstName, String lastName,
 	    String email) {
 	this.firstName = firstName;
 	this.lastName = lastName;

@@ -15,26 +15,26 @@ import java.util.Set;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name="order_tracking_number")
+    @Column(name = "order_tracking_number")
     private String orderTrackingNumber;
 
-    @Column(name="total_quantity",nullable = false)
+    @Column(name = "total_quantity", nullable = false)
     private int totalQuantity;
 
-    @Column(name="total_price")
+    @Column(name = "total_price")
     private BigDecimal totalPrice;
 
-    @Column(name="status")
+    @Column(name = "status")
     private String status;
 
-    @Column(name="date_created")
+    @Column(name = "date_created")
     @CreationTimestamp
     private Date dateCreated;
 
-    @Column(name="last_updated")
+    @Column(name = "last_updated")
     @UpdateTimestamp
     private Date lastUpdated;
 
@@ -55,117 +55,122 @@ public class Order {
 
     public void add(OrderItem item) {
 
-        if (item != null) {
-            if (orderItems == null) {
-                orderItems = new HashSet<>();
-            }
+	if (item != null) {
+	    if (orderItems == null) {
+		orderItems = new HashSet<>();
+	    }
 
-            orderItems.add(item);
-            item.setOrder(this);
-        }
+	    orderItems.add(item);
+	    item.setOrder(this);
+	}
     }
+
     public Order() {
     }
 
-    public Order(Long id, String orderTrackingNumber, int totalQuantity, BigDecimal totalPrice, String status, Date dateCreated, Date lastUpdated, Set<OrderItem> orderItems, User user, Address shippingAddress, Address billingAddress) {
-        this.id = id;
-        this.orderTrackingNumber = orderTrackingNumber;
-        this.totalQuantity = totalQuantity;
-        this.totalPrice = totalPrice;
-        this.status = status;
-        this.dateCreated = dateCreated;
-        this.lastUpdated = lastUpdated;
-        this.orderItems = orderItems;
-        this.user = user;
-        this.shippingAddress = shippingAddress;
-        this.billingAddress = billingAddress;
+    public Order(Long id, String orderTrackingNumber,
+	    int totalQuantity, BigDecimal totalPrice, String status,
+	    Date dateCreated, Date lastUpdated,
+	    Set<OrderItem> orderItems, User user,
+	    Address shippingAddress, Address billingAddress) {
+	this.id = id;
+	this.orderTrackingNumber = orderTrackingNumber;
+	this.totalQuantity = totalQuantity;
+	this.totalPrice = totalPrice;
+	this.status = status;
+	this.dateCreated = dateCreated;
+	this.lastUpdated = lastUpdated;
+	this.orderItems = orderItems;
+	this.user = user;
+	this.shippingAddress = shippingAddress;
+	this.billingAddress = billingAddress;
     }
 
     public Long getId() {
-        return id;
+	return id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+	this.id = id;
     }
 
     public String getOrderTrackingNumber() {
-        return orderTrackingNumber;
+	return orderTrackingNumber;
     }
 
     public void setOrderTrackingNumber(String orderTrackingNumber) {
-        this.orderTrackingNumber = orderTrackingNumber;
+	this.orderTrackingNumber = orderTrackingNumber;
     }
 
     public int getTotalQuantity() {
-        return totalQuantity;
+	return totalQuantity;
     }
 
     public void setTotalQuantity(int totalQuantity) {
-        this.totalQuantity = totalQuantity;
+	this.totalQuantity = totalQuantity;
     }
 
     public BigDecimal getTotalPrice() {
-        return totalPrice;
+	return totalPrice;
     }
 
     public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+	this.totalPrice = totalPrice;
     }
 
     public String getStatus() {
-        return status;
+	return status;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+	this.status = status;
     }
 
     public Date getDateCreated() {
-        return dateCreated;
+	return dateCreated;
     }
 
     public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+	this.dateCreated = dateCreated;
     }
 
     public Date getLastUpdated() {
-        return lastUpdated;
+	return lastUpdated;
     }
 
     public void setLastUpdated(Date lastUpdated) {
-        this.lastUpdated = lastUpdated;
+	this.lastUpdated = lastUpdated;
     }
 
     public Set<OrderItem> getOrderItems() {
-        return orderItems;
+	return orderItems;
     }
 
     public void setOrderItems(Set<OrderItem> orderItems) {
-        this.orderItems = orderItems;
+	this.orderItems = orderItems;
     }
 
-    public User getCustomer() {
-        return user;
+    public User getUser() {
+	return user;
     }
 
-    public void setCustomer(User user) {
-        this.user = user;
+    public void setUser(User user) {
+	this.user = user;
     }
 
     public Address getShippingAddress() {
-        return shippingAddress;
+	return shippingAddress;
     }
 
     public void setShippingAddress(Address shippingAddress) {
-        this.shippingAddress = shippingAddress;
+	this.shippingAddress = shippingAddress;
     }
 
     public Address getBillingAddress() {
-        return billingAddress;
+	return billingAddress;
     }
 
     public void setBillingAddress(Address billingAddress) {
-        this.billingAddress = billingAddress;
+	this.billingAddress = billingAddress;
     }
 }
