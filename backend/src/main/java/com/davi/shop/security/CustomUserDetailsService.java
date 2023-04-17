@@ -1,6 +1,6 @@
 package com.davi.shop.security;
 
-import com.davi.shop.entities.User;
+import com.davi.shop.entities.user.User;
 import com.davi.shop.repositories.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

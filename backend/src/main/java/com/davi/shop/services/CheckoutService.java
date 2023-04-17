@@ -1,8 +1,8 @@
 package com.davi.shop.services;
 
-import com.davi.shop.dto.PaymentInfoDTO;
-import com.davi.shop.dto.PurchaseDTO;
-import com.davi.shop.dto.PurchaseResponseDTO;
+import com.davi.shop.dto.controller.PaymentInfoDTO;
+import com.davi.shop.dto.controller.PurchaseDTO;
+import com.davi.shop.dto.controller.PurchaseResponseDTO;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 

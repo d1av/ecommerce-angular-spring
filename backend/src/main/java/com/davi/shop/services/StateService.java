@@ -1,8 +1,9 @@
 package com.davi.shop.services;
 
-import com.davi.shop.dto.StateDTO;
-import com.davi.shop.entities.State;
-import com.davi.shop.repositories.StateRepository;
+import com.davi.shop.dto.controller.location.StateDTO;
+import com.davi.shop.entities.location.State;
+import com.davi.shop.repositories.location.StateRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

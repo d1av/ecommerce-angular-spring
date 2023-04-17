@@ -1,13 +1,10 @@
 package com.davi.shop.services;
 
-import com.davi.shop.dto.OrderDTO;
-import com.davi.shop.entities.Order;
+import com.davi.shop.dto.controller.OrderDTO;
+import com.davi.shop.entities.order.Order;
 import com.davi.shop.repositories.OrderRepository;
-import com.davi.shop.repositories.UserRepository;
-
 import java.util.Objects;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

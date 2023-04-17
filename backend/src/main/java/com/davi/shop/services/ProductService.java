@@ -1,7 +1,7 @@
 package com.davi.shop.services;
 
-import com.davi.shop.dto.ProductDTO;
-import com.davi.shop.entities.Product;
+import com.davi.shop.dto.controller.ProductDTO;
+import com.davi.shop.entities.product.Product;
 import com.davi.shop.repositories.ProductRepository;
 import com.davi.shop.exceptions.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

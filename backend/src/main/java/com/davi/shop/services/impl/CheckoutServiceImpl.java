@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.davi.shop.dto.PaymentInfoDTO;
-import com.davi.shop.dto.PurchaseDTO;
-import com.davi.shop.dto.PurchaseResponseDTO;
-import com.davi.shop.entities.Order;
-import com.davi.shop.entities.OrderItem;
-import com.davi.shop.entities.User;
+import com.davi.shop.dto.controller.PaymentInfoDTO;
+import com.davi.shop.dto.controller.PurchaseDTO;
+import com.davi.shop.dto.controller.PurchaseResponseDTO;
+import com.davi.shop.entities.order.Order;
+import com.davi.shop.entities.order.OrderItem;
+import com.davi.shop.entities.user.User;
 import com.davi.shop.repositories.UserRepository;
 import com.davi.shop.services.CheckoutService;
 import com.davi.shop.utils.IDUtils;
