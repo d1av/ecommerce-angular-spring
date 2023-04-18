@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { CartItem } from '../common/cart-item';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,12 @@ export class CartService {
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
-  storage: Storage = sessionStorage;
-
-
-  constructor() {
-    let data = JSON.parse(this.storage.getItem('cartItems')!);
+  constructor (
+    @Inject(PLATFORM_ID) public platformId: object) {
+    let data = null;
+    if (isPlatformBrowser(this.platformId)) {
+      data = JSON.parse(sessionStorage.getItem('cartItems')!);
+    }
 
     if (data != null) {
       this.cartItems = data;
@@ -31,7 +33,7 @@ export class CartService {
 
     if (this.cartItems.length > 0) {
 
-      existingCartItem = this.cartItems.find(tempCartItem => tempCartItem.id === theCartItem.id)
+      existingCartItem = this.cartItems.find(tempCartItem => tempCartItem.id === theCartItem.id);
 
 
       alreadyExistsInCart = (existingCartItem != undefined);
@@ -40,7 +42,7 @@ export class CartService {
     if (alreadyExistsInCart) {
       existingCartItem!.quantity++;
     } else {
-      this.cartItems.push(theCartItem)
+      this.cartItems.push(theCartItem);
     }
     //  console.log(this.cartItems)
     this.computeCartTotals();
@@ -65,7 +67,9 @@ export class CartService {
   }
 
   persistCartItems() {
-    this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+    }
   }
 
   logCartData(totalPriceValue: number, totalQuantityValue: number) {

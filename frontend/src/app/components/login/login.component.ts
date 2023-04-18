@@ -1,4 +1,5 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, Injector, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthInterceptorService } from 'src/app/services/authentication/auth-interceptor.service';
@@ -13,9 +14,9 @@ export class LoginComponent implements OnInit {
   isSignIn: any;
   loginFormGroup!: FormGroup;
   isDisabled: boolean = true;
-  storage: Storage = sessionStorage;
 
   constructor (
+    @Inject(PLATFORM_ID) public platformId: object,
     private formBuilder: FormBuilder,
     private injector: Injector,
     private router: Router
@@ -51,9 +52,12 @@ export class LoginComponent implements OnInit {
     const authService = this.injector.get(AuthInterceptorService);
     authService.login(formForApi).subscribe(
       data => {
-        if (data && this.storage.getItem('token')) {
+        if (data) {
           console.log(data);
           this.router.navigateByUrl('/admin');
+          if (isPlatformBrowser(this.platformId)) {
+            localStorage.setItem('token', data.accessToken);
+          }
         }
       }
     );

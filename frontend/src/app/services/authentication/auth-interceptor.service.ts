@@ -1,9 +1,10 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { from, lastValueFrom, map, Observable, of } from 'rxjs';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Observable, from, lastValueFrom, map } from 'rxjs';
+import LoginTokenResponse from 'src/app/common/auth/login-token-response';
 import { environment } from 'src/environments/environment';
-import Login from '../../common/login';
-import tokenResponse from '../../common/tokenResponse';
+import Login from '../../common/auth/login';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class AuthInterceptorService implements HttpInterceptor {
   baseUrl = environment.shopApiUrl;
   accessToken: string | undefined;
   responseLoginDataFromApi: any;
-  storage: Storage = sessionStorage;
 
   constructor (
+    @Inject(PLATFORM_ID) public platformId: object,
     private http: HttpClient,
   ) { }
 
@@ -28,8 +29,8 @@ export class AuthInterceptorService implements HttpInterceptor {
     const theEndpoint = environment.shopApiUrl + '/orders';
 
     const securedEndpoints = [theEndpoint];
-    if (this.accessToken == null) {
-      this.accessToken = this.storage.getItem("token")!;
+    if (this.accessToken == null && isPlatformBrowser(this.platformId)) {
+      this.accessToken = sessionStorage.getItem("token")!;
     }
 
     if (securedEndpoints.some(url => request.urlWithParams.includes(url))) {
@@ -45,11 +46,14 @@ export class AuthInterceptorService implements HttpInterceptor {
 
 
   login(formValue: Login): Observable<any> {
-    return this.http.post<tokenResponse>(this.baseUrl + '/api/auth/login', formValue).pipe(map(
+    return this.http.post<LoginTokenResponse>(this.baseUrl + '/auth/login', formValue).pipe(map(
       data => {
         this.accessToken = data.accessToken;
-        this.storage.setItem("token", data.accessToken);
-        this.storage.setItem("email", formValue.usernameOrEmail);
+        if (isPlatformBrowser(this.platformId)) {
+          sessionStorage.setItem("token", data.accessToken);
+          sessionStorage.setItem("username", data.username);
+          sessionStorage.setItem("roles", JSON.stringify(data.roles));
+        }
         this.responseLoginDataFromApi = data;
         return this.responseLoginDataFromApi;
       })

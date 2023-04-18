@@ -46,7 +46,7 @@ import { AdminAreaComponent } from './components/admin-area/admin-area.component
     AdminAreaComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
