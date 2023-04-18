@@ -7,7 +7,7 @@
   ],
   "functions": {
     "api/index.js": {
-      "includeFiles": ["dist/angular-ecommerce/browser/**","dist/angular-ecommerce/server/**"]
+      "includeFiles": "dist/angular-ecommerce/browser/**"
     }
   }
 }
