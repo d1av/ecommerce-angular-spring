@@ -1,7 +1,7 @@
 {
   "version": 2,
   "public": true,
-  "name": "angular-ecommerce",
+  "name": "shop-api",
   "rewrites": [
     { "source": "/(.*)", "destination": "/api" }
   ],
