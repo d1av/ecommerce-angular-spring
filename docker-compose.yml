@@ -8,7 +8,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: eshop_db
     ports:
-      - "3306:3306"
+      - "3316:3306"
     volumes:
       - ./db:/var/lib/mysql
     healthcheck:
@@ -25,7 +25,7 @@ services:
       MYSQL_PASSWORD: root
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     ports:
-      - "8080:8080"
+      - "8091:8080"
     depends_on:
       db:
         condition: service_healthy
@@ -47,7 +47,7 @@ services:
     #build: ./frontend
     restart: always
     ports:
-      - "4200:4200"
+      - "4200:4000"
     depends_on:
       backend:
         condition: service_healthy
