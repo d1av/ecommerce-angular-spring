@@ -51,7 +51,7 @@ export function app(): express.Express {
   global['document'] = docServicer.getDocument();
   // global['navigator'] = docServicer.getWindow().navigator;
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/sito-igna/browser');
+  const distFolder = join(process.cwd(), 'dist/angular-ecommerce/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/main/modules/express-engine)
