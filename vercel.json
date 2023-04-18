@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "public": true,
+  "name": "sito-igna",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api" }
+  ],
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "dist/angular-ecommerce/browser/**"
+    }
+  }
+}
