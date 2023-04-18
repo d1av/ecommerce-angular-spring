@@ -1,13 +1,16 @@
 {
   "version": 2,
-  "public": true,
-  "name": "shop-api",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api" }
-  ],
-  "functions": {
-    "api/index.js": {
-      "includeFiles": "dist/angular-ecommerce/browser/**"
+  "builds": [
+    {
+      "src": "server.ts",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/browser/**",
+      "use": "@vercel/static"
     }
-  }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
