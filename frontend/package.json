@@ -31,6 +31,7 @@
     "@stripe/stripe-js": "^1.46.0",
     "bootstrap": "^5.2.3",
     "express": "^4.15.2",
+    "mock-browser": "^0.92.14",
     "ngx-spinner": "^15.0.1",
     "rxjs": "~7.5.0",
     "stripe": "^11.5.0",
