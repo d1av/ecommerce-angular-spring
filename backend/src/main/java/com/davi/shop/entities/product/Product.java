@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.davi.shop.dto.controller.ProductCategoryDTO;
+import com.davi.shop.dto.controller.ProductDTO;
 import com.davi.shop.utils.InstantUtils;
 
 import java.math.BigDecimal;
@@ -96,6 +98,7 @@ public class Product {
 		unitPrice, imageUrl, active, unitsInStock,
 		InstantUtils.dateNow(), InstantUtils.dateNow());
     }
+    
 
     public ProductCategory getCategory() {
 	return category;
@@ -206,4 +209,6 @@ public class Product {
     public int hashCode() {
 	return Objects.hash(id);
     }
+
+  
 }

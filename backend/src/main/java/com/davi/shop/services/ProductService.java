@@ -1,23 +1,18 @@
 package com.davi.shop.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import com.davi.shop.dto.controller.ProductDTO;
 import com.davi.shop.dto.product.RegisterProductDTO;
 import com.davi.shop.entities.product.Product;
 import com.davi.shop.entities.product.ProductCategory;
 import com.davi.shop.exceptions.DataNotFoundException;
-import com.davi.shop.exceptions.ShopAPIException;
 import com.davi.shop.repositories.product.ProductCategoryRepository;
 import com.davi.shop.repositories.product.ProductRepository;
 
 import jakarta.transaction.Transactional;
-
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
 
 @Service
 public class ProductService {
@@ -53,9 +48,12 @@ public class ProductService {
 	return entity == null || entity < 0;
     }
 
-    public Page<Product> findByName(String name, Pageable pageable) {
-	return repository.findByNameContainingIgnoreCase(name,
-		pageable);
+    @Transactional
+    public Page<ProductDTO> findByName(String name,
+	    Pageable pageable) {
+	return repository
+		.findByNameContainingIgnoreCase(name, pageable)
+		.map(ProductDTO::from);
     }
 
     @Transactional
@@ -75,9 +73,13 @@ public class ProductService {
     }
 
     @Transactional
-    public String deleteById(Long id) {
-	repository.deleteById(id);
-	return "query executed successfully";
+    public Boolean deleteById(Long id) {
+	
+	if (repository.existsById(id)) {
+	    repository.deleteById(id);
+	}
+	
+	return true;
     }
 
     @Transactional

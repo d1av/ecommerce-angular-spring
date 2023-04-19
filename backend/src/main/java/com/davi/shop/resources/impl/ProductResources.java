@@ -20,25 +20,23 @@ public class ProductResources implements ProductAPI {
     private ProductService service;
 
     @Override
-    public ResponseEntity<Page<ProductDTO>> findAllPaged(
+    public ResponseEntity<Page<ProductDTO>> findAllPaged(String name,
 	    Pageable pageable) {
-	return ResponseEntity.ok()
-		.body(service.findAllPaged(pageable));
+	if (name != null && "".equals(name.trim())) {
+	    return ResponseEntity.ok()
+		    .body(service.findAllPaged(pageable));
+	} else {
+	    return ResponseEntity.ok()
+		    .body(service.findByName(name, pageable));
+	}
+
     }
 
     @Override
-    public ResponseEntity<Page<Product>> findAllPaged(Long id,
+    public ResponseEntity<Page<Product>> findAllPagedByCategory(Long id,
 	    Pageable pageable) {
-	System.out.println(id);
 	return ResponseEntity.ok()
 		.body(service.findByCategoryId(id, pageable));
-    }
-
-    @Override
-    public ResponseEntity<Page<Product>> seachByName(String name,
-	    Pageable pageable) {
-	return ResponseEntity.ok()
-		.body(service.findByName(name, pageable));
     }
 
     @Override
@@ -55,9 +53,9 @@ public class ProductResources implements ProductAPI {
     }
 
     @Override
-    public HeadersBuilder<?> deleteProductJson(Long id) {
+    public ResponseEntity<?> deleteProductJson(Long id) {
 	service.deleteById(id);
-	return ResponseEntity.noContent();
+	return ResponseEntity.noContent().build();
     }
 
     @Override
