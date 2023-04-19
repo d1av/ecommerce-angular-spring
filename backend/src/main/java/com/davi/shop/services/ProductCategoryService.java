@@ -2,7 +2,8 @@ package com.davi.shop.services;
 
 import com.davi.shop.dto.controller.ProductCategoryDTO;
 import com.davi.shop.entities.product.ProductCategory;
-import com.davi.shop.repositories.ProductCategoryRepository;
+import com.davi.shop.repositories.product.ProductCategoryRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

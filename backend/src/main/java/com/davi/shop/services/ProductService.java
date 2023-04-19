@@ -2,8 +2,9 @@ package com.davi.shop.services;
 
 import com.davi.shop.dto.controller.ProductDTO;
 import com.davi.shop.entities.product.Product;
-import com.davi.shop.repositories.ProductRepository;
 import com.davi.shop.exceptions.DataNotFoundException;
+import com.davi.shop.repositories.product.ProductRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,4 +1,4 @@
-package com.davi.shop.repositories;
+package com.davi.shop.repositories.order;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

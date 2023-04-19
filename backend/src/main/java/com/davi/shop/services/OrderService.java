@@ -2,7 +2,8 @@ package com.davi.shop.services;
 
 import com.davi.shop.dto.controller.OrderDTO;
 import com.davi.shop.entities.order.Order;
-import com.davi.shop.repositories.OrderRepository;
+import com.davi.shop.repositories.order.OrderRepository;
+
 import java.util.Objects;
 
 import org.springframework.data.domain.Page;

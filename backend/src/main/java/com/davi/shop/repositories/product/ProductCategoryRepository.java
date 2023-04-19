@@ -1,4 +1,4 @@
-package com.davi.shop.repositories;
+package com.davi.shop.repositories.product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
