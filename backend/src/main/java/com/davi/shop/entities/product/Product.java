@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.davi.shop.utils.InstantUtils;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
@@ -16,164 +18,192 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private ProductCategory category;
-    
+
     @Column(name = "sku", nullable = false)
     private String sku;
-    
+
     @Column(name = "name", nullable = false)
     private String name;
-    
+
     @Column(name = "description")
     private String description;
-    
+
     @Column(name = "unit_price")
     private BigDecimal unitPrice;
-    
+
     @Column(name = "image_url")
     private String imageUrl;
-    
+
     @Column(name = "active")
     private Boolean active;
-    
+
     @Column(name = "units_in_stock")
     private Integer unitsInStock;
-    
+
     @CreationTimestamp
     @Column(name = "date_created")
     private Date dateCreated;
-    
+
     @UpdateTimestamp
     @Column(name = "last_updated")
     private Date lastUpdated;
 
-
     public Product() {
     }
 
-    public Product(Long id, ProductCategory category, String sku, String name, String description, BigDecimal unitPrice, String imageUrl, Boolean active, Integer unitsInStock, Date dateCreated, Date lastUpdated) {
-        this.id = id;
-        this.category = category;
-        this.sku = sku;
-        this.name = name;
-        this.description = description;
-        this.unitPrice = unitPrice;
-        this.imageUrl = imageUrl;
-        this.active = active;
-        this.unitsInStock = unitsInStock;
-        this.dateCreated = dateCreated;
-        this.lastUpdated = lastUpdated;
+    private Product(Long id, ProductCategory category, String sku,
+	    String name, String description, BigDecimal unitPrice,
+	    String imageUrl, Boolean active, Integer unitsInStock,
+	    Date dateCreated, Date lastUpdated) {
+	this.id = id;
+	this.category = category;
+	this.sku = sku;
+	this.name = name;
+	this.description = description;
+	this.unitPrice = unitPrice;
+	this.imageUrl = imageUrl;
+	this.active = active;
+	this.unitsInStock = unitsInStock;
+	this.dateCreated = dateCreated;
+	this.lastUpdated = lastUpdated;
     }
 
+    public Product update(ProductCategory category, String sku,
+	    String name, String description, BigDecimal unitPrice,
+	    String imageUrl, Boolean active, Integer unitsInStock) {
+
+	this.category = category;
+	this.sku = sku;
+	this.name = name;
+	this.description = description;
+	this.unitPrice = unitPrice;
+	this.imageUrl = imageUrl;
+	this.active = active;
+	this.unitsInStock = unitsInStock;
+	this.lastUpdated = Date.from(InstantUtils.now());
+
+	return this;
+    }
+
+    public static Product create(ProductCategory category, String sku,
+	    String name, String description, BigDecimal unitPrice,
+	    String imageUrl, Boolean active, Integer unitsInStock) {
+	return new Product(null, category, sku, name, description,
+		unitPrice, imageUrl, active, unitsInStock,
+		InstantUtils.dateNow(), InstantUtils.dateNow());
+    }
 
     public ProductCategory getCategory() {
-        return category;
+	return category;
     }
 
     public void setCategory(ProductCategory category) {
-        this.category = category;
+	this.category = category;
     }
 
     public Boolean getActive() {
-        return active;
+	return active;
     }
 
     public void setActive(Boolean active) {
-        this.active = active;
+	this.active = active;
     }
 
     public Long getId() {
-        return id;
+	return id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+	this.id = id;
     }
 
     public String getSku() {
-        return sku;
+	return sku;
     }
 
     public void setSku(String sku) {
-        this.sku = sku;
+	this.sku = sku;
     }
 
     public String getName() {
-        return name;
+	return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+	this.name = name;
     }
 
     public String getDescription() {
-        return description;
+	return description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+	this.description = description;
     }
 
     public BigDecimal getUnitPrice() {
-        return unitPrice;
+	return unitPrice;
     }
 
     public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
+	this.unitPrice = unitPrice;
     }
 
     public String getImageUrl() {
-        return imageUrl;
+	return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+	this.imageUrl = imageUrl;
     }
 
     public boolean isActive() {
-        return active;
+	return active;
     }
 
     public void setActive(boolean active) {
-        this.active = active;
+	this.active = active;
     }
 
     public Integer getUnitsInStock() {
-        return unitsInStock;
+	return unitsInStock;
     }
 
     public void setUnitsInStock(Integer unitsInStock) {
-        this.unitsInStock = unitsInStock;
+	this.unitsInStock = unitsInStock;
     }
 
     public Date getDateCreated() {
-        return dateCreated;
+	return dateCreated;
     }
 
     public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+	this.dateCreated = dateCreated;
     }
 
     public Date getLastUpdated() {
-        return lastUpdated;
+	return lastUpdated;
     }
 
     public void setLastUpdated(Date lastUpdated) {
-        this.lastUpdated = lastUpdated;
+	this.lastUpdated = lastUpdated;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Product product)) return false;
-        return Objects.equals(id, product.id);
+	if (this == o)
+	    return true;
+	if (!(o instanceof Product product))
+	    return false;
+	return Objects.equals(id, product.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+	return Objects.hash(id);
     }
 }

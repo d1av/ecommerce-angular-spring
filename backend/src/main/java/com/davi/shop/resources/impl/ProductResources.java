@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.HeadersBuilder;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.davi.shop.dto.controller.ProductDTO;
@@ -18,46 +19,51 @@ public class ProductResources implements ProductAPI {
     @Autowired
     private ProductService service;
 
+    @Override
     public ResponseEntity<Page<ProductDTO>> findAllPaged(
 	    Pageable pageable) {
 	return ResponseEntity.ok()
 		.body(service.findAllPaged(pageable));
     }
 
+    @Override
     public ResponseEntity<Page<Product>> findAllPaged(Long id,
 	    Pageable pageable) {
+	System.out.println(id);
 	return ResponseEntity.ok()
 		.body(service.findByCategoryId(id, pageable));
     }
 
+    @Override
     public ResponseEntity<Page<Product>> seachByName(String name,
 	    Pageable pageable) {
 	return ResponseEntity.ok()
 		.body(service.findByName(name, pageable));
     }
 
+    @Override
     public ResponseEntity<ProductDTO> searchById(Long id,
 	    Pageable pageable) {
 	return ResponseEntity.ok().body(service.findById(id));
     }
 
     @Override
-    public ResponseEntity<ProductDTO> registerProductJson(
+    public ResponseEntity<Product> registerProductJson(
 	    RegisterProductDTO productDto) {
-	// TODO Auto-generated method stub
-	return null;
+	return ResponseEntity.ok()
+		.body(service.saveProductJson(productDto));
     }
 
     @Override
-    public ResponseEntity<ProductDTO> changeProductJson(
-	    RegisterProductDTO productDto) {
-	// TODO Auto-generated method stub
-	return null;
+    public HeadersBuilder<?> deleteProductJson(Long id) {
+	service.deleteById(id);
+	return ResponseEntity.noContent();
     }
 
     @Override
-    public ResponseEntity<?> deleteProductJson(Long id) {
-	// TODO Auto-generated method stub
-	return null;
+    public ResponseEntity<Product> updateProductJson(
+	    RegisterProductDTO productDto, Long id) {
+	return ResponseEntity.ok()
+		.body(service.updateProductJson(id, productDto));
     }
 }

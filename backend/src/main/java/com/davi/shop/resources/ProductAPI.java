@@ -3,6 +3,7 @@ package com.davi.shop.resources;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.HeadersBuilder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,7 @@ public interface ProductAPI {
     public ResponseEntity<Page<ProductDTO>> findAllPaged(
 	    Pageable pageable);
 
-    @GetMapping(value = "/search/category")
+    @GetMapping(value = "/category")
     public ResponseEntity<Page<Product>> findAllPaged(
 	    @RequestParam("id") Long id, Pageable pageable);
 
@@ -40,15 +41,16 @@ public interface ProductAPI {
 	    @PathVariable @NotNull Long id, Pageable pageable);
 
     @PostMapping
-    public ResponseEntity<ProductDTO> registerProductJson(
+    public ResponseEntity<Product> registerProductJson(
 	    @RequestBody RegisterProductDTO productDto);
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO> changeProductJson(
-	    @RequestBody RegisterProductDTO productDto);
+    @PutMapping
+    public ResponseEntity<Product> updateProductJson(
+	    @RequestBody RegisterProductDTO productDto,
+	    @RequestParam(name = "id") Long id);
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteProductJson(
+    public HeadersBuilder<?> deleteProductJson(
 	    @RequestParam("id") Long id);
 
 }

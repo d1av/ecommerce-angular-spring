@@ -1,6 +1,6 @@
 CREATE TABLE product_categories (
 	id INT NOT NULL PRIMARY KEY UNIQUE AUTO_INCREMENT,
-	category_name VARCHAR(255) NOT NULL
+	category_name VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE products (

@@ -18,7 +18,7 @@ export class ProductService {
 
   getProductList(theCategoryId: number): Observable<Product[]> {
 
-    const searchUrl = `${ this.baseUrl }/search/category?id=${ theCategoryId }`;
+    const searchUrl = `${ this.baseUrl }/products/category?id=${ theCategoryId }`;
     return this.getProducts(searchUrl);
   }
 
