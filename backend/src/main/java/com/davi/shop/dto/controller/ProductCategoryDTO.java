@@ -1,6 +1,6 @@
 package com.davi.shop.dto.controller;
 
-import com.davi.shop.entities.product.ProductCategory;
+import com.davi.shop.entities.productcat.ProductCategory;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

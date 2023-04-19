@@ -4,10 +4,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.davi.shop.dto.controller.ProductDTO;
 import com.davi.shop.dto.product.RegisterProductDTO;
 import com.davi.shop.entities.product.Product;
-import com.davi.shop.entities.product.ProductCategory;
+import com.davi.shop.entities.product.ProductJpaEntity;
+import com.davi.shop.entities.productcat.ProductCategory;
 import com.davi.shop.exceptions.DataNotFoundException;
 import com.davi.shop.repositories.product.ProductCategoryRepository;
 import com.davi.shop.repositories.product.ProductRepository;
@@ -27,20 +27,21 @@ public class ProductService {
 	this.productCategoryRepository = productCategoryRepository;
     }
 
-    public Page<ProductDTO> findAllPaged(Pageable pageable) {
-	Page<Product> entity = repository.findAll(pageable);
-	return entity.map(ProductDTO::new);
+    public Page<Product> findAllPaged(Pageable pageable) {
+	return repository.findAll(pageable)
+		.map(ProductJpaEntity::toAggregate);
     }
 
     public Page<Product> findByCategoryId(Long id,
 	    Pageable pageable) {
 	Page<Product> entity;
 	if (checkIfNullOrNegative(id)) {
-	    entity = repository.findAll(pageable);
+	    entity = repository.findAll(pageable)
+		    .map(ProductJpaEntity::toAggregate);
 	} else {
-	    entity = repository.findByCategoryId(id, pageable);
+	    entity = repository.findByCategoryId(id, pageable)
+		    .map(ProductJpaEntity::toAggregate);
 	}
-	;
 	return entity;
     }
 
@@ -49,17 +50,15 @@ public class ProductService {
     }
 
     @Transactional
-    public Page<ProductDTO> findByName(String name,
-	    Pageable pageable) {
+    public Page<Product> findByName(String name, Pageable pageable) {
 	return repository
 		.findByNameContainingIgnoreCase(name, pageable)
-		.map(ProductDTO::from);
+		.map(ProductJpaEntity::toAggregate);
     }
 
     @Transactional
-    public ProductDTO findById(Long id) {
-	Product entity = getProduct(id);
-	return new ProductDTO(entity);
+    public Product findById(Long id) {
+	return getProduct(id);
     }
 
     @Transactional
@@ -69,16 +68,17 @@ public class ProductService {
 		productDto.getName(), productDto.getDescription(),
 		productDto.getUnitPrice(), productDto.getImageUrl(),
 		productDto.getActive(), productDto.getUnitsInStock());
-	return repository.save(entity);
+	return repository.save(ProductJpaEntity.from(entity))
+		.toAggregate();
     }
 
     @Transactional
     public Boolean deleteById(Long id) {
-	
+
 	if (repository.existsById(id)) {
 	    repository.deleteById(id);
 	}
-	
+
 	return true;
     }
 
@@ -92,7 +92,7 @@ public class ProductService {
 		productDto.getUnitPrice(), productDto.getImageUrl(),
 		productDto.getActive(), productDto.getUnitsInStock());
 
-	repository.save(entity);
+	repository.save(ProductJpaEntity.from(entity)).toAggregate();
 	return entity;
     }
 
@@ -110,6 +110,7 @@ public class ProductService {
 	return repository.findById(id)
 		.orElseThrow(() -> new DataNotFoundException(
 			"'product' not found with id: %s"
-				.formatted(id)));
+				.formatted(id)))
+		.toAggregate();
     }
 }

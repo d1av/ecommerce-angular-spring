@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.davi.shop.config.security.JwtTokenProvider;
 import com.davi.shop.dto.controller.auth.LoginDTO;
 import com.davi.shop.dto.controller.auth.RegisterDTO;
 import com.davi.shop.dto.service.LoginRolesResponseDTO;
@@ -22,7 +23,6 @@ import com.davi.shop.exceptions.DataNotFoundException;
 import com.davi.shop.exceptions.ShopAPIException;
 import com.davi.shop.repositories.RoleRepository;
 import com.davi.shop.repositories.UserRepository;
-import com.davi.shop.security.JwtTokenProvider;
 import com.davi.shop.services.AuthService;
 
 @Service

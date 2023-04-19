@@ -1,4 +1,4 @@
-package com.davi.shop.security;
+package com.davi.shop.config.security;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.davi.shop.security;
+package com.davi.shop.config.security;
 
 import com.davi.shop.entities.user.User;
 import com.davi.shop.repositories.UserRepository;

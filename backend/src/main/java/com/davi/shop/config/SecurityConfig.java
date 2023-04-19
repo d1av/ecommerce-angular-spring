@@ -15,8 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.davi.shop.security.JwtAuthenticationEntryPoint;
-import com.davi.shop.security.JwtAuthenticationFilter;
+import com.davi.shop.config.security.JwtAuthenticationEntryPoint;
+import com.davi.shop.config.security.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity

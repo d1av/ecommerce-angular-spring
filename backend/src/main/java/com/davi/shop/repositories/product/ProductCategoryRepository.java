@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.davi.shop.entities.product.ProductCategory;
+import com.davi.shop.entities.productcat.ProductCategory;
 
 public interface ProductCategoryRepository
 	extends JpaRepository<ProductCategory, Long> {

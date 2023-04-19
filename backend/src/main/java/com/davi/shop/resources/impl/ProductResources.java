@@ -1,5 +1,8 @@
 package com.davi.shop.resources.impl;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,33 +26,39 @@ public class ProductResources implements ProductAPI {
     public ResponseEntity<Page<ProductDTO>> findAllPaged(String name,
 	    Pageable pageable) {
 	if (name != null && "".equals(name.trim())) {
-	    return ResponseEntity.ok()
-		    .body(service.findAllPaged(pageable));
+	    return ResponseEntity.ok().body(service
+		    .findAllPaged(pageable).map(ProductDTO::from));
 	} else {
 	    return ResponseEntity.ok()
-		    .body(service.findByName(name, pageable));
+		    .body(service.findByName(name, pageable)
+			    .map(ProductDTO::from));
 	}
 
     }
 
     @Override
-    public ResponseEntity<Page<Product>> findAllPagedByCategory(Long id,
-	    Pageable pageable) {
+    public ResponseEntity<Page<ProductDTO>> findAllPagedByCategory(
+	    Long id, Pageable pageable) {
 	return ResponseEntity.ok()
-		.body(service.findByCategoryId(id, pageable));
+		.body(service.findByCategoryId(id, pageable)
+			.map(ProductDTO::from));
     }
 
     @Override
     public ResponseEntity<ProductDTO> searchById(Long id,
 	    Pageable pageable) {
-	return ResponseEntity.ok().body(service.findById(id));
+	return ResponseEntity.ok()
+		.body(ProductDTO.from(service.findById(id)));
     }
 
     @Override
-    public ResponseEntity<Product> registerProductJson(
-	    RegisterProductDTO productDto) {
-	return ResponseEntity.ok()
-		.body(service.saveProductJson(productDto));
+    public ResponseEntity<ProductDTO> registerProductJson(
+	    RegisterProductDTO productDto) throws URISyntaxException {
+	Product entity = service.saveProductJson(productDto);
+	return ResponseEntity
+		.created(
+			new URI("/api/v1/products/" + entity.getId()))
+		.body(ProductDTO.from(entity));
     }
 
     @Override
@@ -59,9 +68,9 @@ public class ProductResources implements ProductAPI {
     }
 
     @Override
-    public ResponseEntity<Product> updateProductJson(
+    public ResponseEntity<ProductDTO> updateProductJson(
 	    RegisterProductDTO productDto, Long id) {
-	return ResponseEntity.ok()
-		.body(service.updateProductJson(id, productDto));
+	return ResponseEntity.ok().body(ProductDTO
+		.from(service.updateProductJson(id, productDto)));
     }
 }

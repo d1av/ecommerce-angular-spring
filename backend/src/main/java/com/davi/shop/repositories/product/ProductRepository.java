@@ -6,13 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.davi.shop.entities.product.Product;
+import com.davi.shop.entities.product.ProductJpaEntity;
 
 import java.util.Optional;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
-    Page<Product> findByCategoryId(@Param("id") Long id, Pageable pageable);
+public interface ProductRepository extends JpaRepository<ProductJpaEntity, Long> {
+    Page<ProductJpaEntity> findByCategoryId(@Param("id") Long id, Pageable pageable);
 
-    Page<Product> findByNameContainingIgnoreCase(@Param("name") String name, Pageable pageable);
+    Page<ProductJpaEntity> findByNameContainingIgnoreCase(@Param("name") String name, Pageable pageable);
 
-    Optional<Product> findById(Long id);
+    Optional<ProductJpaEntity> findById(Long id);
 }
