@@ -5,13 +5,13 @@ public enum Roles {
     ROLE_SELLER("ROLE_SELLER"),
     ROLE_ADMIN("ROLE_ADMIN");
 
-    private final String roleString;
+    private final String role;
 
     Roles(String string) {
-	this.roleString = string;
+	this.role = string;
     }
 
     public String getRoleString() {
-	return roleString;
+	return role;
     }
 }
